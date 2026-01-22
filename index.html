@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أذكار القرآن الكريم - Complete Islamic Resources</title>
     <style>
+        /* ============================================
+           SPIRITUAL ISLAMIC THEME - CELESTIAL NIGHT
+           A deeply immersive reading experience
+        ============================================ */
+
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -15,178 +22,359 @@
             height: 100%;
         }
 
+        /* Celestial Night Sky Background */
         body {
-            font-family: 'Segoe UI', 'Arial Unicode MS', 'Simplified Arabic', 'Arabic Typesetting', 'Droid Arabic Kufi', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', 'Simplified Arabic', serif;
+            background: linear-gradient(180deg,
+                #0a0a1a 0%,
+                #0d1528 25%,
+                #0f1a30 50%,
+                #0a1628 75%,
+                #050a14 100%);
             min-height: 100vh;
             padding: 0;
-            color: #333;
+            color: #e8dcc4;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Stars Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 130px 80px, rgba(255,215,0,0.6), transparent),
+                radial-gradient(1px 1px at 160px 120px, #fff, transparent),
+                radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 250px 160px, #fff, transparent),
+                radial-gradient(2px 2px at 300px 90px, rgba(255,215,0,0.5), transparent),
+                radial-gradient(1px 1px at 350px 200px, #fff, transparent),
+                radial-gradient(2px 2px at 400px 150px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 450px 60px, #fff, transparent),
+                radial-gradient(2px 2px at 500px 180px, rgba(255,215,0,0.4), transparent);
+            background-size: 550px 250px;
+            animation: twinkle 8s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.5; }
+        }
+
+        /* Subtle Light Rays from Above */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200%;
+            height: 100%;
+            background: radial-gradient(ellipse at center top,
+                rgba(212, 175, 55, 0.03) 0%,
+                transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 100%;
             width: 100%;
             margin: 0;
-            background: white;
+            background: transparent;
             border-radius: 0;
             box-shadow: none;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             height: 100vh;
+            position: relative;
+            z-index: 1;
         }
 
+        /* Sacred Header with Glowing Effect */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
+            background: linear-gradient(180deg,
+                rgba(15, 25, 45, 0.95) 0%,
+                rgba(10, 20, 40, 0.9) 100%);
+            color: #f4e4bc;
+            padding: 50px 40px;
             text-align: center;
-            border-bottom: 4px solid #764ba2;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Islamic Pattern Overlay */
+        .header::before {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 300px;
+            opacity: 0.03;
+            color: #d4af37;
+            pointer-events: none;
         }
 
         .header h1 {
-            font-size: 5em;
+            font-size: 4.5em;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4),
+                         0 0 60px rgba(212, 175, 55, 0.2);
             font-weight: 700;
-            letter-spacing: 0.02em;
-            -webkit-font-smoothing: antialiased;
+            letter-spacing: 0.05em;
+            color: #f8e8c8;
+            position: relative;
+            animation: gentleGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentleGlow {
+            0% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.1); }
+            100% { text-shadow: 0 0 40px rgba(212, 175, 55, 0.5), 0 0 80px rgba(212, 175, 55, 0.2); }
         }
 
         .header p {
-            font-size: 2.2em;
-            opacity: 0.95;
+            font-size: 1.8em;
+            opacity: 0.8;
             font-weight: 400;
-            letter-spacing: 0.02em;
-            -webkit-font-smoothing: antialiased;
+            letter-spacing: 0.1em;
+            color: #c9b896;
+            font-style: italic;
         }
 
+        /* Mystical Tab Navigation */
         .tabs-nav {
             display: flex;
-            background: #f5f5f5;
-            border-bottom: 2px solid #ddd;
+            background: rgba(10, 15, 30, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             overflow-x: auto;
             flex-wrap: wrap;
             flex-shrink: 0;
+            backdrop-filter: blur(10px);
         }
 
         .tabs-nav button {
             flex: 1;
             min-width: 140px;
-            padding: 25px 20px;
+            padding: 22px 20px;
             border: none;
             background: transparent;
             cursor: pointer;
-            font-size: 1.8em;
+            font-size: 1.6em;
             font-weight: 600;
-            color: #666;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
+            color: #8b9dc3;
+            transition: all 0.5s ease;
+            border-bottom: 2px solid transparent;
             white-space: nowrap;
-            letter-spacing: 0.03em;
-            -webkit-font-smoothing: antialiased;
+            letter-spacing: 0.05em;
+            font-family: inherit;
+            position: relative;
+        }
+
+        .tabs-nav button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            transition: all 0.5s ease;
+            transform: translateX(-50%);
         }
 
         .tabs-nav button:hover {
-            background: #e9ecef;
-            color: #667eea;
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .tabs-nav button:hover::after {
+            width: 80%;
         }
 
         .tabs-nav button.active {
-            color: white;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-bottom: 3px solid #764ba2;
+            color: #f4e4bc;
+            background: linear-gradient(180deg,
+                rgba(212, 175, 55, 0.15) 0%,
+                rgba(212, 175, 55, 0.05) 100%);
+            border-bottom: 2px solid #d4af37;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
 
+        .tabs-nav button.active::after {
+            width: 100%;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        /* Sacred Content Area */
         .content-wrapper {
             flex: 1;
             overflow-y: auto;
-            padding: 25px;
+            padding: 35px 40px;
+            background: linear-gradient(180deg,
+                rgba(8, 15, 30, 0.3) 0%,
+                rgba(5, 10, 25, 0.5) 100%);
         }
 
         .content-area {
             display: none;
-            animation: fadeIn 0.4s ease;
+            animation: sacredReveal 0.8s ease-out;
         }
 
         .content-area.active {
             display: block;
         }
 
-        @keyframes fadeIn {
+        @keyframes sacredReveal {
             from {
                 opacity: 0;
-                transform: translateY(5px);
+                transform: translateY(20px);
+                filter: blur(5px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
+                filter: blur(0);
             }
         }
 
+        /* Section Title with Divine Glow */
         .section-title {
-            font-size: 3.5em;
-            color: #667eea;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
+            font-size: 3.2em;
+            color: #d4af37;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
             text-align: center;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            -webkit-font-smoothing: antialiased;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            position: relative;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
         }
 
+        .section-title::after {
+            content: '❖';
+            display: block;
+            margin-top: 15px;
+            font-size: 0.5em;
+            color: rgba(212, 175, 55, 0.6);
+            letter-spacing: 0.5em;
+        }
+
+        /* Dua Cards - Sacred Scroll Style */
         .dua-card {
-            background: #f9f9f9;
-            padding: 15px 20px;
-            margin-bottom: 12px;
-            border-right: 4px solid #667eea;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg,
+                rgba(20, 30, 50, 0.8) 0%,
+                rgba(15, 25, 45, 0.9) 100%);
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            border-right: 3px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .dua-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at top right,
+                rgba(212, 175, 55, 0.08) 0%,
+                transparent 70%);
+            pointer-events: none;
         }
 
         .dua-card:hover {
-            background: #f0f4ff;
-            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.15);
+            background: linear-gradient(135deg,
+                rgba(25, 35, 60, 0.9) 0%,
+                rgba(20, 30, 55, 0.95) 100%);
+            border-right-color: #d4af37;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4),
+                        0 0 30px rgba(212, 175, 55, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transform: translateX(-5px);
         }
 
+        /* Dua Number - Crescent Moon Style */
         .dua-number {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 1.5em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4af37 0%, #b8972e 100%);
+            color: #0a0a1a;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.3em;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         .dua-counter {
             display: inline-block;
-            background: #f39c12;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 1.3em;
-            margin-left: 10px;
+            background: none;
+            color: #d4af37;
+            padding: 0;
+            border-radius: 0;
+            font-size: 1.2em;
+            margin: 0;
+            font-weight: 600;
+            visibility: visible;
         }
 
+        .dua-counter::before {
+            content: "۝ ";
+            margin-right: 5px;
+            opacity: 0.7;
+        }
+
+        .dua-counter::after {
+            content: " مرة";
+            margin-left: 5px;
+            opacity: 0.7;
+        }
+
+        /* Sacred Text Styling */
         .dua-text {
-            font-size: 2.2em;
-            line-height: 2.4;
-            color: #1a1a1a;
-            margin: 5px 0;
+            font-size: 2.4em;
+            line-height: 2.6;
+            color: #f0e6d3;
+            margin: 15px 0;
             font-weight: 400;
-            padding: 8px;
-            background: transparent;
-            border-radius: 4px;
-            letter-spacing: 0.05em;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            letter-spacing: 0.03em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+        }
+
+        .dua-card:hover .dua-text {
+            color: #fff8e8;
+            text-shadow: 0 0 20px rgba(255, 248, 232, 0.2);
         }
 
         .dua-source {
@@ -197,147 +385,219 @@
             display: none;
         }
 
+        /* Quranic Verses - Heavenly Scroll */
         .quran-verse {
-            background: #fef5e7;
-            padding: 12px 15px;
-            margin-bottom: 12px;
-            border-radius: 6px;
-            line-height: 2.5;
-            font-size: 2.1em;
-            color: #1a1a1a;
-            border-right: 4px solid #f39c12;
+            background: linear-gradient(135deg,
+                rgba(30, 25, 15, 0.9) 0%,
+                rgba(25, 20, 10, 0.95) 100%);
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            line-height: 2.8;
+            font-size: 2.3em;
+            color: #f8f0e0;
+            border-right: 4px solid #d4af37;
+            border-left: 1px solid rgba(212, 175, 55, 0.2);
             text-align: right;
             font-weight: 400;
             letter-spacing: 0.04em;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4),
+                        inset 0 0 60px rgba(212, 175, 55, 0.03);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .quran-verse::before {
+            content: '﴿';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2em;
+            color: rgba(212, 175, 55, 0.3);
+        }
+
+        .quran-verse::after {
+            content: '﴾';
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            font-size: 2em;
+            color: rgba(212, 175, 55, 0.3);
         }
 
         .verse-num {
-            color: #f39c12;
+            color: #d4af37;
             font-weight: bold;
-            font-size: 1.8em;
+            font-size: 1em;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
+        /* Section Headings */
         .section-heading {
-            font-size: 2.8em;
-            color: #764ba2;
-            margin-top: 15px;
-            margin-bottom: 12px;
+            font-size: 2.5em;
+            color: #c9a84c;
+            margin-top: 40px;
+            margin-bottom: 20px;
             font-weight: 600;
-            letter-spacing: 0.04em;
-            -webkit-font-smoothing: antialiased;
+            letter-spacing: 0.06em;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
         }
 
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        /* Info Boxes - Ancient Manuscript Style */
         .intro-box {
-            background: #f0f7ff;
-            padding: 12px 15px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            border-right: 4px solid #667eea;
-            line-height: 2.2;
+            background: linear-gradient(135deg,
+                rgba(20, 25, 40, 0.9) 0%,
+                rgba(15, 20, 35, 0.95) 100%);
+            padding: 25px 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-right: 3px solid rgba(100, 149, 237, 0.5);
+            border-left: 1px solid rgba(100, 149, 237, 0.1);
+            line-height: 2.4;
+            font-size: 1.7em;
+            color: #c4d4e8;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .intro-box strong {
-            color: #667eea;
-            font-size: 2em;
-            font-weight: 600;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .intro-box {
-            font-size: 1.8em;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-            letter-spacing: 0.03em;
+            color: #7eb8da;
+            font-size: 1.15em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(126, 184, 218, 0.3);
         }
 
         .benefits-list {
-            margin-top: 20px;
-            margin-right: 30px;
+            margin-top: 15px;
+            margin-right: 20px;
+            list-style: none;
         }
 
         .benefits-list li {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             line-height: 2.2;
-            font-size: 1.8em;
+            font-size: 1em;
             font-weight: 400;
-            -webkit-font-smoothing: antialiased;
-            letter-spacing: 0.03em;
+            padding-right: 25px;
+            position: relative;
+            color: #b8c8d8;
         }
 
-        /* Scrollbar Styling */
+        .benefits-list li::before {
+            content: '✧';
+            position: absolute;
+            right: 0;
+            color: #d4af37;
+            opacity: 0.7;
+        }
+
+        .benefits-list li strong {
+            color: #d4af37;
+            display: inline;
+            font-size: 1em;
+        }
+
+        /* Ethereal Scrollbar */
         .content-wrapper::-webkit-scrollbar {
             width: 8px;
         }
 
         .content-wrapper::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: rgba(10, 15, 30, 0.5);
         }
 
         .content-wrapper::-webkit-scrollbar-thumb {
-            background: #667eea;
+            background: linear-gradient(180deg, #d4af37 0%, #8b7355 100%);
             border-radius: 4px;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         .content-wrapper::-webkit-scrollbar-thumb:hover {
-            background: #764ba2;
+            background: linear-gradient(180deg, #e8c252 0%, #a08060 100%);
         }
 
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 3.5em;
+                font-size: 3em;
+            }
+
+            .header p {
+                font-size: 1.4em;
             }
 
             .tabs-nav button {
                 min-width: 100px;
                 padding: 15px;
-                font-size: 1.4em;
+                font-size: 1.3em;
             }
 
             .content-wrapper {
-                padding: 30px;
+                padding: 25px 20px;
             }
 
             .dua-text {
-                font-size: 1.8em;
+                font-size: 1.9em;
+                line-height: 2.4;
             }
 
             .quran-verse {
-                font-size: 1.8em;
+                font-size: 1.9em;
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 2.5em;
+            }
+
+            .intro-box {
+                font-size: 1.5em;
             }
         }
 
         .counter-display {
             display: inline;
-            color: transparent;
-            font-size: 2.2em;
+            color: #8b9dc3;
+            font-size: 1em;
             margin-left: 8px;
-            font-weight: 600;
+            font-weight: 500;
             letter-spacing: 0.03em;
             line-height: 2.2;
         }
 
-        .dua-counter {
-            background: none;
-            color: #667eea;
-            padding: 0;
-            border-radius: 0;
-            font-size: 1.4em;
-            margin: 0;
-            font-weight: 600;
-            visibility: visible;
-            display: inline;
+        /* Breathing Animation for Important Elements */
+        @keyframes breathe {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
         }
 
-        .dua-counter::before {
-            content: "(";
-            margin-right: 2px;
+        .dua-number {
+            animation: breathe 4s ease-in-out infinite;
         }
 
-        .dua-counter::after {
-            content: ")";
-            margin-left: 2px;
+        /* Selection Color */
+        ::selection {
+            background: rgba(212, 175, 55, 0.3);
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background: rgba(212, 175, 55, 0.3);
+            color: #fff;
         }
     </style>
 </head>
@@ -345,15 +605,15 @@
 
 <div class="container">
     <div class="header">
-        <h1>📖 أذكار وأدعية إسلامية شاملة</h1>
-        <p>Athkar, Duas & Surah Yasin - Complete Islamic Resources</p>
+        <h1>۞ أذكار وأدعية إسلامية ۞</h1>
+        <p>Athkar, Duas & Surah Yasin</p>
     </div>
 
     <div class="tabs-nav">
-        <button class="tab-btn active" onclick="switchTab('tab1', this)">🌅 أذكار الاستيقاظ</button>
-        <button class="tab-btn" onclick="switchTab('tab2', this)">🌄 أذكار الصباح</button>
-        <button class="tab-btn" onclick="switchTab('tab3', this)">📕 سورة يس</button>
-        <button class="tab-btn" onclick="switchTab('tab4', this)">🤲 أدعية الرزق</button>
+        <button class="tab-btn active" onclick="switchTab('tab1', this)">أذكار الاستيقاظ</button>
+        <button class="tab-btn" onclick="switchTab('tab2', this)">أذكار الصباح</button>
+        <button class="tab-btn" onclick="switchTab('tab3', this)">سورة يس</button>
+        <button class="tab-btn" onclick="switchTab('tab4', this)">أدعية الرزق</button>
     </div>
 
     <div class="content-wrapper">
@@ -400,191 +660,191 @@
             <div class="dua-card">
                 <div class="dua-number">1</div>
                 <div class="dua-text">أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">2</div>
                 <div class="dua-text">اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ</div>
                 <div class="benefits"><strong>الفائدة:</strong> من قالها حين يصبح أجير من الجن حتى يمسى ومن قالها حين يمسى أجير من الجن حتى يصبح</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">3</div>
                 <div class="dua-text">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم ❋ قُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ</div>
                 <div class="benefits"><strong>الفائدة:</strong> من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين)</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">4</div>
                 <div class="dua-text">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم ❋ قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ، مِن شَرِّ مَا خَلَقَ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">5</div>
                 <div class="dua-text">بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم ❋ قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ، مَلِكِ ٱلنَّاسِ، إِلَٰهِ ٱلنَّاسِ، مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ، ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ، مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">6</div>
                 <div class="dua-text">أَصْـبَحْنا وَأَصْـبَحَ المُـلْكُ لله وَالحَمدُ لله ، لا إلهَ إلاّ اللّهُ وَحدَهُ لا شَريكَ لهُ، لهُ المُـلكُ ولهُ الحَمْـد، وهُوَ على كلّ شَيءٍ قدير ، رَبِّ أسْـأَلُـكَ خَـيرَ ما في هـذا اليوم وَخَـيرَ ما بَعْـدَه ، وَأَعـوذُ بِكَ مِنْ شَـرِّ ما في هـذا اليوم وَشَرِّ ما بَعْـدَه، رَبِّ أَعـوذُبِكَ مِنَ الْكَسَـلِ وَسـوءِ الْكِـبَر ، رَبِّ أَعـوذُ بِكَ مِنْ عَـذابٍ في النّـارِ وَعَـذابٍ في القَـبْر</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">7</div>
                 <div class="dua-text">اللّهـمَّ أَنْتَ رَبِّـي لا إلهَ إلاّ أَنْتَ ، خَلَقْتَنـي وَأَنا عَبْـدُك ، وَأَنا عَلـى عَهْـدِكَ وَوَعْـدِكَ ما اسْتَـطَعْـت ، أَعـوذُبِكَ مِنْ شَـرِّ ما صَنَـعْت ، أَبـوءُ لَـكَ بِنِعْـمَتِـكَ عَلَـيَّ وَأَبـوءُ بِذَنْـبي فَاغْفـِرْ لي فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ</div>
                 <div class="benefits"><strong>الفائدة:</strong> من قالها موقنا بها حين يمسى ومات من ليلته دخل الجنة وكذلك حين يصبح</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">8</div>
                 <div class="dua-text">رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً</div>
                 <div class="benefits"><strong>الفائدة:</strong> من قالها حين يصبح وحين يمسى كان حقا على الله أن يرضيه يوم القيامة</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">9</div>
                 <div class="dua-text">اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك</div>
                 <div class="benefits"><strong>الفائدة:</strong> من قالها أعتقه الله من النار</div>
-                <div class="counter-display">👆 <span class="dua-counter">4</span></div>
+                <div class="counter-display"><span class="dua-counter">4</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">10</div>
                 <div class="dua-text">اللّهُـمَّ ما أَصْبَـَحَ بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِك ، فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـك ، فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـر</div>
                 <div class="benefits"><strong>الفائدة:</strong> من قالها حين يصبح أدى شكر يومه</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">11</div>
                 <div class="dua-text">حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم</div>
                 <div class="benefits"><strong>الفائدة:</strong> من قالها كفاه الله ما أهمه من أمر الدنيا والأخرة</div>
-                <div class="counter-display">👆 <span class="dua-counter">7</span></div>
+                <div class="counter-display"><span class="dua-counter">7</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">12</div>
                 <div class="dua-text">بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم</div>
                 <div class="benefits"><strong>الفائدة:</strong> لم يضره من الله شيء</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">13</div>
                 <div class="dua-text">اللّهُـمَّ بِكَ أَصْـبَحْنا وَبِكَ أَمْسَـينا ، وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ النُّـشُور</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">14</div>
                 <div class="dua-text">أَصْبَـحْـنا عَلَى فِطْرَةِ الإسْلاَمِ، وَعَلَى كَلِمَةِ الإِخْلاَصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إبْرَاهِيمَ حَنِيفاً مُسْلِماً وَمَا كَانَ مِنَ المُشْرِكِينَ</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">15</div>
                 <div class="dua-text">سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">16</div>
                 <div class="dua-text">اللّهُـمَّ عافِـني في بَدَنـي ، اللّهُـمَّ عافِـني في سَمْـعي ، اللّهُـمَّ عافِـني في بَصَـري ، لا إلهَ إلاّ أَنْـتَ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">17</div>
                 <div class="dua-text">اللّهُـمَّ إِنّـي أَعـوذُ بِكَ مِنَ الْكُـفر ، وَالفَـقْر ، وَأَعـوذُ بِكَ مِنْ عَذابِ القَـبْر ، لا إلهَ إلاّ أَنْـتَ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">18</div>
                 <div class="dua-text">اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي ، اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي ، اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي ، وَمِن فَوْقـي ، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">19</div>
                 <div class="dua-text">يَا حَيُّ يَا قيُّومُ بِرَحْمَتِكَ أسْتَغِيثُ أصْلِحْ لِي شَأنِي كُلَّهُ وَلاَ تَكِلْنِي إلَى نَفْسِي طَـرْفَةَ عَيْنٍ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">20</div>
                 <div class="dua-text">أَصْبَـحْـنا وَأَصْبَـحْ المُـلكُ للهِ رَبِّ العـالَمـين ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ خَـيْرَ هـذا الـيَوْم ، فَـتْحَهُ ، وَنَصْـرَهُ ، وَنـورَهُ وَبَـرَكَتَـهُ ، وَهُـداهُ ، وَأَعـوذُ بِـكَ مِـنْ شَـرِّ ما فـيهِ وَشَـرِّ ما بَعْـدَه</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">21</div>
                 <div class="dua-text">اللّهُـمَّ عالِـمَ الغَـيْبِ وَالشّـهادَةِ فاطِـرَ السّماواتِ وَالأرْضِ رَبَّ كـلِّ شَـيءٍ وَمَليـكَه ، أَشْهَـدُ أَنْ لا إِلـهَ إِلاّ أَنْت ، أَعـوذُ بِكَ مِن شَـرِّ نَفْسـي وَمِن شَـرِّ الشَّيْـطانِ وَشِرْكِهِ ، وَأَنْ أَقْتَـرِفَ عَلـى نَفْسـي سوءاً أَوْ أَجُـرَّهُ إِلـى مُسْـلِم</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">22</div>
                 <div class="dua-text">أَعـوذُ بِكَلِمـاتِ اللّهِ التّـامّـاتِ مِنْ شَـرِّ ما خَلَـق</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">23</div>
                 <div class="dua-text">اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ على نَبِيِّنَا مُحمَّد</div>
                 <div class="benefits"><strong>الفائدة:</strong> من صلى على حين يصبح وحين يمسى ادركته شفاعتى يوم القيامة</div>
-                <div class="counter-display">👆 <span class="dua-counter">10</span></div>
+                <div class="counter-display"><span class="dua-counter">10</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">24</div>
                 <div class="dua-text">اللَّهُمَّ إِنَّا نَعُوذُ بِكَ مِنْ أَنْ نُشْرِكَ بِكَ شَيْئًا نَعْلَمُهُ ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">25</div>
                 <div class="dua-text">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنْ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنْ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">26</div>
                 <div class="dua-text">أسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لاَ إلَهَ إلاَّ هُوَ، الحَيُّ القَيُّومُ، وَأتُوبُ إلَيهِ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">27</div>
                 <div class="dua-text">يَا رَبِّ , لَكَ الْحَمْدُ كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ , وَلِعَظِيمِ سُلْطَانِكَ</div>
-                <div class="counter-display">👆 <span class="dua-counter">3</span></div>
+                <div class="counter-display"><span class="dua-counter">3</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">28</div>
                 <div class="dua-text">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">29</div>
                 <div class="dua-text">اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ ، عَلَيْكَ تَوَكَّلْتُ ، وَأَنْتَ رَبُّ الْعَرْشِ الْعَظِيمِ , مَا شَاءَ اللَّهُ كَانَ ، وَمَا لَمْ يَشَأْ لَمْ يَكُنْ ، وَلا حَوْلَ وَلا قُوَّةَ إِلا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ , أَعْلَمُ أَنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ، وَأَنَّ اللَّهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا , اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي ، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا ، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ</div>
-                <div class="counter-display">👆 <span class="dua-counter">1</span></div>
+                <div class="counter-display"><span class="dua-counter">1</span></div>
             </div>
 
             <div class="dua-card">
                 <div class="dua-number">30</div>
                 <div class="dua-text">لَا إلَه إلّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءِ قَدِيرِ</div>
                 <div class="benefits"><strong>الفائدة:</strong> كانت له عدل عشر رقاب، وكتبت له مئة حسنة، ومحيت عنه مئة سيئة، وكانت له حرزا من الشيطان</div>
-                <div class="counter-display">👆 <span class="dua-counter">100</span></div>
+                <div class="counter-display"><span class="dua-counter">100</span></div>
             </div>
         </div>
 
@@ -625,7 +885,7 @@
             </div>
 
             <div class="intro-box">
-                <strong>💡 فضائل سورة يس:</strong>
+                <strong>✦ فضائل سورة يس:</strong>
                 <ul class="benefits-list">
                     <li>تسمى بـ قلب القرآن لعظمة مكانتها</li>
                     <li>تقرأ لتيسير الأمور وتحقيق الدعوات</li>
