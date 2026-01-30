@@ -691,6 +691,250 @@
             background: var(--gold-warm);
             color: var(--night-deep);
         }
+
+        /* ═══════════════════════════════════════ */
+        /* Habits Tracker Styles */
+        /* ═══════════════════════════════════════ */
+        .habits-section-label {
+            font-family: 'Scheherazade New', serif;
+            font-size: 2.2em;
+            color: var(--gold-bright);
+            margin: 35px 0 20px;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .habits-section-label::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-warm), transparent);
+        }
+
+        .habit-item {
+            background: linear-gradient(135deg,
+                rgba(250, 246, 237, 0.97) 0%,
+                rgba(255, 254, 249, 0.99) 100%);
+            padding: 18px 24px;
+            margin-bottom: 12px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            box-shadow: var(--shadow-card);
+        }
+
+        .habit-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(46, 204, 113, 0.15);
+            border-color: rgba(46, 204, 113, 0.4);
+        }
+
+        .habit-item.completed {
+            opacity: 0.55;
+            background: linear-gradient(135deg,
+                rgba(46, 204, 113, 0.12) 0%,
+                rgba(46, 204, 113, 0.06) 100%);
+            border-color: var(--gold-bright);
+        }
+
+        .habit-item.completed .habit-name {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .habit-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .habit-name {
+            font-family: 'Amiri', serif;
+            font-size: 1.45em;
+            color: #1a5c3a;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .habit-schedule {
+            font-size: 1.05em;
+            color: #888;
+            font-family: 'Amiri', serif;
+        }
+
+        .habit-check {
+            position: relative;
+        }
+
+        .habit-check input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 34px;
+            height: 34px;
+            border: 2px solid var(--gold-warm);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .habit-check input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .habit-check input[type="checkbox"]::after {
+            content: '✓';
+            color: transparent;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .habit-check input[type="checkbox"]:checked::after {
+            color: white;
+        }
+
+        .weekly-tracker {
+            background: linear-gradient(135deg,
+                rgba(18, 26, 46, 0.98) 0%,
+                rgba(26, 37, 64, 0.98) 100%);
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin: 30px 0;
+            border: 2px solid rgba(46, 204, 113, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .weekly-tracker h3 {
+            font-family: 'Scheherazade New', serif;
+            font-size: 1.8em;
+            color: var(--gold-bright);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .week-grid .day-header {
+            font-family: 'Amiri', serif;
+            font-size: 1.15em;
+            color: var(--gold-soft);
+            padding: 8px 4px;
+            font-weight: 600;
+        }
+
+        .week-grid .day-cell {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(46, 204, 113, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .week-grid .day-cell:hover {
+            border-color: rgba(46, 204, 113, 0.5);
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .week-grid .day-cell.today {
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
+            color: var(--gold-bright);
+            font-weight: bold;
+        }
+
+        .week-grid .day-cell.done {
+            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
+            color: var(--night-deep);
+            font-weight: bold;
+            border-color: var(--gold-bright);
+        }
+
+        .habits-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .habits-btn {
+            font-family: 'Amiri', serif;
+            font-size: 1.25em;
+            padding: 12px 26px;
+            border-radius: 12px;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--gold-soft);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .habits-btn:hover {
+            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
+            color: var(--night-deep);
+            border-color: var(--gold-bright);
+            box-shadow: var(--glow-gold);
+        }
+
+        .habits-stats {
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Amiri', serif;
+            font-size: 1.3em;
+            color: var(--gold-soft);
+        }
+
+        .stats-number {
+            font-size: 2.2em;
+            color: var(--gold-bright);
+            font-weight: bold;
+            display: block;
+            margin: 5px 0;
+            text-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .habit-item {
+                padding: 14px 16px;
+            }
+            .habit-name {
+                font-size: 1.25em;
+            }
+            .week-grid {
+                gap: 4px;
+            }
+            .week-grid .day-header {
+                font-size: 0.95em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -717,6 +961,8 @@
         <button class="tab-btn" onclick="switchTab('tab2', this)">🌄 أذكار الصباح</button>
         <button class="tab-btn" onclick="switchTab('tab3', this)">📕 سورة يس</button>
         <button class="tab-btn" onclick="switchTab('tab4', this)">🤲 أدعية الرزق</button>
+        <button class="tab-btn" onclick="switchTab('tab5', this)">📖 سورة الكهف</button>
+        <button class="tab-btn" onclick="switchTab('tab6', this)">✅ العادات اليومية</button>
     </div>
 
     <div class="content-wrapper">
@@ -1105,6 +1351,239 @@
                 </ul>
             </div>
         </div>
+
+        <!-- TAB 5: Surah Al-Kahf -->
+        <div id="tab5" class="content-area">
+            <h2 class="section-title">سورة الكهف</h2>
+
+            <div class="intro-box">
+                <strong>معلومات السورة:</strong>
+                <ul class="benefits-list">
+                    <li>رقم السورة: 18</li>
+                    <li>عدد الآيات: 110 آية</li>
+                    <li>التصنيف: مكية</li>
+                    <li>الرواية: حفص عن عاصم</li>
+                    <li><strong>الفضل:</strong> قال صلى الله عليه وسلم: "من قرأ سورة الكهف يوم الجمعة أضاء له من النور ما بين الجمعتين" - يُستحب قراءتها كل يوم جمعة</li>
+                </ul>
+            </div>
+
+            <div class="quran-verse">
+                <span class="verse-num">بسم الله الرحمن الرحيم</span><br>
+                ٱلۡحَمۡدُ لِلَّهِ ٱلَّذِيٓ أَنزَلَ عَلَىٰ عَبۡدِهِ ٱلۡكِتَٰبَ وَلَمۡ يَجۡعَل لَّهُۥ عِوَجَاۜ (1) قَيِّمٗا لِّيُنذِرَ بَأۡسٗا شَدِيدٗا مِّن لَّدُنۡهُ وَيُبَشِّرَ ٱلۡمُؤۡمِنِينَ ٱلَّذِينَ يَعۡمَلُونَ ٱلصَّٰلِحَٰتِ أَنَّ لَهُمۡ أَجۡرًا حَسَنٗا (2) مَّٰكِثِينَ فِيهِ أَبَدٗا (3) وَيُنذِرَ ٱلَّذِينَ قَالُواْ ٱتَّخَذَ ٱللَّهُ وَلَدٗا (4) مَّا لَهُم بِهِۦ مِنۡ عِلۡمٖ وَلَا لِأٓبَآئِهِمۡۚ كَبُرَتۡ كَلِمَةٗ تَخۡرُجُ مِنۡ أَفۡوَٰهِهِمۡۚ إِن يَقُولُونَ إِلَّا كَذِبٗا (5) فَلَعَلَّكَ بَٰخِعٞ نَّفۡسَكَ عَلَىٰٓ ءَاثَٰرِهِمۡ إِن لَّمۡ يُؤۡمِنُواْ بِهَٰذَا ٱلۡحَدِيثِ أَسَفًا (6) إِنَّا جَعَلۡنَا مَا عَلَى ٱلۡأَرۡضِ زِينَةٗ لَّهَا لِنَبۡلُوَهُمۡ أَيُّهُمۡ أَحۡسَنُ عَمَلٗا (7) وَإِنَّا لَجَٰعِلُونَ مَا عَلَيۡهَا صَعِيدٗا جُرُزًا (8)
+            </div>
+
+            <div class="quran-verse">
+                أَمۡ حَسِبۡتَ أَنَّ أَصۡحَٰبَ ٱلۡكَهۡفِ وَٱلرَّقِيمِ كَانُواْ مِنۡ ءَايَٰتِنَا عَجَبًا (9) إِذۡ أَوَى ٱلۡفِتۡيَةُ إِلَى ٱلۡكَهۡفِ فَقَالُواْ رَبَّنَآ ءَاتِنَا مِن لَّدُنكَ رَحۡمَةٗ وَهَيِّئۡ لَنَا مِنۡ أَمۡرِنَا رَشَدٗا (10) فَضَرَبۡنَا عَلَىٰٓ ءَاذَانِهِمۡ فِي ٱلۡكَهۡفِ سِنِينَ عَدَدٗا (11) ثُمَّ بَعَثۡنَٰهُمۡ لِنَعۡلَمَ أَيُّ ٱلۡحِزۡبَيۡنِ أَحۡصَىٰ لِمَا لَبِثُوٓاْ أَمَدٗا (12) نَّحۡنُ نَقُصُّ عَلَيۡكَ نَبَأَهُم بِٱلۡحَقِّۚ إِنَّهُمۡ فِتۡيَةٌ ءَامَنُواْ بِرَبِّهِمۡ وَزِدۡنَٰهُمۡ هُدٗى (13) وَرَبَطۡنَا عَلَىٰ قُلُوبِهِمۡ إِذۡ قَامُواْ فَقَالُواْ رَبُّنَا رَبُّ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ لَن نَّدۡعُوَاْ مِن دُونِهِۦٓ إِلَٰهٗاۖ لَّقَدۡ قُلۡنَآ إِذٗا شَطَطًا (14) هَٰٓؤُلَآءِ قَوۡمُنَا ٱتَّخَذُواْ مِن دُونِهِۦٓ ءَالِهَةٗۖ لَّوۡلَا يَأۡتُونَ عَلَيۡهِم بِسُلۡطَٰنِۭ بَيِّنٖۖ فَمَنۡ أَظۡلَمُ مِمَّنِ ٱفۡتَرَىٰ عَلَى ٱللَّهِ كَذِبٗا (15) وَإِذِ ٱعۡتَزَلۡتُمُوهُمۡ وَمَا يَعۡبُدُونَ إِلَّا ٱللَّهَ فَأۡوُۥٓاْ إِلَى ٱلۡكَهۡفِ يَنشُرۡ لَكُمۡ رَبُّكُم مِّن رَّحۡمَتِهِۦ وَيُهَيِّئۡ لَكُم مِّنۡ أَمۡرِكُم مِّرۡفَقٗا (16) ۞وَتَرَى ٱلشَّمۡسَ إِذَا طَلَعَت تَّزَٰوَرُ عَن كَهۡفِهِمۡ ذَاتَ ٱلۡيَمِينِ وَإِذَا غَرَبَت تَّقۡرِضُهُمۡ ذَاتَ ٱلشِّمَالِ وَهُمۡ فِي فَجۡوَةٖ مِّنۡهُۚ ذَٰلِكَ مِنۡ ءَايَٰتِ ٱللَّهِۗ مَن يَهۡدِ ٱللَّهُ فَهُوَ ٱلۡمُهۡتَدِۖ وَمَن يُضۡلِلۡ فَلَن تَجِدَ لَهُۥ وَلِيّٗا مُّرۡشِدٗا (17) وَتَحۡسَبُهُمۡ أَيۡقَاظٗا وَهُمۡ رُقُودٞۚ وَنُقَلِّبُهُمۡ ذَاتَ ٱلۡيَمِينِ وَذَاتَ ٱلشِّمَالِۖ وَكَلۡبُهُم بَٰسِطٞ ذِرَاعَيۡهِ بِٱلۡوَصِيدِۚ لَوِ ٱطَّلَعۡتَ عَلَيۡهِمۡ لَوَلَّيۡتَ مِنۡهُمۡ فِرَارٗا وَلَمُلِئۡتَ مِنۡهُمۡ رُعۡبٗا (18) وَكَذَٰلِكَ بَعَثۡنَٰهُمۡ لِيَتَسَآءَلُواْ بَيۡنَهُمۡۚ قَالَ قَآئِلٞ مِّنۡهُمۡ كَمۡ لَبِثۡتُمۡۖ قَالُواْ لَبِثۡنَا يَوۡمًا أَوۡ بَعۡضَ يَوۡمٖۚ قَالُواْ رَبُّكُمۡ أَعۡلَمُ بِمَا لَبِثۡتُمۡ فَٱبۡعَثُوٓاْ أَحَدَكُم بِوَرِقِكُمۡ هَٰذِهِۦٓ إِلَى ٱلۡمَدِينَةِ فَلۡيَنظُرۡ أَيُّهَآ أَزۡكَىٰ طَعَامٗا فَلۡيَأۡتِكُم بِرِزۡقٖ مِّنۡهُ وَلۡيَتَلَطَّفۡ وَلَا يُشۡعِرَنَّ بِكُمۡ أَحَدًا (19) إِنَّهُمۡ إِن يَظۡهَرُواْ عَلَيۡكُمۡ يَرۡجُمُوكُمۡ أَوۡ يُعِيدُوكُمۡ فِي مِلَّتِهِمۡ وَلَن تُفۡلِحُوٓاْ إِذًا أَبَدٗا (20)
+            </div>
+
+            <div class="quran-verse">
+                وَكَذَٰلِكَ أَعۡثَرۡنَا عَلَيۡهِمۡ لِيَعۡلَمُوٓاْ أَنَّ وَعۡدَ ٱللَّهِ حَقّٞ وَأَنَّ ٱلسَّاعَةَ لَا رَيۡبَ فِيهَآ إِذۡ يَتَنَٰزَعُونَ بَيۡنَهُمۡ أَمۡرَهُمۡۖ فَقَالُواْ ٱبۡنُواْ عَلَيۡهِم بُنۡيَٰنٗاۖ رَّبُّهُمۡ أَعۡلَمُ بِهِمۡۚ قَالَ ٱلَّذِينَ غَلَبُواْ عَلَىٰٓ أَمۡرِهِمۡ لَنَتَّخِذَنَّ عَلَيۡهِم مَّسۡجِدٗا (21) سَيَقُولُونَ ثَلَٰثَةٞ رَّابِعُهُمۡ كَلۡبُهُمۡ وَيَقُولُونَ خَمۡسَةٞ سَادِسُهُمۡ كَلۡبُهُمۡ رَجۡمَۢا بِٱلۡغَيۡبِۖ وَيَقُولُونَ سَبۡعَةٞ وَثَامِنُهُمۡ كَلۡبُهُمۡۚ قُل رَّبِّيٓ أَعۡلَمُ بِعِدَّتِهِم مَّا يَعۡلَمُهُمۡ إِلَّا قَلِيلٞۗ فَلَا تُمَارِ فِيهِمۡ إِلَّا مِرَآءٗ ظَٰهِرٗا وَلَا تَسۡتَفۡتِ فِيهِم مِّنۡهُمۡ أَحَدٗا (22) وَلَا تَقُولَنَّ لِشَاْيۡءٍ إِنِّي فَاعِلٞ ذَٰلِكَ غَدًا (23) إِلَّآ أَن يَشَآءَ ٱللَّهُۚ وَٱذۡكُر رَّبَّكَ إِذَا نَسِيتَ وَقُلۡ عَسَىٰٓ أَن يَهۡدِيَنِ رَبِّي لِأَقۡرَبَ مِنۡ هَٰذَا رَشَدٗا (24) وَلَبِثُواْ فِي كَهۡفِهِمۡ ثَلَٰثَ مِاْئَةٖ سِنِينَ وَٱزۡدَادُواْ تِسۡعٗا (25) قُلِ ٱللَّهُ أَعۡلَمُ بِمَا لَبِثُواْۖ لَهُۥ غَيۡبُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِۖ أَبۡصِرۡ بِهِۦ وَأَسۡمِعۡۚ مَا لَهُم مِّن دُونِهِۦ مِن وَلِيّٖ وَلَا يُشۡرِكُ فِي حُكۡمِهِۦٓ أَحَدٗا (26) وَٱتۡلُ مَآ أُوحِيَ إِلَيۡكَ مِن كِتَابِ رَبِّكَۖ لَا مُبَدِّلَ لِكَلِمَٰتِهِۦ وَلَن تَجِدَ مِن دُونِهِۦ مُلۡتَحَدٗا (27)
+            </div>
+
+            <div class="quran-verse">
+                وَٱصۡبِرۡ نَفۡسَكَ مَعَ ٱلَّذِينَ يَدۡعُونَ رَبَّهُم بِٱلۡغَدَوٰةِ وَٱلۡعَشِيِّ يُرِيدُونَ وَجۡهَهُۥۖ وَلَا تَعۡدُ عَيۡنَاكَ عَنۡهُمۡ تُرِيدُ زِينَةَ ٱلۡحَيَوٰةِ ٱلدُّنۡيَاۖ وَلَا تُطِعۡ مَنۡ أَغۡفَلۡنَا قَلۡبَهُۥ عَن ذِكۡرِنَا وَٱتَّبَعَ هَوَىٰهُ وَكَانَ أَمۡرُهُۥ فُرُطٗا (28) وَقُلِ ٱلۡحَقُّ مِن رَّبِّكُمۡۖ فَمَن شَآءَ فَلۡيُؤۡمِن وَمَن شَآءَ فَلۡيَكۡفُرۡۚ إِنَّآ أَعۡتَدۡنَا لِلظَّٰلِمِينَ نَارًا أَحَاطَ بِهِمۡ سُرَادِقُهَاۚ وَإِن يَسۡتَغِيثُواْ يُغَاثُواْ بِمَآءٖ كَٱلۡمُهۡلِ يَشۡوِي ٱلۡوُجُوهَۚ بِئۡسَ ٱلشَّرَابُ وَسَآءَتۡ مُرۡتَفَقًا (29) إِنَّ ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّٰلِحَٰتِ إِنَّا لَا نُضِيعُ أَجۡرَ مَنۡ أَحۡسَنَ عَمَلًا (30) أُوْلَٰٓئِكَ لَهُمۡ جَنَّٰتُ عَدۡنٖ تَجۡرِي مِن تَحۡتِهِمُ ٱلۡأَنۡهَٰرُ يُحَلَّوۡنَ فِيهَا مِنۡ أَسَاوِرَ مِن ذَهَبٖ وَيَلۡبَسُونَ ثِيَابًا خُضۡرٗا مِّن سُندُسٖ وَإِسۡتَبۡرَقٖ مُّتَّكِـِٔينَ فِيهَا عَلَى ٱلۡأَرَآئِكِۚ نِعۡمَ ٱلثَّوَابُ وَحَسُنَتۡ مُرۡتَفَقٗا (31) ۞وَٱضۡرِبۡ لَهُم مَّثَلٗا رَّجُلَيۡنِ جَعَلۡنَا لِأَحَدِهِمَا جَنَّتَيۡنِ مِنۡ أَعۡنَٰبٖ وَحَفَفۡنَٰهُمَا بِنَخۡلٖ وَجَعَلۡنَا بَيۡنَهُمَا زَرۡعٗا (32) كِلۡتَا ٱلۡجَنَّتَيۡنِ ءَاتَتۡ أُكُلَهَا وَلَمۡ تَظۡلِم مِّنۡهُ شَيۡـٔٗاۚ وَفَجَّرۡنَا خِلَٰلَهُمَا نَهَرٗا (33) وَكَانَ لَهُۥ ثَمَرٞ فَقَالَ لِصَٰحِبِهِۦ وَهُوَ يُحَاوِرُهُۥٓ أَنَا۠ أَكۡثَرُ مِنكَ مَالٗا وَأَعَزُّ نَفَرٗا (34)
+            </div>
+
+            <div class="quran-verse">
+                وَدَخَلَ جَنَّتَهُۥ وَهُوَ ظَالِمٞ لِّنَفۡسِهِۦ قَالَ مَآ أَظُنُّ أَن تَبِيدَ هَٰذِهِۦٓ أَبَدٗا (35) وَمَآ أَظُنُّ ٱلسَّاعَةَ قَآئِمَةٗ وَلَئِن رُّدِدتُّ إِلَىٰ رَبِّي لَأَجِدَنَّ خَيۡرٗا مِّنۡهَا مُنقَلَبٗا (36) قَالَ لَهُۥ صَاحِبُهُۥ وَهُوَ يُحَاوِرُهُۥٓ أَكَفَرۡتَ بِٱلَّذِي خَلَقَكَ مِن تُرَابٖ ثُمَّ مِن نُّطۡفَةٖ ثُمَّ سَوَّىٰكَ رَجُلٗا (37) لَّٰكِنَّا۠ هُوَ ٱللَّهُ رَبِّي وَلَآ أُشۡرِكُ بِرَبِّيٓ أَحَدٗا (38) وَلَوۡلَآ إِذۡ دَخَلۡتَ جَنَّتَكَ قُلۡتَ مَا شَآءَ ٱللَّهُ لَا قُوَّةَ إِلَّا بِٱللَّهِۚ إِن تَرَنِ أَنَا۠ أَقَلَّ مِنكَ مَالٗا وَوَلَدٗا (39) فَعَسَىٰ رَبِّيٓ أَن يُؤۡتِيَنِ خَيۡرٗا مِّن جَنَّتِكَ وَيُرۡسِلَ عَلَيۡهَا حُسۡبَانٗا مِّنَ ٱلسَّمَآءِ فَتُصۡبِحَ صَعِيدٗا زَلَقًا (40) أَوۡ يُصۡبِحَ مَآؤُهَا غَوۡرٗا فَلَن تَسۡتَطِيعَ لَهُۥ طَلَبٗا (41) وَأُحِيطَ بِثَمَرِهِۦ فَأَصۡبَحَ يُقَلِّبُ كَفَّيۡهِ عَلَىٰ مَآ أَنفَقَ فِيهَا وَهِيَ خَاوِيَةٌ عَلَىٰ عُرُوشِهَا وَيَقُولُ يَٰلَيۡتَنِي لَمۡ أُشۡرِكۡ بِرَبِّيٓ أَحَدٗا (42) وَلَمۡ تَكُن لَّهُۥ فِئَةٞ يَنصُرُونَهُۥ مِن دُونِ ٱللَّهِ وَمَا كَانَ مُنتَصِرًا (43) هُنَالِكَ ٱلۡوَلَٰيَةُ لِلَّهِ ٱلۡحَقِّۚ هُوَ خَيۡرٞ ثَوَابٗا وَخَيۡرٌ عُقۡبٗا (44) وَٱضۡرِبۡ لَهُم مَّثَلَ ٱلۡحَيَوٰةِ ٱلدُّنۡيَا كَمَآءٍ أَنزَلۡنَٰهُ مِنَ ٱلسَّمَآءِ فَٱخۡتَلَطَ بِهِۦ نَبَاتُ ٱلۡأَرۡضِ فَأَصۡبَحَ هَشِيمٗا تَذۡرُوهُ ٱلرِّيَٰحُۗ وَكَانَ ٱللَّهُ عَلَىٰ كُلِّ شَيۡءٖ مُّقۡتَدِرًا (45)
+            </div>
+
+            <div class="quran-verse">
+                ٱلۡمَالُ وَٱلۡبَنُونَ زِينَةُ ٱلۡحَيَوٰةِ ٱلدُّنۡيَاۖ وَٱلۡبَٰقِيَٰتُ ٱلصَّٰلِحَٰتُ خَيۡرٌ عِندَ رَبِّكَ ثَوَابٗا وَخَيۡرٌ أَمَلٗا (46) وَيَوۡمَ نُسَيِّرُ ٱلۡجِبَالَ وَتَرَى ٱلۡأَرۡضَ بَارِزَةٗ وَحَشَرۡنَٰهُمۡ فَلَمۡ نُغَادِرۡ مِنۡهُمۡ أَحَدٗا (47) وَعُرِضُواْ عَلَىٰ رَبِّكَ صَفّٗا لَّقَدۡ جِئۡتُمُونَا كَمَا خَلَقۡنَٰكُمۡ أَوَّلَ مَرَّةِۭۚ بَلۡ زَعَمۡتُمۡ أَلَّن نَّجۡعَلَ لَكُم مَّوۡعِدٗا (48) وَوُضِعَ ٱلۡكِتَٰبُ فَتَرَى ٱلۡمُجۡرِمِينَ مُشۡفِقِينَ مِمَّا فِيهِ وَيَقُولُونَ يَٰوَيۡلَتَنَا مَالِ هَٰذَا ٱلۡكِتَٰبِ لَا يُغَادِرُ صَغِيرَةٗ وَلَا كَبِيرَةً إِلَّآ أَحۡصَىٰهَاۚ وَوَجَدُواْ مَا عَمِلُواْ حَاضِرٗاۗ وَلَا يَظۡلِمُ رَبُّكَ أَحَدٗا (49) وَإِذۡ قُلۡنَا لِلۡمَلَٰٓئِكَةِ ٱسۡجُدُواْ لِأٓدَمَ فَسَجَدُوٓاْ إِلَّآ إِبۡلِيسَ كَانَ مِنَ ٱلۡجِنِّ فَفَسَقَ عَنۡ أَمۡرِ رَبِّهِۦٓۗ أَفَتَتَّخِذُونَهُۥ وَذُرِّيَّتَهُۥٓ أَوۡلِيَآءَ مِن دُونِي وَهُمۡ لَكُمۡ عَدُوُّۢۚ بِئۡسَ لِلظَّٰلِمِينَ بَدَلٗا (50)
+            </div>
+
+            <div class="quran-verse">
+                ۞مَّآ أَشۡهَدتُّهُمۡ خَلۡقَ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضِ وَلَا خَلۡقَ أَنفُسِهِمۡ وَمَا كُنتُ مُتَّخِذَ ٱلۡمُضِلِّينَ عَضُدٗا (51) وَيَوۡمَ يَقُولُ نَادُواْ شُرَكَآءِيَ ٱلَّذِينَ زَعَمۡتُمۡ فَدَعَوۡهُمۡ فَلَمۡ يَسۡتَجِيبُواْ لَهُمۡ وَجَعَلۡنَا بَيۡنَهُم مَّوۡبِقٗا (52) وَرَءَا ٱلۡمُجۡرِمُونَ ٱلنَّارَ فَظَنُّوٓاْ أَنَّهُم مُّوَاقِعُوهَا وَلَمۡ يَجِدُواْ عَنۡهَا مَصۡرِفٗا (53) وَلَقَدۡ صَرَّفۡنَا فِي هَٰذَا ٱلۡقُرۡءَانِ لِلنَّاسِ مِن كُلِّ مَثَلٖۚ وَكَانَ ٱلۡإِنسَٰنُ أَكۡثَرَ شَيۡءٖ جَدَلٗا (54) وَمَا مَنَعَ ٱلنَّاسَ أَن يُؤۡمِنُوٓاْ إِذۡ جَآءَهُمُ ٱلۡهُدَىٰ وَيَسۡتَغۡفِرُواْ رَبَّهُمۡ إِلَّآ أَن تَأۡتِيَهُمۡ سُنَّةُ ٱلۡأَوَّلِينَ أَوۡ يَأۡتِيَهُمُ ٱلۡعَذَابُ قُبُلٗا (55) وَمَا نُرۡسِلُ ٱلۡمُرۡسَلِينَ إِلَّا مُبَشِّرِينَ وَمُنذِرِينَۚ وَيُجَٰدِلُ ٱلَّذِينَ كَفَرُواْ بِٱلۡبَٰطِلِ لِيُدۡحِضُواْ بِهِ ٱلۡحَقَّۖ وَٱتَّخَذُوٓاْ ءَايَٰتِي وَمَآ أُنذِرُواْ هُزُوٗا (56) وَمَنۡ أَظۡلَمُ مِمَّن ذُكِّرَ بِـَٔايَٰتِ رَبِّهِۦ فَأَعۡرَضَ عَنۡهَا وَنَسِيَ مَا قَدَّمَتۡ يَدَاهُۚ إِنَّا جَعَلۡنَا عَلَىٰ قُلُوبِهِمۡ أَكِنَّةً أَن يَفۡقَهُوهُ وَفِيٓ ءَاذَانِهِمۡ وَقۡرٗاۖ وَإِن تَدۡعُهُمۡ إِلَى ٱلۡهُدَىٰ فَلَن يَهۡتَدُوٓاْ إِذًا أَبَدٗا (57) وَرَبُّكَ ٱلۡغَفُورُ ذُو ٱلرَّحۡمَةِۖ لَوۡ يُؤَاخِذُهُم بِمَا كَسَبُواْ لَعَجَّلَ لَهُمُ ٱلۡعَذَابَۚ بَل لَّهُم مَّوۡعِدٞ لَّن يَجِدُواْ مِن دُونِهِۦ مَوۡئِلٗا (58) وَتِلۡكَ ٱلۡقُرَىٰٓ أَهۡلَكۡنَٰهُمۡ لَمَّا ظَلَمُواْ وَجَعَلۡنَا لِمَهۡلِكِهِم مَّوۡعِدٗا (59)
+            </div>
+
+            <div class="quran-verse">
+                وَإِذۡ قَالَ مُوسَىٰ لِفَتَىٰهُ لَآ أَبۡرَحُ حَتَّىٰٓ أَبۡلُغَ مَجۡمَعَ ٱلۡبَحۡرَيۡنِ أَوۡ أَمۡضِيَ حُقُبٗا (60) فَلَمَّا بَلَغَا مَجۡمَعَ بَيۡنِهِمَا نَسِيَا حُوتَهُمَا فَٱتَّخَذَ سَبِيلَهُۥ فِي ٱلۡبَحۡرِ سَرَبٗا (61) فَلَمَّا جَاوَزَا قَالَ لِفَتَىٰهُ ءَاتِنَا غَدَآءَنَا لَقَدۡ لَقِينَا مِن سَفَرِنَا هَٰذَا نَصَبٗا (62) قَالَ أَرَءَيۡتَ إِذۡ أَوَيۡنَآ إِلَى ٱلصَّخۡرَةِ فَإِنِّي نَسِيتُ ٱلۡحُوتَ وَمَآ أَنسَىٰنِيهُ إِلَّا ٱلشَّيۡطَٰنُ أَنۡ أَذۡكُرَهُۥۚ وَٱتَّخَذَ سَبِيلَهُۥ فِي ٱلۡبَحۡرِ عَجَبٗا (63) قَالَ ذَٰلِكَ مَا كُنَّا نَبۡغِۚ فَٱرۡتَدَّا عَلَىٰٓ ءَاثَارِهِمَا قَصَصٗا (64) فَوَجَدَا عَبۡدٗا مِّنۡ عِبَادِنَآ ءَاتَيۡنَٰهُ رَحۡمَةٗ مِّنۡ عِندِنَا وَعَلَّمۡنَٰهُ مِن لَّدُنَّا عِلۡمٗا (65) قَالَ لَهُۥ مُوسَىٰ هَلۡ أَتَّبِعُكَ عَلَىٰٓ أَن تُعَلِّمَنِ مِمَّا عُلِّمۡتَ رُشۡدٗا (66) قَالَ إِنَّكَ لَن تَسۡتَطِيعَ مَعِيَ صَبۡرٗا (67) وَكَيۡفَ تَصۡبِرُ عَلَىٰ مَا لَمۡ تُحِطۡ بِهِۦ خُبۡرٗا (68) قَالَ سَتَجِدُنِيٓ إِن شَآءَ ٱللَّهُ صَابِرٗا وَلَآ أَعۡصِي لَكَ أَمۡرٗا (69) قَالَ فَإِنِ ٱتَّبَعۡتَنِي فَلَا تَسۡـَٔلۡنِي عَن شَيۡءٍ حَتَّىٰٓ أُحۡدِثَ لَكَ مِنۡهُ ذِكۡرٗا (70)
+            </div>
+
+            <div class="quran-verse">
+                فَٱنطَلَقَا حَتَّىٰٓ إِذَا رَكِبَا فِي ٱلسَّفِينَةِ خَرَقَهَاۖ قَالَ أَخَرَقۡتَهَا لِتُغۡرِقَ أَهۡلَهَا لَقَدۡ جِئۡتَ شَيۡـًٔا إِمۡرٗا (71) قَالَ أَلَمۡ أَقُلۡ إِنَّكَ لَن تَسۡتَطِيعَ مَعِيَ صَبۡرٗا (72) قَالَ لَا تُؤَاخِذۡنِي بِمَا نَسِيتُ وَلَا تُرۡهِقۡنِي مِنۡ أَمۡرِي عُسۡرٗا (73) فَٱنطَلَقَا حَتَّىٰٓ إِذَا لَقِيَا غُلَٰمٗا فَقَتَلَهُۥ قَالَ أَقَتَلۡتَ نَفۡسٗا زَكِيَّةَۢ بِغَيۡرِ نَفۡسٖ لَّقَدۡ جِئۡتَ شَيۡـٔٗا نُّكۡرٗا (74) ۞قَالَ أَلَمۡ أَقُل لَّكَ إِنَّكَ لَن تَسۡتَطِيعَ مَعِيَ صَبۡرٗا (75) قَالَ إِن سَأَلۡتُكَ عَن شَيۡءِۭ بَعۡدَهَا فَلَا تُصَٰحِبۡنِيۖ قَدۡ بَلَغۡتَ مِن لَّدُنِّي عُذۡرٗا (76) فَٱنطَلَقَا حَتَّىٰٓ إِذَآ أَتَيَآ أَهۡلَ قَرۡيَةٍ ٱسۡتَطۡعَمَآ أَهۡلَهَا فَأَبَوۡاْ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارٗا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥۖ قَالَ لَوۡ شِئۡتَ لَتَّخَذۡتَ عَلَيۡهِ أَجۡرٗا (77) قَالَ هَٰذَا فِرَاقُ بَيۡنِي وَبَيۡنِكَۚ سَأُنَبِّئُكَ بِتَأۡوِيلِ مَا لَمۡ تَسۡتَطِع عَّلَيۡهِ صَبۡرًا (78) أَمَّا ٱلسَّفِينَةُ فَكَانَتۡ لِمَسَٰكِينَ يَعۡمَلُونَ فِي ٱلۡبَحۡرِ فَأَرَدتُّ أَنۡ أَعِيبَهَا وَكَانَ وَرَآءَهُم مَّلِكٞ يَأۡخُذُ كُلَّ سَفِينَةٍ غَصۡبٗا (79) وَأَمَّا ٱلۡغُلَٰمُ فَكَانَ أَبَوَاهُ مُؤۡمِنَيۡنِ فَخَشِينَآ أَن يُرۡهِقَهُمَا طُغۡيَٰنٗا وَكُفۡرٗا (80) فَأَرَدۡنَآ أَن يُبۡدِلَهُمَا رَبُّهُمَا خَيۡرٗا مِّنۡهُ زَكَوٰةٗ وَأَقۡرَبَ رُحۡمٗا (81) وَأَمَّا ٱلۡجِدَارُ فَكَانَ لِغُلَٰمَيۡنِ يَتِيمَيۡنِ فِي ٱلۡمَدِينَةِ وَكَانَ تَحۡتَهُۥ كَنزٞ لَّهُمَا وَكَانَ أَبُوهُمَا صَٰلِحٗا فَأَرَادَ رَبُّكَ أَن يَبۡلُغَآ أَشُدَّهُمَا وَيَسۡتَخۡرِجَا كَنزَهُمَا رَحۡمَةٗ مِّن رَّبِّكَۚ وَمَا فَعَلۡتُهُۥ عَنۡ أَمۡرِيۚ ذَٰلِكَ تَأۡوِيلُ مَا لَمۡ تَسۡطِع عَّلَيۡهِ صَبۡرٗا (82)
+            </div>
+
+            <div class="quran-verse">
+                وَيَسۡـَٔلُونَكَ عَن ذِي ٱلۡقَرۡنَيۡنِۖ قُلۡ سَأَتۡلُواْ عَلَيۡكُم مِّنۡهُ ذِكۡرًا (83) إِنَّا مَكَّنَّا لَهُۥ فِي ٱلۡأَرۡضِ وَءَاتَيۡنَٰهُ مِن كُلِّ شَيۡءٖ سَبَبٗا (84) فَأَتۡبَعَ سَبَبًا (85) حَتَّىٰٓ إِذَا بَلَغَ مَغۡرِبَ ٱلشَّمۡسِ وَجَدَهَا تَغۡرُبُ فِي عَيۡنٍ حَمِئَةٖ وَوَجَدَ عِندَهَا قَوۡمٗاۖ قُلۡنَا يَٰذَا ٱلۡقَرۡنَيۡنِ إِمَّآ أَن تُعَذِّبَ وَإِمَّآ أَن تَتَّخِذَ فِيهِمۡ حُسۡنٗا (86) قَالَ أَمَّا مَن ظَلَمَ فَسَوۡفَ نُعَذِّبُهُۥ ثُمَّ يُرَدُّ إِلَىٰ رَبِّهِۦ فَيُعَذِّبُهُۥ عَذَابٗا نُّكۡرٗا (87) وَأَمَّا مَنۡ ءَامَنَ وَعَمِلَ صَٰلِحٗا فَلَهُۥ جَزَآءً ٱلۡحُسۡنَىٰۖ وَسَنَقُولُ لَهُۥ مِنۡ أَمۡرِنَا يُسۡرٗا (88) ثُمَّ أَتۡبَعَ سَبَبًا (89) حَتَّىٰٓ إِذَا بَلَغَ مَطۡلِعَ ٱلشَّمۡسِ وَجَدَهَا تَطۡلُعُ عَلَىٰ قَوۡمٖ لَّمۡ نَجۡعَل لَّهُم مِّن دُونِهَا سِتۡرٗا (90) كَذَٰلِكَۖ وَقَدۡ أَحَطۡنَا بِمَا لَدَيۡهِ خُبۡرٗا (91) ثُمَّ أَتۡبَعَ سَبَبًا (92) حَتَّىٰٓ إِذَا بَلَغَ بَيۡنَ ٱلسَّدَّيۡنِ وَجَدَ مِن دُونِهِمَا قَوۡمٗا لَّا يَكَادُونَ يَفۡقَهُونَ قَوۡلٗا (93) قَالُواْ يَٰذَا ٱلۡقَرۡنَيۡنِ إِنَّ يَأۡجُوجَ وَمَأۡجُوجَ مُفۡسِدُونَ فِي ٱلۡأَرۡضِ فَهَلۡ نَجۡعَلُ لَكَ خَرۡجًا عَلَىٰٓ أَن تَجۡعَلَ بَيۡنَنَا وَبَيۡنَهُمۡ سَدّٗا (94) قَالَ مَا مَكَّنِّي فِيهِ رَبِّي خَيۡرٞ فَأَعِينُونِي بِقُوَّةٍ أَجۡعَلۡ بَيۡنَكُمۡ وَبَيۡنَهُمۡ رَدۡمًا (95) ءَاتُونِي زُبَرَ ٱلۡحَدِيدِۖ حَتَّىٰٓ إِذَا سَاوَىٰ بَيۡنَ ٱلصَّدَفَيۡنِ قَالَ ٱنفُخُواْۖ حَتَّىٰٓ إِذَا جَعَلَهُۥ نَارٗا قَالَ ءَاتُونِيٓ أُفۡرِغۡ عَلَيۡهِ قِطۡرٗا (96) فَمَا ٱسۡطَٰعُوٓاْ أَن يَظۡهَرُوهُ وَمَا ٱسۡتَطَٰعُواْ لَهُۥ نَقۡبٗا (97)
+            </div>
+
+            <div class="quran-verse">
+                قَالَ هَٰذَا رَحۡمَةٞ مِّن رَّبِّيۖ فَإِذَا جَآءَ وَعۡدُ رَبِّي جَعَلَهُۥ دَكَّآءَۖ وَكَانَ وَعۡدُ رَبِّي حَقّٗا (98) ۞وَتَرَكۡنَا بَعۡضَهُمۡ يَوۡمَئِذٖ يَمُوجُ فِي بَعۡضٖۖ وَنُفِخَ فِي ٱلصُّورِ فَجَمَعۡنَٰهُمۡ جَمۡعٗا (99) وَعَرَضۡنَا جَهَنَّمَ يَوۡمَئِذٖ لِّلۡكَٰفِرِينَ عَرۡضًا (100) ٱلَّذِينَ كَانَتۡ أَعۡيُنُهُمۡ فِي غِطَآءٍ عَن ذِكۡرِي وَكَانُواْ لَا يَسۡتَطِيعُونَ سَمۡعًا (101) أَفَحَسِبَ ٱلَّذِينَ كَفَرُوٓاْ أَن يَتَّخِذُواْ عِبَادِي مِن دُونِيٓ أَوۡلِيَآءَۚ إِنَّآ أَعۡتَدۡنَا جَهَنَّمَ لِلۡكَٰفِرِينَ نُزُلٗا (102) قُلۡ هَلۡ نُنَبِّئُكُم بِٱلۡأَخۡسَرِينَ أَعۡمَٰلًا (103) ٱلَّذِينَ ضَلَّ سَعۡيُهُمۡ فِي ٱلۡحَيَوٰةِ ٱلدُّنۡيَا وَهُمۡ يَحۡسَبُونَ أَنَّهُمۡ يُحۡسِنُونَ صُنۡعًا (104) أُوْلَٰٓئِكَ ٱلَّذِينَ كَفَرُواْ بِـَٔايَٰتِ رَبِّهِمۡ وَلِقَآئِهِۦ فَحَبِطَتۡ أَعۡمَٰلُهُمۡ فَلَا نُقِيمُ لَهُمۡ يَوۡمَ ٱلۡقِيَٰمَةِ وَزۡنٗا (105) ذَٰلِكَ جَزَآؤُهُمۡ جَهَنَّمُ بِمَا كَفَرُواْ وَٱتَّخَذُوٓاْ ءَايَٰتِي وَرُسُلِي هُزُوًا (106) إِنَّ ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّٰلِحَٰتِ كَانَتۡ لَهُمۡ جَنَّٰتُ ٱلۡفِرۡدَوۡسِ نُزُلًا (107) خَٰلِدِينَ فِيهَا لَا يَبۡغُونَ عَنۡهَا حِوَلٗا (108) قُل لَّوۡ كَانَ ٱلۡبَحۡرُ مِدَادٗا لِّكَلِمَٰتِ رَبِّي لَنَفِدَ ٱلۡبَحۡرُ قَبۡلَ أَن تَنفَدَ كَلِمَٰتُ رَبِّي وَلَوۡ جِئۡنَا بِمِثۡلِهِۦ مَدَدٗا (109) قُلۡ إِنَّمَآ أَنَا۠ بَشَرٞ مِّثۡلُكُمۡ يُوحَىٰٓ إِلَيَّ أَنَّمَآ إِلَٰهُكُمۡ إِلَٰهٞ وَٰحِدٞۖ فَمَن كَانَ يَرۡجُواْ لِقَآءَ رَبِّهِۦ فَلۡيَعۡمَلۡ عَمَلٗا صَٰلِحٗا وَلَا يُشۡرِكۡ بِعِبَادَةِ رَبِّهِۦٓ أَحَدَۢا (110)
+            </div>
+
+            <div class="intro-box">
+                <strong>فضائل سورة الكهف:</strong>
+                <ul class="benefits-list">
+                    <li>من قرأها يوم الجمعة أضاء له من النور ما بين الجمعتين</li>
+                    <li>من حفظ عشر آيات من أولها عُصم من فتنة الدجال</li>
+                    <li>تحتوي على أربع قصص عظيمة: أصحاب الكهف، صاحب الجنتين، موسى والخضر، ذو القرنين</li>
+                    <li>فيها دروس في الإيمان والصبر والتواضع والعلم</li>
+                    <li>يُستحب قراءتها كل يوم جمعة</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TAB 6: Daily Habits Tracker -->
+        <div id="tab6" class="content-area">
+            <h2 class="section-title">العادات اليومية</h2>
+
+            <div class="intro-box">
+                <strong>متتبع العادات:</strong> حافظ على عاداتك اليومية وتتبع تقدمك. يتم حفظ البيانات في متصفحك تلقائياً. اضغط على الدائرة لتحديد المهمة كمنجزة.
+            </div>
+
+            <!-- Stats -->
+            <div class="habits-stats">
+                اليوم أنجزت
+                <span class="stats-number" id="habitsCompleted">0 / 14</span>
+                من عاداتك
+            </div>
+
+            <!-- Weekly Tracker -->
+            <div class="weekly-tracker">
+                <h3>📅 الأسبوع الحالي</h3>
+                <div class="week-grid" id="weekGrid">
+                    <div class="day-header">سبت</div>
+                    <div class="day-header">أحد</div>
+                    <div class="day-header">إثنين</div>
+                    <div class="day-header">ثلاثاء</div>
+                    <div class="day-header">أربعاء</div>
+                    <div class="day-header">خميس</div>
+                    <div class="day-header">جمعة</div>
+                    <div class="day-cell" data-day="0"></div>
+                    <div class="day-cell" data-day="1"></div>
+                    <div class="day-cell" data-day="2"></div>
+                    <div class="day-cell" data-day="3"></div>
+                    <div class="day-cell" data-day="4"></div>
+                    <div class="day-cell" data-day="5"></div>
+                    <div class="day-cell" data-day="6"></div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="habits-controls">
+                <button class="habits-btn" onclick="resetToday()">🔄 إعادة ضبط اليوم</button>
+                <button class="habits-btn" onclick="resetWeek()">📅 إعادة ضبط الأسبوع</button>
+            </div>
+
+            <!-- Islamic Habits -->
+            <h3 class="habits-section-label">🕌 عبادات</h3>
+
+            <div class="habit-item" data-habit="dua_jumaa">
+                <div class="habit-info">
+                    <span class="habit-name">دعاء كل جمعة - ساعة الاستجابة</span>
+                    <span class="habit-schedule">كل جمعة 5:00 مساءً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('dua_jumaa', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="surah_kahf">
+                <div class="habit-info">
+                    <span class="habit-name">سورة الكهف</span>
+                    <span class="habit-schedule">كل جمعة</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('surah_kahf', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="salat_duha">
+                <div class="habit-info">
+                    <span class="habit-name">صلاة الضحى</span>
+                    <span class="habit-schedule">كل يوم 12:00 ظهراً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('salat_duha', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="athkar_sabah">
+                <div class="habit-info">
+                    <span class="habit-name">أذكار الصباح</span>
+                    <span class="habit-schedule">كل يوم 12:00 ظهراً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('athkar_sabah', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="athkar_wake">
+                <div class="habit-info">
+                    <span class="habit-name">أذكار الاستيقاظ من النوم</span>
+                    <span class="habit-schedule">عند الاستيقاظ</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('athkar_wake', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="athkar_sleep">
+                <div class="habit-info">
+                    <span class="habit-name">أذكار النوم</span>
+                    <span class="habit-schedule">قبل النوم</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('athkar_sleep', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="quran_reading">
+                <div class="habit-info">
+                    <span class="habit-name">قراءة القرآن</span>
+                    <span class="habit-schedule">يومياً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('quran_reading', this)"></div>
+            </div>
+
+            <!-- Daily Habits -->
+            <h3 class="habits-section-label">💪 عادات يومية</h3>
+
+            <div class="habit-item" data-habit="gym">
+                <div class="habit-info">
+                    <span class="habit-name">Gym</span>
+                    <span class="habit-schedule">كل يوم 3:00 عصراً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('gym', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="vacuum">
+                <div class="habit-info">
+                    <span class="habit-name">Vacuum</span>
+                    <span class="habit-schedule">يومياً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('vacuum', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="stretch">
+                <div class="habit-info">
+                    <span class="habit-name">Stretch</span>
+                    <span class="habit-schedule">يومياً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('stretch', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="cold_shower">
+                <div class="habit-info">
+                    <span class="habit-name">Cold Showers</span>
+                    <span class="habit-schedule">يومياً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('cold_shower', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="skincare">
+                <div class="habit-info">
+                    <span class="habit-name">Night Skin Care Routine</span>
+                    <span class="habit-schedule">كل ليلة</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('skincare', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="journaling">
+                <div class="habit-info">
+                    <span class="habit-name">Journaling</span>
+                    <span class="habit-schedule">يومياً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('journaling', this)"></div>
+            </div>
+
+            <div class="habit-item" data-habit="read_book">
+                <div class="habit-info">
+                    <span class="habit-name">Read a Book</span>
+                    <span class="habit-schedule">يومياً</span>
+                </div>
+                <div class="habit-check"><input type="checkbox" onchange="toggleHabit('read_book', this)"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1183,6 +1662,143 @@
         const stars = document.getElementById('stars');
         stars.style.transform = `translateY(${scrollTop * 0.1}px)`;
     });
+
+    // ═══════════════════════════════════════
+    // Habits Tracker Logic
+    // ═══════════════════════════════════════
+    const ALL_HABITS = [
+        'dua_jumaa','surah_kahf','salat_duha','athkar_sabah',
+        'athkar_wake','athkar_sleep','quran_reading',
+        'gym','vacuum','stretch','cold_shower','skincare','journaling','read_book'
+    ];
+
+    function getTodayKey() {
+        const d = new Date();
+        return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    }
+
+    function getWeekKey() {
+        const d = new Date();
+        // Get Saturday-based week start
+        const day = d.getDay(); // 0=Sun
+        const diff = (day + 1) % 7; // days since Saturday
+        const sat = new Date(d);
+        sat.setDate(d.getDate() - diff);
+        return 'week-' + sat.getFullYear() + '-' + String(sat.getMonth()+1).padStart(2,'0') + '-' + String(sat.getDate()).padStart(2,'0');
+    }
+
+    function loadHabits() {
+        const key = 'habits-' + getTodayKey();
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : {};
+    }
+
+    function saveHabits(habits) {
+        const key = 'habits-' + getTodayKey();
+        localStorage.setItem(key, JSON.stringify(habits));
+    }
+
+    function toggleHabit(habitId, checkbox) {
+        const habits = loadHabits();
+        habits[habitId] = checkbox.checked;
+        saveHabits(habits);
+
+        const item = checkbox.closest('.habit-item');
+        if (checkbox.checked) {
+            item.classList.add('completed');
+        } else {
+            item.classList.remove('completed');
+        }
+        updateStats();
+        updateWeekGrid();
+    }
+
+    function updateStats() {
+        const habits = loadHabits();
+        const done = ALL_HABITS.filter(h => habits[h]).length;
+        const el = document.getElementById('habitsCompleted');
+        if (el) el.textContent = done + ' / ' + ALL_HABITS.length;
+    }
+
+    function restoreHabits() {
+        const habits = loadHabits();
+        ALL_HABITS.forEach(id => {
+            const item = document.querySelector('[data-habit="'+id+'"]');
+            if (!item) return;
+            const cb = item.querySelector('input[type="checkbox"]');
+            if (habits[id]) {
+                cb.checked = true;
+                item.classList.add('completed');
+            } else {
+                cb.checked = false;
+                item.classList.remove('completed');
+            }
+        });
+        updateStats();
+    }
+
+    function resetToday() {
+        if (!confirm('هل تريد إعادة ضبط جميع عادات اليوم؟')) return;
+        const key = 'habits-' + getTodayKey();
+        localStorage.removeItem(key);
+        restoreHabits();
+        updateWeekGrid();
+    }
+
+    function resetWeek() {
+        if (!confirm('هل تريد إعادة ضبط الأسبوع كاملاً؟')) return;
+        // Remove all days in current week
+        const d = new Date();
+        const day = d.getDay();
+        const diff = (day + 1) % 7;
+        for (let i = 0; i < 7; i++) {
+            const dd = new Date(d);
+            dd.setDate(d.getDate() - diff + i);
+            const k = 'habits-' + dd.getFullYear() + '-' + String(dd.getMonth()+1).padStart(2,'0') + '-' + String(dd.getDate()).padStart(2,'0');
+            localStorage.removeItem(k);
+        }
+        restoreHabits();
+        updateWeekGrid();
+    }
+
+    function updateWeekGrid() {
+        const cells = document.querySelectorAll('.day-cell[data-day]');
+        if (!cells.length) return;
+
+        const now = new Date();
+        const todayDay = now.getDay();
+        const diff = (todayDay + 1) % 7; // days since Saturday
+
+        cells.forEach(cell => {
+            const i = parseInt(cell.dataset.day);
+            const dd = new Date(now);
+            dd.setDate(now.getDate() - diff + i);
+
+            const dateStr = dd.getDate();
+            const dayKey = 'habits-' + dd.getFullYear() + '-' + String(dd.getMonth()+1).padStart(2,'0') + '-' + String(dd.getDate()).padStart(2,'0');
+            const data = localStorage.getItem(dayKey);
+
+            cell.classList.remove('today', 'done');
+
+            if (i === diff) {
+                cell.classList.add('today');
+            }
+
+            if (data) {
+                const habits = JSON.parse(data);
+                const done = ALL_HABITS.filter(h => habits[h]).length;
+                const pct = Math.round((done / ALL_HABITS.length) * 100);
+                cell.textContent = pct + '%';
+                if (pct >= 70) cell.classList.add('done');
+            } else {
+                cell.textContent = dateStr;
+            }
+        });
+    }
+
+    // Initialize habits on load
+    restoreHabits();
+    updateWeekGrid();
 </script>
 
 </body>
