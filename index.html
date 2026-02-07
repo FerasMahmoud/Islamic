@@ -1010,24 +1010,24 @@
             background: linear-gradient(135deg, rgba(18,26,46,0.98), rgba(26,37,64,0.98));
             border-radius: 14px; border: 1px solid rgba(212,175,55,0.18); margin-bottom: 18px;
         }
-        .a-card2 {
+        .surah-para {
             background: linear-gradient(135deg, rgba(250,246,237,0.97), rgba(255,254,249,0.99));
-            padding: 18px 22px; margin-bottom: 10px; border-radius: 13px;
-            border: 1px solid rgba(212,175,55,0.12); transition: all 0.3s;
-            display: flex; gap: 14px; align-items: flex-start;
+            padding: 28px 30px; border-radius: 14px;
+            border: 1px solid rgba(212,175,55,0.12);
+            font-family: 'Scheherazade New', 'Amiri', serif;
+            font-size: 1.8em; line-height: 2.4; color: var(--text-dark);
+            text-align: justify; word-spacing: 2px;
         }
-        .a-card2:hover { border-color: rgba(212,175,55,0.28); }
-        .a-card2.lr-hl { border-color: var(--emerald-soft); border-width: 2px; box-shadow: 0 0 15px rgba(58,122,100,0.2); }
-        .a-num2 {
-            display: flex; align-items: center; justify-content: center;
-            min-width: 38px; height: 38px;
-            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
-            color: var(--night-deep); border-radius: 50%; font-size: 1.05em; font-weight: bold; flex-shrink: 0;
+        .ayah-span { transition: background 0.3s; border-radius: 4px; padding: 0 2px; }
+        .ayah-span.lr-hl { background: rgba(46, 204, 113, 0.15); }
+        .ayah-span.bm-hl { background: rgba(212, 175, 55, 0.18); }
+        .ayah-num-inline {
+            display: inline; font-size: 0.65em; color: var(--gold-warm);
+            cursor: pointer; margin: 0 4px; font-weight: bold;
+            transition: color 0.3s; vertical-align: middle; user-select: none;
         }
-        .a-text2 { font-family: 'Scheherazade New', 'Amiri', serif; font-size: 1.8em; line-height: 2.3; color: var(--text-dark); flex: 1; }
-        .a-bm2 { cursor: pointer; font-size: 1.2em; opacity: 0.25; transition: all 0.3s; flex-shrink: 0; padding: 4px; }
-        .a-bm2:hover { opacity: 0.7; }
-        .a-bm2.on { opacity: 1; color: var(--gold-bright); }
+        .ayah-num-inline:hover { color: var(--gold-bright); }
+        .ayah-num-inline.on { color: var(--gold-bright); text-shadow: 0 0 8px rgba(46,204,113,0.5); }
         .q-loading2 { text-align: center; padding: 50px; color: var(--gold-soft); font-size: 1.4em; }
         .q-spinner2 { display: block; width: 36px; height: 36px; margin: 18px auto;
             border: 3px solid rgba(212,175,55,0.18); border-top-color: var(--gold-bright);
@@ -1037,7 +1037,7 @@
             .r-head2 { flex-direction: column; align-items: stretch; text-align: center; }
             .r-title2 h3 { font-size: 1.9em; }
             .r-nav2 { justify-content: center; }
-            .a-text2 { font-size: 1.5em; }
+            .surah-para { font-size: 1.5em; padding: 20px 18px; }
         }
     </style>
 </head>
@@ -1648,6 +1648,7 @@
 
     let currentSurahNum = 0, curFilter = 'all';
     const BM_KEY = 'iq_bookmarks', LR_KEY = 'iq_last_read';
+    function toArabicNum(n) { return String(n).replace(/\d/g, function(d) { return '٠١٢٣٤٥٦٧٨٩'[d]; }); }
 
     function getBM() { try { return JSON.parse(localStorage.getItem(BM_KEY)) || []; } catch(e) { return []; } }
     function saveBM(bm) { localStorage.setItem(BM_KEY, JSON.stringify(bm)); }
@@ -1755,6 +1756,7 @@
             }
             const ayahBMs = bm.filter(function(b) { return b.s === num && b.a; });
             const lr = getLR();
+            html += '<div class="surah-para">';
             ayahs.forEach(function(a) {
                 var text = a.text;
                 if (a.numberInSurah === 1 && num !== 1 && num !== 9) {
@@ -1762,12 +1764,12 @@
                 }
                 var isABM = ayahBMs.some(function(b) { return b.a === a.numberInSurah; });
                 var isLR = lr && lr.s === num && lr.a === a.numberInSurah;
-                html += '<div class="a-card2'+(isLR?' lr-hl':'')+'" data-ayah="'+a.numberInSurah+'" id="ayah-'+a.numberInSurah+'">'
-                    + '<div class="a-num2">'+a.numberInSurah+'</div>'
-                    + '<div class="a-text2">'+text+'</div>'
-                    + '<span class="a-bm2'+(isABM?' on':'')+'" onclick="toggleAyahBM('+num+','+a.numberInSurah+',this)">🔖</span>'
-                    + '</div>';
+                var cls = 'ayah-span' + (isLR ? ' lr-hl' : '') + (isABM ? ' bm-hl' : '');
+                var anum = toArabicNum(a.numberInSurah);
+                html += '<span class="'+cls+'" data-ayah="'+a.numberInSurah+'" id="ayah-'+a.numberInSurah+'">'+text+'</span>'
+                    + '<span class="ayah-num-inline'+(isABM?' on':'')+'" onclick="toggleAyahBM('+num+','+a.numberInSurah+',this)"> ﴿'+anum+'﴾ </span>';
             });
+            html += '</div>';
             document.getElementById('readerContent').innerHTML = html;
         } catch (err) {
             document.getElementById('readerContent').innerHTML =
@@ -1830,8 +1832,9 @@
     function toggleAyahBM(surah, ayah, el) {
         var bm = getBM();
         var idx = bm.findIndex(function(b) { return b.s === surah && b.a === ayah; });
-        if (idx >= 0) { bm.splice(idx, 1); el.classList.remove('on'); }
-        else { bm.push({ s: surah, a: ayah }); el.classList.add('on'); }
+        var ayahSpan = document.getElementById('ayah-' + ayah);
+        if (idx >= 0) { bm.splice(idx, 1); el.classList.remove('on'); if (ayahSpan) ayahSpan.classList.remove('bm-hl'); }
+        else { bm.push({ s: surah, a: ayah }); el.classList.add('on'); if (ayahSpan) ayahSpan.classList.add('bm-hl'); }
         saveBM(bm);
     }
 
@@ -1844,12 +1847,12 @@
         clearTimeout(autoSaveTimer);
         autoSaveTimer = setTimeout(function() {
             if (!currentSurahNum) return;
-            var cards = document.querySelectorAll('.a-card2');
+            var spans = document.querySelectorAll('.ayah-span');
             var visAyah = null;
-            for (var i = 0; i < cards.length; i++) {
-                var r = cards[i].getBoundingClientRect();
+            for (var i = 0; i < spans.length; i++) {
+                var r = spans[i].getBoundingClientRect();
                 if (r.top >= -100 && r.top <= window.innerHeight) {
-                    visAyah = parseInt(cards[i].dataset.ayah);
+                    visAyah = parseInt(spans[i].dataset.ayah);
                     break;
                 }
             }
