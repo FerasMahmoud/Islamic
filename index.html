@@ -1123,6 +1123,16 @@
             display: flex; align-items: center; gap: 14px;
         }
         .surah-card:hover { border-color: rgba(46,204,113,0.4); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+        .surah-card.highlighted { border-color: rgba(212,175,55,0.5); background: linear-gradient(135deg, rgba(45,40,20,0.95), rgba(30,28,18,0.98)); box-shadow: 0 0 18px rgba(212,175,55,0.12); }
+        .surah-card.highlighted .surah-card-num { background: linear-gradient(135deg, #d4af37, #f0c040); }
+        .surah-hl-btn {
+            position: absolute; top: 8px; left: 8px; width: 30px; height: 30px; border-radius: 50%;
+            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 0.85em; transition: all 0.2s; z-index: 2;
+            background: rgba(255,255,255,0.06); color: var(--text-muted);
+        }
+        .surah-hl-btn:hover { background: rgba(212,175,55,0.2); color: var(--gold-soft); }
+        .surah-hl-btn.on { background: rgba(212,175,55,0.25); color: var(--gold-bright); }
         .surah-card-num {
             min-width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
             background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
@@ -1993,6 +2003,7 @@
                         <button class="q-filter2 on" onclick="setQFilter('all',this)">الكل (114)</button>
                         <button class="q-filter2" onclick="setQFilter('mec',this)">مكية (86)</button>
                         <button class="q-filter2" onclick="setQFilter('med',this)">مدنية (28)</button>
+                        <button class="q-filter2" onclick="setQFilter('hl',this)" id="hlFilterBtn">المميزة</button>
                         <button class="q-filter2" id="offlineBtn" onclick="downloadAllSurahs()">تحميل للقراءة بدون إنترنت</button>
                     </div>
                     <div class="offline-progress" id="offlineProgress" style="display:none">
@@ -2256,24 +2267,50 @@
     function getLR() { try { return JSON.parse(localStorage.getItem(LR_KEY)); } catch(e) { return null; } }
     function saveLR(d) { localStorage.setItem(LR_KEY, JSON.stringify(d)); }
 
-    function initQuran() { renderSurahGrid2(); renderBM(); renderLR(); checkOfflineStatus(); }
+    function initQuran() { renderSurahGrid2(); renderBM(); renderLR(); checkOfflineStatus(); updateHLCount(); }
+
+    function getHighlightedSurahs() {
+        try { return JSON.parse(localStorage.getItem('iq_hl_surahs')) || []; } catch(e) { return []; }
+    }
+    function saveHighlightedSurahs(arr) {
+        try { localStorage.setItem('iq_hl_surahs', JSON.stringify(arr)); } catch(e) {}
+    }
+    function toggleSurahHL(num, e) {
+        e.stopPropagation();
+        var hl = getHighlightedSurahs();
+        var idx = hl.indexOf(num);
+        if (idx >= 0) hl.splice(idx, 1); else hl.push(num);
+        saveHighlightedSurahs(hl);
+        renderSurahGrid2();
+        updateHLCount();
+    }
+    function updateHLCount() {
+        var btn = document.getElementById('hlFilterBtn');
+        if (!btn) return;
+        var count = getHighlightedSurahs().length;
+        btn.textContent = 'المميزة' + (count ? ' (' + count + ')' : '');
+    }
 
     function renderSurahGrid2() {
         const grid = document.getElementById('surahGrid');
         if (!grid) return;
         const q = (document.getElementById('surahSearch').value || '').trim().toLowerCase();
         const bm = getBM();
+        const hl = getHighlightedSurahs();
         grid.innerHTML = SURAH_DATA.filter(function(s) {
             if (curFilter === 'mec' && s.type !== 'meccan') return false;
             if (curFilter === 'med' && s.type !== 'medinan') return false;
+            if (curFilter === 'hl' && hl.indexOf(s.n) < 0) return false;
             if (q && !s.name.includes(q) && !s.en.toLowerCase().includes(q) && !String(s.n).includes(q)) return false;
             return true;
         }).map(function(s) {
             const hasBM = bm.some(function(b) { return b.s === s.n; });
+            const isHL = hl.indexOf(s.n) >= 0;
             const tCls = s.type === 'meccan' ? 'meccan' : 'medinan';
             const tLbl = s.type === 'meccan' ? 'مكية' : 'مدنية';
-            return '<div class="surah-card" onclick="openSurah('+s.n+')">'
-                + (hasBM ? '<span style="position:absolute;top:8px;left:8px;color:var(--gold-bright)">🔖</span>' : '')
+            return '<div class="surah-card'+(isHL?' highlighted':'')+'" onclick="openSurah('+s.n+')">'
+                + '<button class="surah-hl-btn'+(isHL?' on':'')+'" onclick="toggleSurahHL('+s.n+',event)" title="تمييز السورة">'+(isHL?'★':'☆')+'</button>'
+                + (hasBM ? '<span style="position:absolute;top:8px;left:38px;color:var(--gold-bright)">🔖</span>' : '')
                 + '<div class="surah-card-num">'+s.n+'</div>'
                 + '<div class="surah-card-info">'
                 + '<div class="surah-card-name">سورة '+s.name+'</div>'
