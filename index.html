@@ -2706,7 +2706,6 @@
         var textEl = document.getElementById('dailyAyahText');
         var refEl = document.getElementById('dailyAyahRef');
         if (!textEl) return;
-        // Pick a random ayah from a curated set of beautiful verses
         var dailyVerses = [
             {s:2,a:286},{s:3,a:8},{s:2,a:201},{s:21,a:87},{s:40,a:60},
             {s:65,a:3},{s:94,a:6},{s:2,a:152},{s:13,a:28},{s:3,a:139},
@@ -2714,16 +2713,28 @@
         ];
         var dayIdx = Math.floor(Date.now() / 86400000) % dailyVerses.length;
         var pick = dailyVerses[dayIdx];
+        // Check localStorage cache first
+        var cacheKey = 'iq_daily_ayah';
+        try {
+            var cached = JSON.parse(localStorage.getItem(cacheKey));
+            if (cached && cached.day === dayIdx) {
+                textEl.textContent = cached.text;
+                if (refEl) { refEl.style.display = 'block'; refEl.textContent = cached.ref; }
+                return;
+            }
+        } catch(e) {}
         fetch('https://api.alquran.cloud/v1/ayah/' + pick.s + ':' + pick.a)
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (d.code === 200) {
                     textEl.textContent = d.data.text;
                     var surahName = SURAH_DATA.find(function(x) { return x.n === pick.s; });
+                    var refText = 'سورة ' + (surahName ? surahName.name : pick.s) + ' - آية ' + pick.a;
                     if (refEl) {
                         refEl.style.display = 'block';
-                        refEl.textContent = 'سورة ' + (surahName ? surahName.name : pick.s) + ' - آية ' + pick.a;
+                        refEl.textContent = refText;
                     }
+                    try { localStorage.setItem(cacheKey, JSON.stringify({day:dayIdx, text:d.data.text, ref:refText})); } catch(e) {}
                 }
             }).catch(function() {
                 textEl.textContent = 'وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ';
@@ -3063,63 +3074,67 @@
     function fetchRamadanMonth(hijriYear, lat, lng, currentRamDay) {
         var container = document.getElementById('ramadanCalContainer');
         var infoEl = document.getElementById('ramadanCalInfo');
+        var ramCacheKey = 'iq_ramadan_' + hijriYear;
+
+        // Try localStorage cache first
+        try {
+            var cached = JSON.parse(localStorage.getItem(ramCacheKey));
+            if (cached && cached.data && cached.data.length) {
+                renderRamadanCal(cached.data, hijriYear, currentRamDay, container, infoEl);
+                return Promise.resolve();
+            }
+        } catch(e) {}
+
         return fetch('https://api.aladhan.com/v1/hijriCalendar?month=9&year=' + hijriYear + '&latitude=' + lat + '&longitude=' + lng + '&method=4')
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (d.code !== 200 || !d.data || !d.data.length) throw new Error('No data');
-                if (infoEl) infoEl.textContent = 'رمضان ' + hijriYear + ' هـ | الحسابات بناءً على موقعك';
-
-                var html = '<div class="ramadan-cal-scroll"><table class="ramadan-cal-table">';
-                html += '<thead><tr><th>اليوم</th><th>التاريخ</th><th>الإمساك</th><th>الفجر</th><th>الشروق</th><th>الظهر</th><th>العصر</th><th>المغرب</th><th>العشاء</th><th>مدة الصيام</th></tr></thead><tbody>';
-
-                var dayNames = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-
-                d.data.forEach(function(day) {
-                    var t = day.timings;
-                    var hd = day.date.hijri;
-                    var gd = day.date.gregorian;
-                    var dayNum = parseInt(hd.day);
-                    var gregDate = gd.day + '/' + gd.month.number;
-                    var jsDate = new Date(gd.year + '-' + gd.month.number.toString().padStart(2,'0') + '-' + gd.day.padStart(2,'0'));
-                    var dayName = dayNames[jsDate.getDay()] || '';
-
-                    // Clean time strings (remove timezone info like " (AST)")
-                    function cleanTime(s) { return s ? s.replace(/\s*\(.*\)/, '') : '--:--'; }
-
-                    var fajrT = cleanTime(t.Fajr);
-                    var maghribT = cleanTime(t.Maghrib);
-                    var imsak = cleanTime(t.Imsak);
-
-                    // Fasting duration
-                    var fMin = timeToMinutes(fajrT);
-                    var mMin = timeToMinutes(maghribT);
-                    var duration = (fMin >= 0 && mMin >= 0) ? formatHoursMin(mMin - fMin) : '--';
-
-                    var isToday = (dayNum === currentRamDay) ? ' class="today-row"' : '';
-
-                    html += '<tr' + isToday + '>'
-                        + '<td>' + toArabicNum(dayNum) + '</td>'
-                        + '<td>' + dayName + ' ' + gregDate + '</td>'
-                        + '<td>' + imsak + '</td>'
-                        + '<td>' + fajrT + '</td>'
-                        + '<td>' + cleanTime(t.Sunrise) + '</td>'
-                        + '<td>' + cleanTime(t.Dhuhr) + '</td>'
-                        + '<td>' + cleanTime(t.Asr) + '</td>'
-                        + '<td>' + maghribT + '</td>'
-                        + '<td>' + cleanTime(t.Isha) + '</td>'
-                        + '<td>' + duration + '</td>'
-                        + '</tr>';
-                });
-
-                html += '</tbody></table></div>';
-                if (container) container.innerHTML = html;
-
-                // Auto-scroll to today
-                setTimeout(function() {
-                    var todayRow = container.querySelector('.today-row');
-                    if (todayRow) todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 200);
+                try { localStorage.setItem(ramCacheKey, JSON.stringify({data: d.data})); } catch(e) {}
+                renderRamadanCal(d.data, hijriYear, currentRamDay, container, infoEl);
             });
+    }
+
+    function renderRamadanCal(days, hijriYear, currentRamDay, container, infoEl) {
+        if (infoEl) infoEl.textContent = 'رمضان ' + hijriYear + ' هـ | الحسابات بناءً على موقعك';
+        var html = '<div class="ramadan-cal-scroll"><table class="ramadan-cal-table">';
+        html += '<thead><tr><th>اليوم</th><th>التاريخ</th><th>الإمساك</th><th>الفجر</th><th>الشروق</th><th>الظهر</th><th>العصر</th><th>المغرب</th><th>العشاء</th><th>مدة الصيام</th></tr></thead><tbody>';
+        var dayNames = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+        function cleanTime(s) { return s ? s.replace(/\s*\(.*\)/, '') : '--:--'; }
+
+        days.forEach(function(day) {
+            var t = day.timings;
+            var hd = day.date.hijri;
+            var gd = day.date.gregorian;
+            var dayNum = parseInt(hd.day);
+            var gregDate = gd.day + '/' + gd.month.number;
+            var jsDate = new Date(gd.year + '-' + gd.month.number.toString().padStart(2,'0') + '-' + gd.day.padStart(2,'0'));
+            var dayName = dayNames[jsDate.getDay()] || '';
+            var fajrT = cleanTime(t.Fajr);
+            var maghribT = cleanTime(t.Maghrib);
+            var imsak = cleanTime(t.Imsak);
+            var fMin = timeToMinutes(fajrT);
+            var mMin = timeToMinutes(maghribT);
+            var duration = (fMin >= 0 && mMin >= 0) ? formatHoursMin(mMin - fMin) : '--';
+            var isToday = (dayNum === currentRamDay) ? ' class="today-row"' : '';
+            html += '<tr' + isToday + '>'
+                + '<td>' + toArabicNum(dayNum) + '</td>'
+                + '<td>' + dayName + ' ' + gregDate + '</td>'
+                + '<td>' + imsak + '</td>'
+                + '<td>' + fajrT + '</td>'
+                + '<td>' + cleanTime(t.Sunrise) + '</td>'
+                + '<td>' + cleanTime(t.Dhuhr) + '</td>'
+                + '<td>' + cleanTime(t.Asr) + '</td>'
+                + '<td>' + maghribT + '</td>'
+                + '<td>' + cleanTime(t.Isha) + '</td>'
+                + '<td>' + duration + '</td>'
+                + '</tr>';
+        });
+        html += '</tbody></table></div>';
+        if (container) container.innerHTML = html;
+        setTimeout(function() {
+            var todayRow = container.querySelector('.today-row');
+            if (todayRow) todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 200);
     }
 
     // ═══════════════════════════════════════
@@ -3221,6 +3236,24 @@
 
     // Initialize home on load
     initHome();
+
+    // Auto-sync all Quran surahs in background on first visit
+    (function autoSyncSurahs() {
+        var cached = 0;
+        for (var i = 1; i <= 114; i++) {
+            if (localStorage.getItem('quran-surah-' + i)) cached++;
+        }
+        if (cached >= 114) return; // Already fully cached
+        // Delay to not compete with initial page load
+        setTimeout(async function() {
+            for (var i = 1; i <= 114; i++) {
+                if (localStorage.getItem('quran-surah-' + i)) continue;
+                try { await fetchSurah(i); } catch(e) {}
+                await new Promise(function(r) { setTimeout(r, 100); });
+            }
+            checkOfflineStatus();
+        }, 3000);
+    })();
 </script>
 
 <script>
