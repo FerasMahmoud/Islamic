@@ -2507,27 +2507,9 @@
     var userLat = null, userLng = null;
 
     function initHome() {
-        loadHijriDate();
         loadDailyAyah();
-        loadEventCountdowns();
         if (!prayerTimesCache) fetchPrayerTimes();
         startLiveCountdown();
-    }
-
-    function loadHijriDate() {
-        var el = document.getElementById('hijriDate');
-        if (!el) return;
-        var today = new Date();
-        fetch('https://api.aladhan.com/v1/gpiDate/' + today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear())
-            .then(function(r) { return r.json(); })
-            .then(function(d) {
-                if (d.code === 200 && d.data && d.data.hijri) {
-                    var h = d.data.hijri;
-                    el.textContent = h.day + ' ' + h.month.ar + ' ' + h.year + ' هـ';
-                }
-            }).catch(function() {
-                el.textContent = '';
-            });
     }
 
     function loadDailyAyah() {
@@ -2587,19 +2569,33 @@
                 displayPrayerTimes(d.data.timings);
                 updateLiveCountdown();
                 updateFastingInfo();
+                // Extract Hijri date from timings response
+                if (d.data.date && d.data.date.hijri) {
+                    var h = d.data.date.hijri;
+                    var hijriEl = document.getElementById('hijriDate');
+                    if (hijriEl) hijriEl.textContent = h.day + ' ' + h.month.ar + ' ' + h.year + ' هـ';
+                    calculateEventCountdowns(parseInt(h.day), parseInt(h.month.number), parseInt(h.year));
+                }
                 // Show location
                 var locEl = document.getElementById('prayerLocation');
                 if (locEl && d.data.meta && d.data.meta.timezone) {
                     locEl.textContent = d.data.meta.timezone;
                 }
                 // Save for offline
-                try { localStorage.setItem('iq_prayer_times', JSON.stringify({t: Date.now(), data: d.data.timings, lat:lat, lng:lng})); } catch(e){}
+                try { localStorage.setItem('iq_prayer_times', JSON.stringify({t: Date.now(), data: d.data.timings, hijri: d.data.date ? d.data.date.hijri : null, lat:lat, lng:lng})); } catch(e){}
             }
         }).catch(function() {
             // Try offline cache
             try {
                 var c = JSON.parse(localStorage.getItem('iq_prayer_times'));
-                if (c && c.data) { prayerTimesCache = c.data; displayPrayerTimes(c.data); updateLiveCountdown(); updateFastingInfo(); }
+                if (c && c.data) {
+                    prayerTimesCache = c.data; displayPrayerTimes(c.data); updateLiveCountdown(); updateFastingInfo();
+                    if (c.hijri) {
+                        var hijriEl = document.getElementById('hijriDate');
+                        if (hijriEl) hijriEl.textContent = c.hijri.day + ' ' + c.hijri.month.ar + ' ' + c.hijri.year + ' هـ';
+                        calculateEventCountdowns(parseInt(c.hijri.day), parseInt(c.hijri.month.number), parseInt(c.hijri.year));
+                    }
+                }
             } catch(e){}
         }).finally(function() {
             var btn = document.getElementById('refreshPrayerBtn');
@@ -2645,21 +2641,6 @@
     // ═══════════════════════════════════════
     // Event Countdowns (Ramadan, Eid al-Fitr, Eid al-Adha)
     // ═══════════════════════════════════════
-    function loadEventCountdowns() {
-        var today = new Date();
-        var dd = today.getDate(), mm = today.getMonth() + 1, yy = today.getFullYear();
-        fetch('https://api.aladhan.com/v1/gpiDate/' + dd + '-' + mm + '-' + yy)
-            .then(function(r) { return r.json(); })
-            .then(function(d) {
-                if (d.code !== 200 || !d.data || !d.data.hijri) return;
-                var h = d.data.hijri;
-                var hMonth = parseInt(h.month.number);
-                var hDay = parseInt(h.day);
-                var hYear = parseInt(h.year);
-                calculateEventCountdowns(hDay, hMonth, hYear);
-            }).catch(function() {});
-    }
-
     function calculateEventCountdowns(hDay, hMonth, hYear) {
         // Hijri months: 1=Muharram...9=Ramadan,10=Shawwal,12=DhulHijjah
         // Target events with their Hijri month and day
@@ -2796,39 +2777,51 @@
         if (!prayerTimesCache) return;
         var now = new Date();
         var nowMs = now.getTime();
+        var nowMin = now.getHours() * 60 + now.getMinutes();
         var todayBase = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
 
         var fajrMin = timeToMinutes(prayerTimesCache.Fajr);
         var maghribMin = timeToMinutes(prayerTimesCache.Maghrib);
 
-        // Fasting duration
+        // Fasting duration (Fajr to Maghrib)
         var durationEl = document.getElementById('fastingDuration');
         if (durationEl && fajrMin >= 0 && maghribMin >= 0) {
             durationEl.textContent = formatHoursMin(maghribMin - fajrMin);
         }
 
-        // Time remaining till Maghrib
+        // Labels and context
+        var maghribLabelEl = document.querySelector('#fastingInfo .fasting-item:nth-child(2) .fasting-label');
+        var fajrLabelEl = document.querySelector('#fastingInfo .fasting-item:nth-child(3) .fasting-label');
         var maghribEl = document.getElementById('maghribRemaining');
+        var fajrEl = document.getElementById('fajrRemaining');
+
+        // Time remaining till Maghrib
         if (maghribEl && maghribMin >= 0) {
             var maghribMs = todayBase + maghribMin * 60000;
             var diffMs = maghribMs - nowMs;
             if (diffMs > 0) {
-                var totalMin = Math.ceil(diffMs / 60000);
-                maghribEl.textContent = formatHoursMin(totalMin);
+                // Before Maghrib - show countdown
+                if (maghribLabelEl) maghribLabelEl.textContent = 'باقي للمغرب';
+                maghribEl.textContent = formatHoursMin(Math.ceil(diffMs / 60000));
             } else {
-                maghribEl.textContent = 'حان الوقت';
+                // After Maghrib - show tomorrow's Maghrib countdown
+                if (maghribLabelEl) maghribLabelEl.textContent = 'المغرب غداً بعد';
+                var tomorrowMaghrib = maghribMs + 86400000;
+                maghribEl.textContent = formatHoursMin(Math.ceil((tomorrowMaghrib - nowMs) / 60000));
             }
         }
 
         // Time remaining till Fajr
-        var fajrEl = document.getElementById('fajrRemaining');
         if (fajrEl && fajrMin >= 0) {
             var fajrMs = todayBase + fajrMin * 60000;
             var fDiff = fajrMs - nowMs;
             if (fDiff > 0) {
+                // Before Fajr - show countdown
+                if (fajrLabelEl) fajrLabelEl.textContent = 'باقي للفجر';
                 fajrEl.textContent = formatHoursMin(Math.ceil(fDiff / 60000));
             } else {
-                // Fajr tomorrow
+                // After Fajr - show tomorrow's Fajr countdown
+                if (fajrLabelEl) fajrLabelEl.textContent = 'الفجر غداً بعد';
                 var tomorrowFajr = fajrMs + 86400000;
                 fajrEl.textContent = formatHoursMin(Math.ceil((tomorrowFajr - nowMs) / 60000));
             }
