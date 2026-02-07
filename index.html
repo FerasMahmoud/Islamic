@@ -1337,157 +1337,104 @@
             .surah-grid { grid-template-columns: 1fr; }
             .surah-card-name { font-size: 1.2em; }
         }
-        /* ═══ Reading Color Themes ═══ */
-        /* Default: dark celestial (already set in :root) */
+        /* ═══ Unified Theme System ═══ */
+        /* Default theme: light celestial (already set in :root) */
 
-        /* Sepia warm theme */
-        body.theme-sepia .surah-para {
-            background: linear-gradient(135deg, #f4e4c1, #faf0dc);
-            color: #3b2f1e; border-color: rgba(139,90,43,0.2);
-        }
-        body.theme-sepia .bismillah-box2 {
-            background: linear-gradient(135deg, #e8d5a8, #f0e2c0);
-            color: #5c4a2a; border-color: rgba(139,90,43,0.25);
-        }
+        /* Sepia warm theme - EVERYTHING */
+        body.theme-sepia { --night-deep: #2c1f0e; --night-mid: #3b2a14; --night-soft: #4a3620; --night-glow: #5c4a2a; }
+        body.theme-sepia .surah-para { background: linear-gradient(135deg, #f4e4c1, #faf0dc); color: #3b2f1e; border-color: rgba(139,90,43,0.2); }
+        body.theme-sepia .bismillah-box2 { background: linear-gradient(135deg, #e8d5a8, #f0e2c0); color: #5c4a2a; border-color: rgba(139,90,43,0.25); }
         body.theme-sepia .ayah-num-inline { color: #8b5a2b; }
+        body.theme-sepia .dua-card { background: linear-gradient(135deg, #f4e4c1, #faf0dc); border-color: rgba(139,90,43,0.15); }
+        body.theme-sepia .dua-text { color: #3b2f1e; }
+        body.theme-sepia .dua-source { color: #7a6540; }
+        body.theme-sepia .habit-item { background: linear-gradient(135deg, #f4e4c1, #faf0dc); border-color: rgba(139,90,43,0.15); color: #3b2f1e; }
+        body.theme-sepia .tabs-nav { background: rgba(60,42,20,0.98); }
+        body.theme-sepia .sub-nav { background: rgba(60,42,20,0.95); }
+        body.theme-sepia .section-title { color: #d4a853; }
 
-        /* Cream soft theme */
-        body.theme-cream .surah-para {
-            background: linear-gradient(135deg, #fefcf3, #fff9eb);
-            color: #2c2c2c; border-color: rgba(200,180,140,0.2);
-        }
-        body.theme-cream .bismillah-box2 {
-            background: linear-gradient(135deg, #f5f0e0, #faf6ed);
-            color: #4a4030; border-color: rgba(200,180,140,0.25);
-        }
-        body.theme-cream .ayah-num-inline { color: #b8860b; }
-
-        /* Dark reading theme */
-        body.theme-dark .surah-para {
-            background: linear-gradient(135deg, rgba(22,28,45,0.98), rgba(18,24,38,0.99));
-            color: #d4cfc5; border-color: rgba(46,204,113,0.1);
-        }
-        body.theme-dark .bismillah-box2 {
-            background: linear-gradient(135deg, rgba(16,22,36,0.98), rgba(20,28,44,0.98));
-            color: var(--gold-soft); border-color: rgba(46,204,113,0.15);
-        }
+        /* Dark theme - EVERYTHING */
+        body.theme-dark { --night-deep: #0a0e1a; --night-mid: #0e1424; --night-soft: #141c30; --night-glow: #1c2844; }
+        body.theme-dark .surah-para { background: linear-gradient(135deg, rgba(22,28,45,0.98), rgba(18,24,38,0.99)); color: #d4cfc5; border-color: rgba(46,204,113,0.1); }
+        body.theme-dark .bismillah-box2 { background: linear-gradient(135deg, rgba(16,22,36,0.98), rgba(20,28,44,0.98)); color: var(--gold-soft); border-color: rgba(46,204,113,0.15); }
         body.theme-dark .ayah-num-inline { color: var(--gold-warm); }
         body.theme-dark .ayah-span.selected { background: rgba(46,204,113,0.18); }
         body.theme-dark .ayah-span.bm-hl { background: rgba(46,204,113,0.12); }
+        body.theme-dark .section-title { color: #a8e6cf; }
+        body.theme-dark .card, body.theme-dark .dua-card { background: linear-gradient(135deg, #0e1424, #141c30); border-color: rgba(255,255,255,0.05); }
+        body.theme-dark .dua-text { color: #c8c0b0; }
+        body.theme-dark .dua-source { color: #706858; }
+        body.theme-dark .dua-card::before { background: linear-gradient(180deg, #27ae60, #1a5c3a); }
+        body.theme-dark .tabs-nav { background: rgba(10,14,26,0.98); border-color: rgba(255,255,255,0.05); }
+        body.theme-dark .sub-nav { background: rgba(10,14,26,0.95); }
+        body.theme-dark .r-head2 { background: rgba(10,14,26,0.95); border-color: rgba(255,255,255,0.05); }
+        body.theme-dark .tafseer-panel { background: #0a0e1a; }
+        body.theme-dark .tafseer-body { color: #c8c0b0; }
+        body.theme-dark .habit-item { background: linear-gradient(135deg, #0e1424, #141c30); border-color: rgba(255,255,255,0.05); color: #c8c0b0; }
+        body.theme-dark .home-card, body.theme-dark .surah-card { background: linear-gradient(135deg, #0e1424, #141c30); border-color: rgba(255,255,255,0.05); }
+        body.theme-dark .quran-search { background: rgba(14,20,36,0.9); border-color: rgba(255,255,255,0.06); color: #c8c0b0; }
+        body.theme-dark .khatm-juz, body.theme-dark .hifz-cell { background: rgba(14,20,36,0.9); border-color: rgba(255,255,255,0.06); }
+        body.theme-dark .streak-banner, body.theme-dark .reading-stat-card, body.theme-dark .history-item { background: rgba(14,20,36,0.9); border-color: rgba(255,255,255,0.05); }
+        body.theme-dark .last-read-card { background: linear-gradient(135deg, #0e1424, #141c30); border-color: rgba(255,255,255,0.05); }
+        body.theme-dark .counter-display, body.theme-dark .counter-card { background: rgba(14,20,36,0.95); border-color: rgba(255,255,255,0.05); color: #c8c0b0; }
+        body.theme-dark .prayer-time-card, body.theme-dark .prayer-card-item { background: rgba(14,20,36,0.95); border-color: rgba(255,255,255,0.05); }
+        body.theme-dark .ramadan-cal-table th { background: rgba(14,20,36,0.9); }
+        body.theme-dark .ramadan-cal-table td { background: rgba(10,14,26,0.9); border-color: rgba(255,255,255,0.03); }
+        body.theme-dark .notif-settings { background: linear-gradient(135deg, #141c30, #0a0e1a); }
 
-        /* AMOLED black theme */
-        body.theme-amoled .surah-para {
-            background: #000; color: #c8c0b0; border-color: rgba(255,255,255,0.06);
-        }
-        body.theme-amoled .bismillah-box2 {
-            background: #050505; color: #a8e6cf; border-color: rgba(255,255,255,0.06);
-        }
+        /* Green theme - EVERYTHING */
+        body.theme-green { --night-deep: #060e08; --night-mid: #0a1a10; --night-soft: #0d2818; --night-glow: #143820; }
+        body.theme-green .surah-para { background: linear-gradient(135deg, #0d2818, #122a1c); color: #c8e6d0; border-color: rgba(46,204,113,0.12); }
+        body.theme-green .bismillah-box2 { background: linear-gradient(135deg, #0a1f14, #0e2518); color: #a8e6cf; border-color: rgba(46,204,113,0.2); }
+        body.theme-green .ayah-num-inline { color: #2ecc71; }
+        body.theme-green .section-title { color: #2ecc71; }
+        body.theme-green .card, body.theme-green .dua-card { background: linear-gradient(135deg, #0a1a10, #0d2818); border-color: rgba(46,204,113,0.1); }
+        body.theme-green .dua-text { color: #c8e6d0; }
+        body.theme-green .dua-source { color: #5a8a68; }
+        body.theme-green .dua-card::before { background: linear-gradient(180deg, #2ecc71, #1a5c3a); }
+        body.theme-green .tabs-nav { background: rgba(6,14,8,0.98); border-color: rgba(46,204,113,0.1); }
+        body.theme-green .sub-nav { background: rgba(6,14,8,0.95); }
+        body.theme-green .r-head2 { background: rgba(6,14,8,0.95); border-color: rgba(46,204,113,0.1); }
+        body.theme-green .tafseer-panel { background: #060e08; }
+        body.theme-green .tafseer-body { color: #c8e6d0; }
+        body.theme-green .habit-item { background: linear-gradient(135deg, #0a1a10, #0d2818); border-color: rgba(46,204,113,0.1); color: #c8e6d0; }
+        body.theme-green .home-card, body.theme-green .surah-card { background: linear-gradient(135deg, #0a1a10, #0d2818); border-color: rgba(46,204,113,0.1); }
+        body.theme-green .quran-search { background: rgba(10,26,16,0.9); border-color: rgba(46,204,113,0.1); color: #c8e6d0; }
+        body.theme-green .khatm-juz, body.theme-green .hifz-cell { background: rgba(10,26,16,0.9); border-color: rgba(46,204,113,0.1); }
+        body.theme-green .streak-banner, body.theme-green .reading-stat-card, body.theme-green .history-item { background: rgba(10,26,16,0.9); border-color: rgba(46,204,113,0.1); }
+        body.theme-green .last-read-card { background: linear-gradient(135deg, #0a1a10, #0d2818); border-color: rgba(46,204,113,0.1); }
+        body.theme-green .counter-display, body.theme-green .counter-card { background: rgba(10,26,16,0.95); border-color: rgba(46,204,113,0.1); color: #c8e6d0; }
+        body.theme-green .prayer-time-card, body.theme-green .prayer-card-item { background: rgba(10,26,16,0.95); border-color: rgba(46,204,113,0.1); }
+        body.theme-green .notif-settings { background: linear-gradient(135deg, #0d2818, #060e08); }
+
+        /* AMOLED black theme - EVERYTHING */
+        body.theme-amoled { --night-deep: #000; --night-mid: #000; --night-soft: #050505; --night-glow: #0a0a0a; }
+        body.theme-amoled .surah-para { background: #000; color: #c8c0b0; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .bismillah-box2 { background: #000; color: #a8e6cf; border-color: rgba(255,255,255,0.06); }
         body.theme-amoled .ayah-num-inline { color: #27ae60; }
         body.theme-amoled .ayah-span.selected { background: rgba(46,204,113,0.15); }
-
-        /* Green reading theme */
-        body.theme-green .surah-para {
-            background: linear-gradient(135deg, #0d2818, #122a1c);
-            color: #c8e6d0; border-color: rgba(46,204,113,0.12);
-        }
-        body.theme-green .bismillah-box2 {
-            background: linear-gradient(135deg, #0a1f14, #0e2518);
-            color: #a8e6cf; border-color: rgba(46,204,113,0.2);
-        }
-        body.theme-green .ayah-num-inline { color: #2ecc71; }
-
-        /* Night mode: full dark overhaul */
-        body.night-mode {
-            --night-deep: #000; --night-mid: #060608; --night-soft: #0c0c10;
-            --night-glow: #151520;
-        }
-        body.night-mode .surah-para {
-            background: linear-gradient(135deg, #080810, #0a0a14);
-            color: #bfb8a8; border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .bismillah-box2 {
-            background: #050508; color: var(--gold-soft); border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .ayah-num-inline { color: var(--gold-warm); }
-        body.night-mode .section-title { color: #a8e6cf; }
-        body.night-mode .card, body.night-mode .dua-card {
-            background: linear-gradient(135deg, #080810, #0a0a14);
-            border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .dua-text { color: #c8c0b0; }
-        body.night-mode .dua-source { color: #706858; }
-        body.night-mode .athkar-card, body.night-mode .hadith-card {
-            background: rgba(8,8,16,0.95); border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .tabs-nav {
-            background: rgba(0,0,0,0.98); border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .sub-nav { background: rgba(0,0,0,0.95); }
-        body.night-mode .r-head2 { background: rgba(0,0,0,0.95); border-color: rgba(255,255,255,0.04); }
-        body.night-mode .tafseer-panel { background: #050508; }
-        body.night-mode .tafseer-body { color: #bfb8a8; }
-        body.night-mode .dua-card::before { background: linear-gradient(180deg, #27ae60, #1a5c3a); }
-        body.night-mode .dua-number { background: linear-gradient(135deg, #1a5c3a, #27ae60); }
-        body.night-mode .counter-display, body.night-mode .counter-card {
-            background: rgba(8,8,16,0.95); border-color: rgba(255,255,255,0.04); color: #c8c0b0;
-        }
-        body.night-mode .home-card {
-            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
-            border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .surah-card {
-            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
-            border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .quran-search {
-            background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.06); color: #c8c0b0;
-        }
-        body.night-mode .quran-search::placeholder { color: rgba(200,192,176,0.4); }
-        body.night-mode .ramadan-cal-table th { background: rgba(8,8,16,0.9); }
-        body.night-mode .ramadan-cal-table td { background: rgba(4,4,10,0.9); border-color: rgba(255,255,255,0.03); }
-        body.night-mode .prayer-time-card, body.night-mode .prayer-card-item {
-            background: rgba(8,8,16,0.95); border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .khatm-juz { background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.06); }
-        body.night-mode .hifz-cell { background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.06); }
-        body.night-mode .notif-settings { background: linear-gradient(135deg, #0c0c10, #000); }
-        body.night-mode .qibla-compass { background: radial-gradient(circle, #0a0a14, #000); }
-        body.night-mode .habit-item {
-            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
-            border-color: rgba(255,255,255,0.04); color: #c8c0b0;
-        }
-        body.night-mode .habit-name { color: #d4cfc5; }
-        body.night-mode .habit-streak { color: var(--gold-warm); }
-        body.night-mode .last-read-card {
-            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
-            border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .streak-banner {
-            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
-        }
-        body.night-mode .reading-stat-card {
-            background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.04);
-        }
-        body.night-mode .history-item {
-            background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.04);
-        }
-
-        /* Theme picker dots */
-        .theme-picker {
-            display: flex; gap: 8px; align-items: center;
-        }
-        .theme-dot {
-            width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15);
-            cursor: pointer; transition: all 0.2s; flex-shrink: 0;
-        }
-        .theme-dot:hover { transform: scale(1.15); }
-        .theme-dot.active { border-color: var(--gold-bright); box-shadow: 0 0 10px rgba(46,204,113,0.4); }
-        .theme-dot[data-theme="default"] { background: linear-gradient(135deg, #faf6ed, #fffef9); }
-        .theme-dot[data-theme="sepia"] { background: linear-gradient(135deg, #f4e4c1, #d4b896); }
-        .theme-dot[data-theme="cream"] { background: linear-gradient(135deg, #fefcf3, #f5f0e0); }
-        .theme-dot[data-theme="dark"] { background: linear-gradient(135deg, #161c2d, #121826); }
-        .theme-dot[data-theme="amoled"] { background: #000; }
-        .theme-dot[data-theme="green"] { background: linear-gradient(135deg, #0d2818, #122a1c); }
+        body.theme-amoled .section-title { color: #a8e6cf; }
+        body.theme-amoled .card, body.theme-amoled .dua-card { background: #000; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .dua-text { color: #c8c0b0; }
+        body.theme-amoled .dua-source { color: #706858; }
+        body.theme-amoled .dua-card::before { background: linear-gradient(180deg, #27ae60, #1a5c3a); }
+        body.theme-amoled .tabs-nav { background: #000; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .sub-nav { background: #000; }
+        body.theme-amoled .r-head2 { background: #000; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .tafseer-panel { background: #000; }
+        body.theme-amoled .tafseer-body { color: #c8c0b0; }
+        body.theme-amoled .habit-item { background: #000; border-color: rgba(255,255,255,0.06); color: #c8c0b0; }
+        body.theme-amoled .home-card, body.theme-amoled .surah-card { background: #000; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .quran-search { background: #000; border-color: rgba(255,255,255,0.08); color: #c8c0b0; }
+        body.theme-amoled .khatm-juz, body.theme-amoled .hifz-cell { background: #000; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .streak-banner, body.theme-amoled .reading-stat-card, body.theme-amoled .history-item { background: #050505; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .last-read-card { background: #000; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .counter-display, body.theme-amoled .counter-card { background: #000; border-color: rgba(255,255,255,0.06); color: #c8c0b0; }
+        body.theme-amoled .prayer-time-card, body.theme-amoled .prayer-card-item { background: #000; border-color: rgba(255,255,255,0.06); }
+        body.theme-amoled .ramadan-cal-table th { background: #050505; }
+        body.theme-amoled .ramadan-cal-table td { background: #000; border-color: rgba(255,255,255,0.04); }
+        body.theme-amoled .notif-settings { background: #000; }
+        body.theme-amoled .qibla-compass { background: radial-gradient(circle, #050505, #000); }
 
         .reading-controls {
             position: fixed; top: 12px; left: 12px; z-index: 999; display: flex; gap: 6px;
@@ -2184,41 +2131,6 @@
         }
         .prayer-notif-close:hover { background: rgba(255,255,255,0.25); }
 
-        /* iOS Install Prompt */
-        .ios-install-prompt {
-            position: fixed;
-            bottom: -200px;
-            left: 12px;
-            right: 12px;
-            z-index: 10000;
-            background: linear-gradient(135deg, var(--night-soft), var(--night-mid));
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 16px;
-            padding: 18px 20px;
-            box-shadow: 0 -4px 25px rgba(0,0,0,0.5);
-            transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-        }
-        .ios-install-prompt.show { bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
-        .ios-install-title {
-            font-family: 'Scheherazade New', serif;
-            font-size: 1.3em; color: var(--gold-bright); margin-bottom: 8px;
-        }
-        .ios-install-text {
-            font-family: 'Amiri', serif;
-            font-size: 1em; color: var(--cream-soft); line-height: 1.6; margin-bottom: 12px;
-        }
-        .ios-install-steps {
-            font-size: 0.95em; color: var(--text-muted); line-height: 1.8;
-        }
-        .ios-install-dismiss {
-            margin-top: 12px; padding: 10px 24px; border-radius: 10px;
-            border: 1px solid rgba(212,175,55,0.3); background: transparent;
-            color: var(--gold-soft); font-family: 'Amiri', serif; font-size: 1em;
-            cursor: pointer;
-        }
-        .ios-install-dismiss:hover { background: rgba(212,175,55,0.1); }
-
         /* Notification settings panel */
         .notif-settings {
             position: fixed;
@@ -2293,8 +2205,7 @@
 
 <!-- Scroll to Top Button -->
 <div class="reading-controls">
-    <button class="rc-btn" onclick="toggleNightMode()" id="nightModeBtn" title="الوضع الليلي">🌙</button>
-    <button class="rc-btn" onclick="cycleReadingTheme()" id="themeBtn" title="لون القراءة">🎨</button>
+    <button class="rc-btn" onclick="cycleTheme()" id="themeBtn" title="تغيير المظهر">🌙</button>
     <button class="rc-btn" onclick="changeFontSize(1)" title="تكبير الخط">A+</button>
     <button class="rc-btn" onclick="changeFontSize(-1)" title="تصغير الخط">A-</button>
     <button class="rc-btn" onclick="openNotifSettings()" id="notifBtn" title="إشعارات الصلاة">🔔</button>
@@ -2340,18 +2251,6 @@
         <input type="range" id="notifVolume" min="0" max="100" value="70" oninput="setNotifVolume(this.value)">
     </div>
     <button class="notif-test-btn" onclick="testPrayerNotif()">🔔 تجربة الإشعار</button>
-</div>
-
-<!-- iOS Install Prompt -->
-<div class="ios-install-prompt" id="iosInstallPrompt">
-    <div class="ios-install-title">📱 أضف التطبيق للشاشة الرئيسية</div>
-    <div class="ios-install-text">للحصول على تجربة أفضل وإشعارات الصلاة</div>
-    <div class="ios-install-steps">
-        1. اضغط على <strong>مشاركة</strong> ⬆️ في أسفل المتصفح<br>
-        2. اختر <strong>"إضافة إلى الشاشة الرئيسية"</strong><br>
-        3. اضغط <strong>"إضافة"</strong>
-    </div>
-    <button class="ios-install-dismiss" onclick="dismissIosPrompt()">فهمت ✓</button>
 </div>
 
 <!-- Ayah Action Popup -->
@@ -4399,46 +4298,51 @@
     }
 
     // ═══════════════════════════════════════
-    // Night Mode, Reading Themes & Controls
+    // Unified Theme System & Controls
     // ═══════════════════════════════════════
-    var READING_THEMES = ['default', 'sepia', 'cream', 'dark', 'green', 'amoled'];
-    var nightMode = localStorage.getItem('iq_night') === '1';
+    var THEMES = ['default', 'sepia', 'dark', 'green', 'amoled'];
+    var THEME_ICONS = {default:'☀️', sepia:'📜', dark:'🌙', green:'🌿', amoled:'⬛'};
+    var THEME_NAMES = {default:'فاتح', sepia:'كلاسيكي', dark:'داكن', green:'أخضر', amoled:'أسود'};
     var currentTheme = localStorage.getItem('iq_theme') || 'default';
     var fontSize = parseInt(localStorage.getItem('iq_fontsize')) || 0;
 
-    if (nightMode) document.body.classList.add('night-mode');
-    if (currentTheme !== 'default') document.body.classList.add('theme-' + currentTheme);
-    if (fontSize) document.documentElement.style.fontSize = (100 + fontSize * 5) + '%';
-
-    function toggleNightMode() {
-        nightMode = !nightMode;
-        document.body.classList.toggle('night-mode', nightMode);
-        localStorage.setItem('iq_night', nightMode ? '1' : '0');
-        var btn = document.getElementById('nightModeBtn');
-        if (btn) btn.classList.toggle('on', nightMode);
+    // Migrate legacy night mode users to dark theme
+    if (localStorage.getItem('iq_night') === '1' && currentTheme === 'default') {
+        currentTheme = 'dark';
+        localStorage.setItem('iq_theme', 'dark');
+        localStorage.removeItem('iq_night');
     }
 
-    function setReadingTheme(theme) {
-        // Remove all theme classes
-        READING_THEMES.forEach(function(t) { document.body.classList.remove('theme-' + t); });
+    // Apply saved theme on load
+    function applyTheme(theme) {
+        THEMES.forEach(function(t) { document.body.classList.remove('theme-' + t); });
+        // Also remove legacy night-mode class
+        document.body.classList.remove('night-mode');
         currentTheme = theme;
         if (theme !== 'default') document.body.classList.add('theme-' + theme);
         localStorage.setItem('iq_theme', theme);
+        // Update button icon
+        var btn = document.getElementById('themeBtn');
+        if (btn) btn.textContent = THEME_ICONS[theme] || '🌙';
     }
+    applyTheme(currentTheme);
+    if (fontSize) document.documentElement.style.fontSize = (100 + fontSize * 5) + '%';
 
-    function cycleReadingTheme() {
-        var idx = READING_THEMES.indexOf(currentTheme);
-        var next = READING_THEMES[(idx + 1) % READING_THEMES.length];
-        setReadingTheme(next);
+    function cycleTheme() {
+        var idx = THEMES.indexOf(currentTheme);
+        var next = THEMES[(idx + 1) % THEMES.length];
+        applyTheme(next);
         // Brief visual feedback
         var btn = document.getElementById('themeBtn');
         if (btn) {
-            var labels = {default:'☀️', sepia:'📜', cream:'🍶', dark:'🌙', green:'🌿', amoled:'⬛'};
-            btn.textContent = labels[next] || '🎨';
             btn.classList.add('on');
             setTimeout(function() { btn.classList.remove('on'); }, 800);
         }
     }
+
+    // Legacy compatibility
+    function toggleNightMode() { cycleTheme(); }
+    function cycleReadingTheme() { cycleTheme(); }
 
     function changeFontSize(dir) {
         fontSize = Math.max(-4, Math.min(6, fontSize + dir));
@@ -4464,46 +4368,74 @@
     var notifShownToday = {}; // track which prayers already notified today
     var prayerCheckInterval = null;
     var athanAudioCtx = null;
+    var athanUnlocked = false;
 
     if (notifEnabled) { var nb = document.getElementById('notifBtn'); if (nb) nb.classList.add('on'); }
 
-    // Initialize Web Audio on first user interaction (iOS requirement)
+    // Initialize Web Audio on user interaction (iOS requires this in a gesture)
     function initAudioContext() {
-        if (athanAudioCtx) return;
-        try {
-            athanAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            // iOS requires resume after creation in user gesture
-            if (athanAudioCtx.state === 'suspended') athanAudioCtx.resume();
-        } catch(e) { /* no audio support */ }
+        if (!athanAudioCtx) {
+            try {
+                athanAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            } catch(e) { return; }
+        }
+        // iOS: resume suspended context inside user gesture
+        if (athanAudioCtx.state === 'suspended') {
+            athanAudioCtx.resume();
+        }
+        // Play a silent buffer to fully unlock audio on iOS
+        if (!athanUnlocked) {
+            try {
+                var buf = athanAudioCtx.createBuffer(1, 1, 22050);
+                var src = athanAudioCtx.createBufferSource();
+                src.buffer = buf;
+                src.connect(athanAudioCtx.destination);
+                src.start(0);
+                athanUnlocked = true;
+            } catch(e) {}
+        }
     }
-    document.addEventListener('touchstart', initAudioContext, { once: true });
-    document.addEventListener('click', initAudioContext, { once: true });
+    // Attach to multiple events to maximize chance of unlocking on iOS
+    ['touchstart', 'touchend', 'click', 'keydown'].forEach(function(evt) {
+        document.addEventListener(evt, initAudioContext, { once: false, passive: true });
+    });
 
     // Play athan-like tone sequence
     function playAthanTone() {
-        if (!athanAudioCtx || notifVolume === 0) return;
+        if (notifVolume === 0) return;
+        // Try to create/resume audio context even if not unlocked yet
+        if (!athanAudioCtx) {
+            try {
+                athanAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            } catch(e) { return; }
+        }
         try {
             if (athanAudioCtx.state === 'suspended') athanAudioCtx.resume();
             var now = athanAudioCtx.currentTime;
-            var vol = notifVolume * 0.4;
-            // Melodic athan-inspired notes (D4, F4, G4, A4, Bb4 - Hijaz-like scale)
-            var notes = [293.66, 349.23, 392.00, 440.00, 466.16, 440.00, 392.00, 349.23];
-            var durations = [0.5, 0.4, 0.5, 0.6, 0.5, 0.4, 0.5, 0.8];
+            var vol = notifVolume * 0.5;
+            // Athan-inspired melody: Hijaz maqam (D4, Eb4, F#4, G4, A4, Bb4, C#5, D5)
+            // Extended sequence for a more recognizable athan feel
+            var notes = [293.66, 311.13, 369.99, 392.00, 440.00, 466.16, 554.37, 587.33,
+                         587.33, 554.37, 466.16, 440.00, 392.00, 369.99, 311.13, 293.66];
+            var durations = [0.6, 0.3, 0.5, 0.7, 0.6, 0.4, 0.5, 1.0,
+                            0.5, 0.3, 0.4, 0.6, 0.5, 0.4, 0.4, 1.0];
             var t = now + 0.05;
             notes.forEach(function(freq, i) {
                 var osc = athanAudioCtx.createOscillator();
                 var gain = athanAudioCtx.createGain();
-                osc.type = 'sine';
+                // Use triangle wave for warmer, more vocal-like sound
+                osc.type = 'triangle';
                 osc.frequency.value = freq;
+                // Gentle envelope for natural athan feel
                 gain.gain.setValueAtTime(0, t);
-                gain.gain.linearRampToValueAtTime(vol, t + 0.06);
-                gain.gain.setValueAtTime(vol, t + durations[i] - 0.1);
+                gain.gain.linearRampToValueAtTime(vol, t + 0.08);
+                gain.gain.setValueAtTime(vol * 0.85, t + durations[i] * 0.6);
                 gain.gain.linearRampToValueAtTime(0, t + durations[i]);
                 osc.connect(gain);
                 gain.connect(athanAudioCtx.destination);
                 osc.start(t);
-                osc.stop(t + durations[i]);
-                t += durations[i] + 0.05;
+                osc.stop(t + durations[i] + 0.01);
+                t += durations[i] + 0.03;
             });
         } catch(e) { /* audio error, silently ignore */ }
     }
@@ -4638,31 +4570,11 @@
         showPrayerNotifBanner('Fajr');
     }
 
-    // iOS detection & install prompt
-    function checkIosInstallPrompt() {
-        var isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-        var dismissed = localStorage.getItem('iq_ios_prompt_dismissed');
-        if (isIos && !isStandalone && !dismissed) {
-            setTimeout(function() {
-                var prompt = document.getElementById('iosInstallPrompt');
-                if (prompt) prompt.classList.add('show');
-            }, 3000);
-        }
-    }
-
-    function dismissIosPrompt() {
-        var prompt = document.getElementById('iosInstallPrompt');
-        if (prompt) prompt.classList.remove('show');
-        localStorage.setItem('iq_ios_prompt_dismissed', '1');
-    }
-
     // Legacy compatibility - keep old function name working
     function toggleNotifications() { openNotifSettings(); }
 
     // Start checker if notifications were previously enabled
     if (notifEnabled) startPrayerChecker();
-    checkIosInstallPrompt();
 
     // ═══════════════════════════════════════
     // Qibla Compass
