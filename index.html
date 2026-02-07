@@ -1337,8 +1337,158 @@
             .surah-grid { grid-template-columns: 1fr; }
             .surah-card-name { font-size: 1.2em; }
         }
-        /* Night/Reading Mode */
-        body.night-mode { --night-deep: #000; --night-mid: #0a0a0a; --night-soft: #111; }
+        /* ═══ Reading Color Themes ═══ */
+        /* Default: dark celestial (already set in :root) */
+
+        /* Sepia warm theme */
+        body.theme-sepia .surah-para {
+            background: linear-gradient(135deg, #f4e4c1, #faf0dc);
+            color: #3b2f1e; border-color: rgba(139,90,43,0.2);
+        }
+        body.theme-sepia .bismillah-box2 {
+            background: linear-gradient(135deg, #e8d5a8, #f0e2c0);
+            color: #5c4a2a; border-color: rgba(139,90,43,0.25);
+        }
+        body.theme-sepia .ayah-num-inline { color: #8b5a2b; }
+
+        /* Cream soft theme */
+        body.theme-cream .surah-para {
+            background: linear-gradient(135deg, #fefcf3, #fff9eb);
+            color: #2c2c2c; border-color: rgba(200,180,140,0.2);
+        }
+        body.theme-cream .bismillah-box2 {
+            background: linear-gradient(135deg, #f5f0e0, #faf6ed);
+            color: #4a4030; border-color: rgba(200,180,140,0.25);
+        }
+        body.theme-cream .ayah-num-inline { color: #b8860b; }
+
+        /* Dark reading theme */
+        body.theme-dark .surah-para {
+            background: linear-gradient(135deg, rgba(22,28,45,0.98), rgba(18,24,38,0.99));
+            color: #d4cfc5; border-color: rgba(46,204,113,0.1);
+        }
+        body.theme-dark .bismillah-box2 {
+            background: linear-gradient(135deg, rgba(16,22,36,0.98), rgba(20,28,44,0.98));
+            color: var(--gold-soft); border-color: rgba(46,204,113,0.15);
+        }
+        body.theme-dark .ayah-num-inline { color: var(--gold-warm); }
+        body.theme-dark .ayah-span.selected { background: rgba(46,204,113,0.18); }
+        body.theme-dark .ayah-span.bm-hl { background: rgba(46,204,113,0.12); }
+
+        /* AMOLED black theme */
+        body.theme-amoled .surah-para {
+            background: #000; color: #c8c0b0; border-color: rgba(255,255,255,0.06);
+        }
+        body.theme-amoled .bismillah-box2 {
+            background: #050505; color: #a8e6cf; border-color: rgba(255,255,255,0.06);
+        }
+        body.theme-amoled .ayah-num-inline { color: #27ae60; }
+        body.theme-amoled .ayah-span.selected { background: rgba(46,204,113,0.15); }
+
+        /* Green reading theme */
+        body.theme-green .surah-para {
+            background: linear-gradient(135deg, #0d2818, #122a1c);
+            color: #c8e6d0; border-color: rgba(46,204,113,0.12);
+        }
+        body.theme-green .bismillah-box2 {
+            background: linear-gradient(135deg, #0a1f14, #0e2518);
+            color: #a8e6cf; border-color: rgba(46,204,113,0.2);
+        }
+        body.theme-green .ayah-num-inline { color: #2ecc71; }
+
+        /* Night mode: full dark overhaul */
+        body.night-mode {
+            --night-deep: #000; --night-mid: #060608; --night-soft: #0c0c10;
+            --night-glow: #151520;
+        }
+        body.night-mode .surah-para {
+            background: linear-gradient(135deg, #080810, #0a0a14);
+            color: #bfb8a8; border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .bismillah-box2 {
+            background: #050508; color: var(--gold-soft); border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .ayah-num-inline { color: var(--gold-warm); }
+        body.night-mode .section-title { color: #a8e6cf; }
+        body.night-mode .card, body.night-mode .dua-card {
+            background: linear-gradient(135deg, #080810, #0a0a14);
+            border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .dua-text { color: #c8c0b0; }
+        body.night-mode .dua-source { color: #706858; }
+        body.night-mode .athkar-card, body.night-mode .hadith-card {
+            background: rgba(8,8,16,0.95); border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .tabs-nav {
+            background: rgba(0,0,0,0.98); border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .sub-nav { background: rgba(0,0,0,0.95); }
+        body.night-mode .r-head2 { background: rgba(0,0,0,0.95); border-color: rgba(255,255,255,0.04); }
+        body.night-mode .tafseer-panel { background: #050508; }
+        body.night-mode .tafseer-body { color: #bfb8a8; }
+        body.night-mode .dua-card::before { background: linear-gradient(180deg, #27ae60, #1a5c3a); }
+        body.night-mode .dua-number { background: linear-gradient(135deg, #1a5c3a, #27ae60); }
+        body.night-mode .counter-display, body.night-mode .counter-card {
+            background: rgba(8,8,16,0.95); border-color: rgba(255,255,255,0.04); color: #c8c0b0;
+        }
+        body.night-mode .home-card {
+            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
+            border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .surah-card {
+            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
+            border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .quran-search {
+            background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.06); color: #c8c0b0;
+        }
+        body.night-mode .quran-search::placeholder { color: rgba(200,192,176,0.4); }
+        body.night-mode .ramadan-cal-table th { background: rgba(8,8,16,0.9); }
+        body.night-mode .ramadan-cal-table td { background: rgba(4,4,10,0.9); border-color: rgba(255,255,255,0.03); }
+        body.night-mode .prayer-time-card, body.night-mode .prayer-card-item {
+            background: rgba(8,8,16,0.95); border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .khatm-juz { background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.06); }
+        body.night-mode .hifz-cell { background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.06); }
+        body.night-mode .notif-settings { background: linear-gradient(135deg, #0c0c10, #000); }
+        body.night-mode .qibla-compass { background: radial-gradient(circle, #0a0a14, #000); }
+        body.night-mode .habit-item {
+            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
+            border-color: rgba(255,255,255,0.04); color: #c8c0b0;
+        }
+        body.night-mode .habit-name { color: #d4cfc5; }
+        body.night-mode .habit-streak { color: var(--gold-warm); }
+        body.night-mode .last-read-card {
+            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
+            border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .streak-banner {
+            background: linear-gradient(135deg, rgba(8,8,16,0.95), rgba(12,12,20,0.95));
+        }
+        body.night-mode .reading-stat-card {
+            background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.04);
+        }
+        body.night-mode .history-item {
+            background: rgba(8,8,16,0.9); border-color: rgba(255,255,255,0.04);
+        }
+
+        /* Theme picker dots */
+        .theme-picker {
+            display: flex; gap: 8px; align-items: center;
+        }
+        .theme-dot {
+            width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15);
+            cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+        }
+        .theme-dot:hover { transform: scale(1.15); }
+        .theme-dot.active { border-color: var(--gold-bright); box-shadow: 0 0 10px rgba(46,204,113,0.4); }
+        .theme-dot[data-theme="default"] { background: linear-gradient(135deg, #faf6ed, #fffef9); }
+        .theme-dot[data-theme="sepia"] { background: linear-gradient(135deg, #f4e4c1, #d4b896); }
+        .theme-dot[data-theme="cream"] { background: linear-gradient(135deg, #fefcf3, #f5f0e0); }
+        .theme-dot[data-theme="dark"] { background: linear-gradient(135deg, #161c2d, #121826); }
+        .theme-dot[data-theme="amoled"] { background: #000; }
+        .theme-dot[data-theme="green"] { background: linear-gradient(135deg, #0d2818, #122a1c); }
+
         .reading-controls {
             position: fixed; top: 12px; left: 12px; z-index: 999; display: flex; gap: 6px;
         }
@@ -1351,35 +1501,101 @@
         .rc-btn:hover { border-color: rgba(212,175,55,0.4); color: var(--gold-soft); }
         .rc-btn.on { background: rgba(212,175,55,0.2); color: var(--gold-bright); border-color: rgba(212,175,55,0.5); }
 
-        /* Qibla Compass */
+        /* Qibla Compass - Enhanced */
         .qibla-container { text-align: center; padding: 20px; }
         .qibla-compass {
-            width: 260px; height: 260px; margin: 20px auto; position: relative;
-            border-radius: 50%; border: 3px solid rgba(212,175,55,0.3);
-            background: radial-gradient(circle, rgba(26,37,64,0.95), rgba(10,14,26,0.98));
+            width: 280px; height: 280px; margin: 20px auto; position: relative;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, rgba(26,42,74,0.95) 0%, rgba(12,18,32,0.99) 70%, rgba(6,10,22,1) 100%);
+            box-shadow: 0 0 40px rgba(46,204,113,0.08), 0 0 80px rgba(0,0,0,0.4), inset 0 0 30px rgba(0,0,0,0.3);
         }
+        /* Outer ring with tick marks */
+        .qibla-ring {
+            position: absolute; inset: 0; border-radius: 50%;
+            border: 2px solid rgba(46,204,113,0.2);
+        }
+        .qibla-ring::before {
+            content: ''; position: absolute; inset: 4px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .qibla-tick {
+            position: absolute; top: 0; left: 50%; width: 1px;
+            transform-origin: 0 140px; background: rgba(255,255,255,0.15);
+        }
+        .qibla-tick { height: 8px; }
+        .qibla-tick.major { height: 14px; width: 2px; background: rgba(46,204,113,0.4); }
+        /* Center dot */
+        .qibla-center {
+            position: absolute; top: 50%; left: 50%; width: 10px; height: 10px;
+            background: var(--gold-bright); border-radius: 50%;
+            transform: translate(-50%, -50%); z-index: 3;
+            box-shadow: 0 0 12px rgba(46,204,113,0.6);
+        }
+        /* Arrow */
         .qibla-arrow {
-            position: absolute; top: 50%; left: 50%; width: 4px; height: 110px;
-            background: linear-gradient(to top, transparent, var(--gold-bright));
+            position: absolute; top: 50%; left: 50%; width: 4px; height: 115px;
+            background: linear-gradient(to top, transparent 0%, rgba(46,204,113,0.3) 30%, var(--gold-bright) 100%);
             transform-origin: bottom center; transform: translateX(-50%) rotate(0deg);
-            transition: transform 0.5s ease-out; border-radius: 2px;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 2px;
+            z-index: 2; filter: drop-shadow(0 0 6px rgba(46,204,113,0.5));
         }
         .qibla-arrow::after {
-            content: '🕋'; position: absolute; top: -20px; left: 50%;
-            transform: translateX(-50%); font-size: 1.4em;
+            content: '🕋'; position: absolute; top: -24px; left: 50%;
+            transform: translateX(-50%); font-size: 1.6em;
+            filter: drop-shadow(0 0 8px rgba(46,204,113,0.4));
         }
-        .qibla-degree {
-            font-size: 2em; color: var(--gold-bright); font-weight: bold;
-            margin-top: 15px; font-family: 'Amiri', serif;
-        }
-        .qibla-label { color: var(--text-muted); margin-top: 8px; font-size: 1.1em; }
+        /* Cardinal labels */
         .qibla-n, .qibla-e, .qibla-s, .qibla-w {
-            position: absolute; color: var(--text-muted); font-weight: bold; font-size: 0.9em;
+            position: absolute; font-weight: bold; font-size: 0.95em;
+            font-family: 'Amiri', serif; z-index: 2;
         }
-        .qibla-n { top: 8px; left: 50%; transform: translateX(-50%); color: var(--gold-soft); }
-        .qibla-e { right: 8px; top: 50%; transform: translateY(-50%); }
-        .qibla-s { bottom: 8px; left: 50%; transform: translateX(-50%); }
-        .qibla-w { left: 8px; top: 50%; transform: translateY(-50%); }
+        .qibla-n { top: 14px; left: 50%; transform: translateX(-50%); color: var(--gold-bright); font-size: 1.1em; }
+        .qibla-e { right: 14px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.5); }
+        .qibla-s { bottom: 14px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.35); }
+        .qibla-w { left: 14px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.5); }
+        /* Intercardinals */
+        .qibla-ne, .qibla-se, .qibla-sw, .qibla-nw {
+            position: absolute; color: rgba(255,255,255,0.2); font-size: 0.7em; font-family: 'Amiri', serif; z-index: 2;
+        }
+        .qibla-ne { top: 22%; right: 18%; }
+        .qibla-se { bottom: 22%; right: 18%; }
+        .qibla-sw { bottom: 22%; left: 18%; }
+        .qibla-nw { top: 22%; left: 18%; }
+        /* Info display */
+        .qibla-degree {
+            font-size: 2.4em; color: var(--gold-bright); font-weight: bold;
+            margin-top: 18px; font-family: 'Amiri', serif;
+            text-shadow: 0 0 20px rgba(46,204,113,0.3);
+        }
+        .qibla-label {
+            color: var(--text-muted); margin-top: 8px; font-size: 1.1em;
+            font-family: 'Amiri', serif;
+        }
+        .qibla-distance {
+            color: rgba(46,204,113,0.6); font-size: 0.95em; margin-top: 6px;
+            font-family: 'Amiri', serif;
+        }
+        .qibla-live-badge {
+            display: inline-block; padding: 4px 12px; border-radius: 20px;
+            background: rgba(46,204,113,0.12); color: var(--gold-bright);
+            font-size: 0.85em; margin-top: 10px; border: 1px solid rgba(46,204,113,0.2);
+        }
+        .qibla-live-badge::before {
+            content: ''; display: inline-block; width: 6px; height: 6px;
+            background: var(--gold-bright); border-radius: 50%; margin-left: 6px;
+            animation: qibla-pulse 1.5s infinite;
+        }
+        @keyframes qibla-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .qibla-actions {
+            display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap;
+        }
+        .qibla-btn {
+            padding: 10px 20px; border-radius: 12px; border: 1px solid rgba(46,204,113,0.25);
+            background: rgba(46,204,113,0.08); color: var(--gold-soft);
+            font-family: 'Amiri', serif; font-size: 1em; cursor: pointer; transition: all 0.2s;
+        }
+        .qibla-btn:hover { background: rgba(46,204,113,0.15); border-color: rgba(46,204,113,0.4); }
+        .qibla-btn.active { background: rgba(46,204,113,0.2); border-color: var(--gold-bright); color: var(--gold-bright); }
 
         /* Khatm Tracker */
         .khatm-container { padding: 10px 0; }
@@ -1818,7 +2034,11 @@
             .hijri-cal-day { padding: 8px 2px; font-size: 0.85em; }
 
             /* Qibla compass */
-            .qibla-compass { width: 220px; height: 220px; }
+            .qibla-compass { width: 250px; height: 250px; }
+            .qibla-tick { transform-origin: 0 125px !important; }
+            .qibla-tick.major { transform-origin: 0 125px !important; }
+            .qibla-actions { gap: 8px; }
+            .qibla-btn { padding: 12px 18px; min-height: 44px; font-size: 1em; }
 
             /* Tasbeeh touch-friendly */
             #tasbeehBtn {
@@ -1835,12 +2055,13 @@
             .reading-controls {
                 top: 8px;
                 left: 8px;
-                gap: 4px;
+                gap: 3px;
             }
             .rc-btn {
-                width: 34px;
-                height: 34px;
-                font-size: 0.95em;
+                width: 32px;
+                height: 32px;
+                font-size: 0.85em;
+                min-height: 32px;
             }
 
             /* Scroll to top */
@@ -2073,6 +2294,7 @@
 <!-- Scroll to Top Button -->
 <div class="reading-controls">
     <button class="rc-btn" onclick="toggleNightMode()" id="nightModeBtn" title="الوضع الليلي">🌙</button>
+    <button class="rc-btn" onclick="cycleReadingTheme()" id="themeBtn" title="لون القراءة">🎨</button>
     <button class="rc-btn" onclick="changeFontSize(1)" title="تكبير الخط">A+</button>
     <button class="rc-btn" onclick="changeFontSize(-1)" title="تصغير الخط">A-</button>
     <button class="rc-btn" onclick="openNotifSettings()" id="notifBtn" title="إشعارات الصلاة">🔔</button>
@@ -2816,15 +3038,24 @@
             <div id="tools-qibla" class="sub-section">
             <h2 class="section-title">اتجاه القبلة</h2>
             <div class="qibla-container">
-                <div class="qibla-compass">
-                    <span class="qibla-n">N</span><span class="qibla-e">E</span>
-                    <span class="qibla-s">S</span><span class="qibla-w">W</span>
+                <div class="qibla-compass" id="qiblaCompass">
+                    <div class="qibla-ring" id="qiblaRing"></div>
+                    <span class="qibla-n">شمال</span><span class="qibla-e">شرق</span>
+                    <span class="qibla-s">جنوب</span><span class="qibla-w">غرب</span>
+                    <span class="qibla-ne">NE</span><span class="qibla-se">SE</span>
+                    <span class="qibla-sw">SW</span><span class="qibla-nw">NW</span>
+                    <div class="qibla-center"></div>
                     <div class="qibla-arrow" id="qiblaArrow"></div>
                 </div>
                 <div class="qibla-degree" id="qiblaDegree">--°</div>
                 <div class="qibla-label" id="qiblaLabel">اضغط لتحديد اتجاه القبلة</div>
-                <div style="margin-top:15px">
-                    <button class="tasbeeh-ctrl-btn" onclick="calculateQibla()">تحديد القبلة</button>
+                <div class="qibla-distance" id="qiblaDistance"></div>
+                <div class="qibla-actions">
+                    <button class="qibla-btn" onclick="calculateQibla()">📍 تحديد القبلة</button>
+                    <button class="qibla-btn" id="qiblaLiveBtn" onclick="toggleLiveCompass()">🧭 بوصلة حية</button>
+                </div>
+                <div id="qiblaLiveBadge" style="display:none">
+                    <span class="qibla-live-badge">البوصلة نشطة</span>
                 </div>
             </div>
             </div><!-- end tools-qibla -->
@@ -4168,11 +4399,15 @@
     }
 
     // ═══════════════════════════════════════
-    // Night Mode & Reading Controls
+    // Night Mode, Reading Themes & Controls
     // ═══════════════════════════════════════
+    var READING_THEMES = ['default', 'sepia', 'cream', 'dark', 'green', 'amoled'];
     var nightMode = localStorage.getItem('iq_night') === '1';
+    var currentTheme = localStorage.getItem('iq_theme') || 'default';
     var fontSize = parseInt(localStorage.getItem('iq_fontsize')) || 0;
+
     if (nightMode) document.body.classList.add('night-mode');
+    if (currentTheme !== 'default') document.body.classList.add('theme-' + currentTheme);
     if (fontSize) document.documentElement.style.fontSize = (100 + fontSize * 5) + '%';
 
     function toggleNightMode() {
@@ -4182,6 +4417,29 @@
         var btn = document.getElementById('nightModeBtn');
         if (btn) btn.classList.toggle('on', nightMode);
     }
+
+    function setReadingTheme(theme) {
+        // Remove all theme classes
+        READING_THEMES.forEach(function(t) { document.body.classList.remove('theme-' + t); });
+        currentTheme = theme;
+        if (theme !== 'default') document.body.classList.add('theme-' + theme);
+        localStorage.setItem('iq_theme', theme);
+    }
+
+    function cycleReadingTheme() {
+        var idx = READING_THEMES.indexOf(currentTheme);
+        var next = READING_THEMES[(idx + 1) % READING_THEMES.length];
+        setReadingTheme(next);
+        // Brief visual feedback
+        var btn = document.getElementById('themeBtn');
+        if (btn) {
+            var labels = {default:'☀️', sepia:'📜', cream:'🍶', dark:'🌙', green:'🌿', amoled:'⬛'};
+            btn.textContent = labels[next] || '🎨';
+            btn.classList.add('on');
+            setTimeout(function() { btn.classList.remove('on'); }, 800);
+        }
+    }
+
     function changeFontSize(dir) {
         fontSize = Math.max(-4, Math.min(6, fontSize + dir));
         document.documentElement.style.fontSize = (100 + fontSize * 5) + '%';
@@ -4409,9 +4667,31 @@
     // ═══════════════════════════════════════
     // Qibla Compass
     // ═══════════════════════════════════════
+    var qiblaBearing = null;
+    var qiblaLiveActive = false;
+    var qiblaDeviceHandler = null;
+
+    // Build compass tick marks
+    function buildQiblaTicks() {
+        var ring = document.getElementById('qiblaRing');
+        if (!ring || ring.dataset.built) return;
+        ring.dataset.built = '1';
+        for (var i = 0; i < 360; i += 5) {
+            var tick = document.createElement('div');
+            tick.className = 'qibla-tick' + (i % 30 === 0 ? ' major' : '');
+            tick.style.position = 'absolute';
+            tick.style.top = '0';
+            tick.style.left = '50%';
+            tick.style.transformOrigin = '0 140px';
+            tick.style.transform = 'rotate(' + i + 'deg)';
+            ring.appendChild(tick);
+        }
+    }
+
     function calculateQibla() {
         var label = document.getElementById('qiblaLabel');
         if (label) label.textContent = 'جاري تحديد الموقع...';
+        buildQiblaTicks();
         var lat = userLat, lng = userLng;
         if (lat && lng) { showQibla(lat, lng); return; }
         if (navigator.geolocation) {
@@ -4419,11 +4699,12 @@
                 showQibla(pos.coords.latitude, pos.coords.longitude);
             }, function() {
                 if (label) label.textContent = 'تعذر تحديد الموقع. فعّل خدمة الموقع.';
-            });
+            }, { enableHighAccuracy: true, timeout: 10000 });
         } else {
             if (label) label.textContent = 'المتصفح لا يدعم تحديد الموقع';
         }
     }
+
     function showQibla(lat, lng) {
         // Kaaba: 21.4225°N, 39.8262°E
         var kLat = 21.4225 * Math.PI / 180;
@@ -4435,12 +4716,107 @@
         var y = Math.cos(uLat) * Math.sin(kLat) - Math.sin(uLat) * Math.cos(kLat) * Math.cos(dLng);
         var bearing = Math.atan2(x, y) * 180 / Math.PI;
         bearing = (bearing + 360) % 360;
+        qiblaBearing = bearing;
+
         var arrow = document.getElementById('qiblaArrow');
         var degEl = document.getElementById('qiblaDegree');
         var label = document.getElementById('qiblaLabel');
+        var distEl = document.getElementById('qiblaDistance');
+
         if (arrow) arrow.style.transform = 'translateX(-50%) rotate(' + bearing + 'deg)';
         if (degEl) degEl.textContent = Math.round(bearing) + '°';
         if (label) label.textContent = 'اتجاه القبلة من موقعك';
+
+        // Calculate distance to Kaaba (Haversine)
+        if (distEl) {
+            var R = 6371; // Earth radius km
+            var dLat = kLat - uLat;
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(uLat) * Math.cos(kLat) * Math.sin(dLng/2) * Math.sin(dLng/2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            var dist = R * c;
+            distEl.textContent = '🕋 المسافة إلى الكعبة: ' + Math.round(dist) + ' كم';
+        }
+    }
+
+    // Live compass using device orientation
+    function toggleLiveCompass() {
+        var btn = document.getElementById('qiblaLiveBtn');
+        var badge = document.getElementById('qiblaLiveBadge');
+        if (qiblaLiveActive) {
+            qiblaLiveActive = false;
+            if (btn) btn.classList.remove('active');
+            if (badge) badge.style.display = 'none';
+            if (qiblaDeviceHandler) {
+                window.removeEventListener('deviceorientationabsolute', qiblaDeviceHandler);
+                window.removeEventListener('deviceorientation', qiblaDeviceHandler);
+                qiblaDeviceHandler = null;
+            }
+            // Reset arrow to static bearing
+            if (qiblaBearing !== null) {
+                var arrow = document.getElementById('qiblaArrow');
+                if (arrow) arrow.style.transform = 'translateX(-50%) rotate(' + qiblaBearing + 'deg)';
+            }
+            return;
+        }
+
+        // First make sure we have qibla direction
+        if (qiblaBearing === null) {
+            calculateQibla();
+            setTimeout(function() { if (qiblaBearing !== null) toggleLiveCompass(); }, 2000);
+            return;
+        }
+
+        // iOS 13+ requires permission for DeviceOrientation
+        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+            DeviceOrientationEvent.requestPermission().then(function(state) {
+                if (state === 'granted') startLiveCompass();
+                else {
+                    var label = document.getElementById('qiblaLabel');
+                    if (label) label.textContent = 'يرجى السماح بالوصول لمستشعر الحركة';
+                }
+            }).catch(function() {
+                var label = document.getElementById('qiblaLabel');
+                if (label) label.textContent = 'تعذر تفعيل البوصلة';
+            });
+        } else {
+            startLiveCompass();
+        }
+    }
+
+    function startLiveCompass() {
+        qiblaLiveActive = true;
+        var btn = document.getElementById('qiblaLiveBtn');
+        var badge = document.getElementById('qiblaLiveBadge');
+        if (btn) btn.classList.add('active');
+        if (badge) badge.style.display = '';
+
+        qiblaDeviceHandler = function(e) {
+            var heading = null;
+            if (e.webkitCompassHeading !== undefined) {
+                heading = e.webkitCompassHeading; // iOS
+            } else if (e.alpha !== null) {
+                heading = (360 - e.alpha); // Android
+                if (e.absolute === false && e.webkitCompassAccuracy) heading = e.webkitCompassHeading;
+            }
+            if (heading === null) return;
+            // Rotate arrow to show qibla relative to device heading
+            var relAngle = qiblaBearing - heading;
+            var arrow = document.getElementById('qiblaArrow');
+            var compass = document.getElementById('qiblaCompass');
+            if (arrow) arrow.style.transform = 'translateX(-50%) rotate(' + relAngle + 'deg)';
+            // Rotate entire compass to show north
+            if (compass) compass.style.transform = 'rotate(' + (-heading) + 'deg)';
+            // Update degree display
+            var degEl = document.getElementById('qiblaDegree');
+            if (degEl) degEl.textContent = Math.round((relAngle + 360) % 360) + '°';
+        };
+
+        // Prefer absolute orientation
+        if ('ondeviceorientationabsolute' in window) {
+            window.addEventListener('deviceorientationabsolute', qiblaDeviceHandler, true);
+        } else {
+            window.addEventListener('deviceorientation', qiblaDeviceHandler, true);
+        }
     }
 
     // ═══════════════════════════════════════
