@@ -306,6 +306,56 @@
         .home-card-title { font-family: 'Scheherazade New', serif; font-size: 1.4em; color: var(--gold-soft); margin-bottom: 4px; }
         .home-card-desc { font-size: 0.95em; color: var(--text-muted); }
 
+        /* Event countdown cards */
+        .event-countdowns { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin-bottom: 24px; }
+        .event-card {
+            text-align: center; padding: 20px 16px; border-radius: 16px;
+            background: linear-gradient(135deg, rgba(26,37,64,0.95), rgba(18,26,46,0.98));
+            border: 1px solid rgba(46,204,113,0.15); transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .event-card.active-event { border-color: var(--gold-bright); box-shadow: 0 0 20px rgba(46,204,113,0.2); }
+        .event-card-icon { font-size: 2em; margin-bottom: 6px; }
+        .event-card-name { font-family: 'Scheherazade New', serif; font-size: 1.3em; color: var(--gold-soft); margin-bottom: 4px; }
+        .event-card-days { font-size: 2.4em; font-weight: 700; color: var(--gold-bright); font-family: 'Amiri', serif; }
+        .event-card-label { font-size: 0.9em; color: var(--text-muted); margin-top: 2px; }
+        .event-card-date { font-size: 0.85em; color: var(--text-muted); margin-top: 6px; opacity: 0.7; }
+
+        /* Live prayer countdown */
+        .live-countdown-bar {
+            background: linear-gradient(135deg, rgba(26,37,64,0.98), rgba(18,26,46,0.98));
+            border: 1px solid rgba(46,204,113,0.25); border-radius: 16px;
+            padding: 20px 24px; margin: 16px 0; text-align: center;
+        }
+        .countdown-next-label { font-size: 1.1em; color: var(--text-muted); margin-bottom: 6px; }
+        .countdown-next-name { font-family: 'Scheherazade New', serif; font-size: 1.6em; color: var(--gold-soft); }
+        .countdown-next-timer { font-size: 2.8em; font-weight: 700; color: var(--gold-bright); font-family: 'Amiri', serif; direction: ltr; margin: 8px 0; }
+        .countdown-fasting {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+            margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(46,204,113,0.1);
+        }
+        .fasting-item { text-align: center; }
+        .fasting-label { font-size: 0.9em; color: var(--text-muted); margin-bottom: 2px; }
+        .fasting-value { font-size: 1.3em; font-weight: 600; color: var(--gold-soft); font-family: 'Amiri', serif; direction: ltr; }
+
+        /* Ramadan calendar */
+        .ramadan-cal-table {
+            width: 100%; border-collapse: collapse; margin: 16px 0;
+            font-family: 'Amiri', serif; font-size: 1.05em;
+        }
+        .ramadan-cal-table th {
+            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
+            color: var(--night-deep); padding: 12px 8px; font-weight: 600;
+            font-size: 1.1em; position: sticky; top: 0; z-index: 2;
+        }
+        .ramadan-cal-table td {
+            padding: 10px 8px; text-align: center; border-bottom: 1px solid rgba(46,204,113,0.08);
+            color: var(--text-light);
+        }
+        .ramadan-cal-table tr:hover td { background: rgba(46,204,113,0.05); }
+        .ramadan-cal-table tr.today-row td { background: rgba(46,204,113,0.12); font-weight: 600; }
+        .ramadan-cal-table tr.today-row td:first-child { border-right: 3px solid var(--gold-bright); }
+        .ramadan-cal-scroll { max-height: 70vh; overflow-y: auto; border-radius: 14px; border: 1px solid rgba(46,204,113,0.15); }
+
         /* Prayer times */
         .prayer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 20px 0; }
         .prayer-card {
@@ -1257,6 +1307,52 @@
             <h2 class="section-title">بسم الله الرحمن الرحيم</h2>
             <div id="hijriDate" style="text-align:center;font-size:1.3em;color:var(--gold-soft);margin-bottom:20px;font-family:'Scheherazade New',serif"></div>
 
+            <!-- Event Countdowns -->
+            <div class="event-countdowns" id="eventCountdowns">
+                <div class="event-card" id="eventRamadan">
+                    <div class="event-card-icon">🌙</div>
+                    <div class="event-card-name">رمضان</div>
+                    <div class="event-card-days" id="ramadanDays">--</div>
+                    <div class="event-card-label" id="ramadanLabel">يوم متبقي</div>
+                    <div class="event-card-date" id="ramadanDate"></div>
+                </div>
+                <div class="event-card" id="eventFitr">
+                    <div class="event-card-icon">🎉</div>
+                    <div class="event-card-name">عيد الفطر</div>
+                    <div class="event-card-days" id="fitrDays">--</div>
+                    <div class="event-card-label" id="fitrLabel">يوم متبقي</div>
+                    <div class="event-card-date" id="fitrDate"></div>
+                </div>
+                <div class="event-card" id="eventAdha">
+                    <div class="event-card-icon">🕋</div>
+                    <div class="event-card-name">عيد الأضحى</div>
+                    <div class="event-card-days" id="adhaDays">--</div>
+                    <div class="event-card-label" id="adhaLabel">يوم متبقي</div>
+                    <div class="event-card-date" id="adhaDate"></div>
+                </div>
+            </div>
+
+            <!-- Live Prayer Countdown -->
+            <div class="live-countdown-bar" id="liveCountdownBar">
+                <div class="countdown-next-label">الصلاة القادمة</div>
+                <div class="countdown-next-name" id="nextPrayerName">--</div>
+                <div class="countdown-next-timer" id="nextPrayerTimer">--:--:--</div>
+                <div class="countdown-fasting" id="fastingInfo">
+                    <div class="fasting-item">
+                        <div class="fasting-label">مدة الصيام</div>
+                        <div class="fasting-value" id="fastingDuration">--</div>
+                    </div>
+                    <div class="fasting-item">
+                        <div class="fasting-label">باقي للمغرب</div>
+                        <div class="fasting-value" id="maghribRemaining">--</div>
+                    </div>
+                    <div class="fasting-item">
+                        <div class="fasting-label">باقي للفجر</div>
+                        <div class="fasting-value" id="fajrRemaining">--</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="home-grid">
                 <div class="home-card" onclick="switchTab('tabAthkar',document.querySelectorAll('.tab-btn')[1])">
                     <div class="home-card-icon">🤲</div>
@@ -1730,6 +1826,7 @@
             <h2 class="section-title">أدوات المسلم</h2>
             <div class="sub-nav">
                 <button class="sub-nav-btn active" onclick="switchSub('tabTools','tools-prayer',this)">مواقيت الصلاة</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabTools','tools-ramadan',this)">تقويم رمضان</button>
                 <button class="sub-nav-btn" onclick="switchSub('tabTools','tools-tasbeeh',this)">عداد التسبيح</button>
                 <button class="sub-nav-btn" onclick="switchSub('tabTools','tools-names',this)">أسماء الله الحسنى</button>
             </div>
@@ -1750,6 +1847,16 @@
                 <button class="tasbeeh-ctrl-btn" onclick="fetchPrayerTimes()" id="refreshPrayerBtn">تحديث المواقيت</button>
             </div>
             </div><!-- end tools-prayer -->
+
+            <!-- Sub: Ramadan Calendar -->
+            <div id="tools-ramadan" class="sub-section">
+            <h2 class="section-title">تقويم رمضان</h2>
+            <div id="ramadanCalInfo" style="text-align:center;margin-bottom:15px;color:var(--text-muted);font-size:1.1em"></div>
+            <div style="text-align:center;margin-bottom:15px">
+                <button class="tasbeeh-ctrl-btn" onclick="loadRamadanCalendar()" id="loadRamadanBtn">تحميل تقويم رمضان</button>
+            </div>
+            <div id="ramadanCalContainer"></div>
+            </div><!-- end tools-ramadan -->
 
             <!-- Sub: Tasbeeh counter -->
             <div id="tools-tasbeeh" class="sub-section">
@@ -2397,10 +2504,14 @@
     // ═══════════════════════════════════════
     var prayerTimesCache = null;
 
+    var userLat = null, userLng = null;
+
     function initHome() {
         loadHijriDate();
         loadDailyAyah();
+        loadEventCountdowns();
         if (!prayerTimesCache) fetchPrayerTimes();
+        startLiveCountdown();
     }
 
     function loadHijriDate() {
@@ -2465,6 +2576,8 @@
     }
 
     function fetchPrayerByCoords(lat, lng) {
+        userLat = lat; userLng = lng;
+        try { localStorage.setItem('iq_coords', JSON.stringify({lat:lat,lng:lng})); } catch(e){}
         var today = new Date();
         var url = 'https://api.aladhan.com/v1/timings/' + Math.floor(today.getTime()/1000)
             + '?latitude=' + lat + '&longitude=' + lng + '&method=4';
@@ -2472,19 +2585,21 @@
             if (d.code === 200 && d.data && d.data.timings) {
                 prayerTimesCache = d.data.timings;
                 displayPrayerTimes(d.data.timings);
+                updateLiveCountdown();
+                updateFastingInfo();
                 // Show location
                 var locEl = document.getElementById('prayerLocation');
                 if (locEl && d.data.meta && d.data.meta.timezone) {
                     locEl.textContent = d.data.meta.timezone;
                 }
                 // Save for offline
-                try { localStorage.setItem('iq_prayer_times', JSON.stringify({t: Date.now(), data: d.data.timings})); } catch(e){}
+                try { localStorage.setItem('iq_prayer_times', JSON.stringify({t: Date.now(), data: d.data.timings, lat:lat, lng:lng})); } catch(e){}
             }
         }).catch(function() {
             // Try offline cache
             try {
                 var c = JSON.parse(localStorage.getItem('iq_prayer_times'));
-                if (c && c.data) displayPrayerTimes(c.data);
+                if (c && c.data) { prayerTimesCache = c.data; displayPrayerTimes(c.data); updateLiveCountdown(); updateFastingInfo(); }
             } catch(e){}
         }).finally(function() {
             var btn = document.getElementById('refreshPrayerBtn');
@@ -2525,6 +2640,304 @@
                 }
             });
         }
+    }
+
+    // ═══════════════════════════════════════
+    // Event Countdowns (Ramadan, Eid al-Fitr, Eid al-Adha)
+    // ═══════════════════════════════════════
+    function loadEventCountdowns() {
+        var today = new Date();
+        var dd = today.getDate(), mm = today.getMonth() + 1, yy = today.getFullYear();
+        fetch('https://api.aladhan.com/v1/gpiDate/' + dd + '-' + mm + '-' + yy)
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                if (d.code !== 200 || !d.data || !d.data.hijri) return;
+                var h = d.data.hijri;
+                var hMonth = parseInt(h.month.number);
+                var hDay = parseInt(h.day);
+                var hYear = parseInt(h.year);
+                calculateEventCountdowns(hDay, hMonth, hYear);
+            }).catch(function() {});
+    }
+
+    function calculateEventCountdowns(hDay, hMonth, hYear) {
+        // Hijri months: 1=Muharram...9=Ramadan,10=Shawwal,12=DhulHijjah
+        // Target events with their Hijri month and day
+        var events = [
+            { id: 'ramadan', month: 9, day: 1, name: 'رمضان' },
+            { id: 'fitr', month: 10, day: 1, name: 'عيد الفطر' },
+            { id: 'adha', month: 12, day: 10, name: 'عيد الأضحى' }
+        ];
+        var hijriMonthNames = ['','محرم','صفر','ربيع الأول','ربيع الثاني','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
+        // Approximate days in Hijri months (alternating 30/29)
+        var mDays = [0,30,29,30,29,30,29,30,29,30,29,30,29];
+
+        events.forEach(function(ev) {
+            var targetMonth = ev.month, targetDay = ev.day;
+            var targetYear = hYear;
+            // If event already passed this Hijri year, target next year
+            if (hMonth > targetMonth || (hMonth === targetMonth && hDay > targetDay)) {
+                targetYear = hYear + 1;
+            }
+            // Calculate approximate days remaining
+            var daysLeft = 0;
+            if (hMonth === targetMonth && targetYear === hYear) {
+                daysLeft = targetDay - hDay;
+            } else {
+                // Days left in current month
+                daysLeft = mDays[hMonth] - hDay;
+                // Full months in between
+                var m = hMonth + 1;
+                var y = hYear;
+                while (!(m === targetMonth && y === targetYear)) {
+                    if (m > 12) { m = 1; y++; }
+                    if (m === targetMonth && y === targetYear) break;
+                    daysLeft += mDays[m] || 30;
+                    m++;
+                }
+                daysLeft += targetDay;
+            }
+
+            var daysEl = document.getElementById(ev.id + 'Days');
+            var labelEl = document.getElementById(ev.id + 'Label');
+            var dateEl = document.getElementById(ev.id + 'Date');
+            var cardEl = document.getElementById('event' + ev.id.charAt(0).toUpperCase() + ev.id.slice(1));
+
+            if (daysEl) {
+                if (daysLeft === 0) {
+                    daysEl.textContent = 'اليوم!';
+                    labelEl.textContent = 'كل عام وأنتم بخير';
+                    if (cardEl) cardEl.classList.add('active-event');
+                } else if (hMonth === 9 && ev.id === 'ramadan') {
+                    // We're IN Ramadan
+                    daysEl.textContent = hDay;
+                    labelEl.textContent = 'رمضان الآن - اليوم ' + hDay;
+                    if (cardEl) cardEl.classList.add('active-event');
+                } else {
+                    daysEl.textContent = toArabicNum(daysLeft);
+                    labelEl.textContent = daysLeft === 1 ? 'يوم واحد متبقي' : 'يوم متبقي';
+                }
+            }
+            if (dateEl) dateEl.textContent = targetDay + ' ' + hijriMonthNames[targetMonth] + ' ' + targetYear + ' هـ';
+        });
+    }
+
+    // ═══════════════════════════════════════
+    // Live Prayer Countdown & Fasting Info
+    // ═══════════════════════════════════════
+    var liveCountdownInterval = null;
+    var prayerOrder = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+    var prayerNames = {Fajr:'الفجر',Sunrise:'الشروق',Dhuhr:'الظهر',Asr:'العصر',Maghrib:'المغرب',Isha:'العشاء'};
+
+    function startLiveCountdown() {
+        if (liveCountdownInterval) clearInterval(liveCountdownInterval);
+        liveCountdownInterval = setInterval(updateLiveCountdown, 1000);
+        updateLiveCountdown();
+    }
+
+    function timeToMinutes(timeStr) {
+        if (!timeStr) return -1;
+        var parts = timeStr.split(':');
+        return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+    }
+
+    function formatCountdown(diffMs) {
+        if (diffMs < 0) return '--:--:--';
+        var totalSec = Math.floor(diffMs / 1000);
+        var h = Math.floor(totalSec / 3600);
+        var m = Math.floor((totalSec % 3600) / 60);
+        var s = totalSec % 60;
+        return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function formatHoursMin(minutes) {
+        if (minutes < 0) return '--';
+        var h = Math.floor(minutes / 60);
+        var m = minutes % 60;
+        return h + ' س ' + m + ' د';
+    }
+
+    function updateLiveCountdown() {
+        if (!prayerTimesCache) return;
+        var now = new Date();
+        var nowMs = now.getTime();
+        var todayBase = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+
+        var nextPrayer = null, nextPrayerMs = null;
+        for (var i = 0; i < prayerOrder.length; i++) {
+            var key = prayerOrder[i];
+            var tStr = prayerTimesCache[key];
+            if (!tStr) continue;
+            var pMs = todayBase + timeToMinutes(tStr) * 60000;
+            if (pMs > nowMs) {
+                nextPrayer = key;
+                nextPrayerMs = pMs;
+                break;
+            }
+        }
+
+        var nameEl = document.getElementById('nextPrayerName');
+        var timerEl = document.getElementById('nextPrayerTimer');
+
+        if (nextPrayer && nextPrayerMs) {
+            if (nameEl) nameEl.textContent = prayerNames[nextPrayer] + ' - ' + prayerTimesCache[nextPrayer];
+            if (timerEl) timerEl.textContent = formatCountdown(nextPrayerMs - nowMs);
+        } else {
+            // All prayers passed today, next is Fajr tomorrow
+            if (nameEl) nameEl.textContent = 'الفجر غداً - ' + (prayerTimesCache.Fajr || '--:--');
+            if (prayerTimesCache.Fajr) {
+                var tomorrowFajr = todayBase + 86400000 + timeToMinutes(prayerTimesCache.Fajr) * 60000;
+                if (timerEl) timerEl.textContent = formatCountdown(tomorrowFajr - nowMs);
+            }
+        }
+    }
+
+    function updateFastingInfo() {
+        if (!prayerTimesCache) return;
+        var now = new Date();
+        var nowMs = now.getTime();
+        var todayBase = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+
+        var fajrMin = timeToMinutes(prayerTimesCache.Fajr);
+        var maghribMin = timeToMinutes(prayerTimesCache.Maghrib);
+
+        // Fasting duration
+        var durationEl = document.getElementById('fastingDuration');
+        if (durationEl && fajrMin >= 0 && maghribMin >= 0) {
+            durationEl.textContent = formatHoursMin(maghribMin - fajrMin);
+        }
+
+        // Time remaining till Maghrib
+        var maghribEl = document.getElementById('maghribRemaining');
+        if (maghribEl && maghribMin >= 0) {
+            var maghribMs = todayBase + maghribMin * 60000;
+            var diffMs = maghribMs - nowMs;
+            if (diffMs > 0) {
+                var totalMin = Math.ceil(diffMs / 60000);
+                maghribEl.textContent = formatHoursMin(totalMin);
+            } else {
+                maghribEl.textContent = 'حان الوقت';
+            }
+        }
+
+        // Time remaining till Fajr
+        var fajrEl = document.getElementById('fajrRemaining');
+        if (fajrEl && fajrMin >= 0) {
+            var fajrMs = todayBase + fajrMin * 60000;
+            var fDiff = fajrMs - nowMs;
+            if (fDiff > 0) {
+                fajrEl.textContent = formatHoursMin(Math.ceil(fDiff / 60000));
+            } else {
+                // Fajr tomorrow
+                var tomorrowFajr = fajrMs + 86400000;
+                fajrEl.textContent = formatHoursMin(Math.ceil((tomorrowFajr - nowMs) / 60000));
+            }
+        }
+    }
+
+    // Update fasting info every minute
+    setInterval(updateFastingInfo, 60000);
+
+    // ═══════════════════════════════════════
+    // Ramadan Calendar
+    // ═══════════════════════════════════════
+    function loadRamadanCalendar() {
+        var btn = document.getElementById('loadRamadanBtn');
+        var container = document.getElementById('ramadanCalContainer');
+        var infoEl = document.getElementById('ramadanCalInfo');
+        if (btn) btn.textContent = 'جاري التحميل...';
+
+        // Get user coordinates
+        var lat = userLat, lng = userLng;
+        if (!lat || !lng) {
+            try {
+                var c = JSON.parse(localStorage.getItem('iq_coords'));
+                if (c) { lat = c.lat; lng = c.lng; }
+            } catch(e) {}
+        }
+        if (!lat) { lat = 21.4225; lng = 39.8262; } // Default: Mecca
+
+        // First get current Hijri year
+        var today = new Date();
+        fetch('https://api.aladhan.com/v1/gpiDate/' + today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear())
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                if (d.code !== 200 || !d.data || !d.data.hijri) throw new Error('No hijri');
+                var hYear = parseInt(d.data.hijri.year);
+                var hMonth = parseInt(d.data.hijri.month.number);
+                var hDay = parseInt(d.data.hijri.day);
+                // If past Ramadan this year, show next year
+                var ramYear = (hMonth > 9) ? hYear + 1 : hYear;
+                return fetchRamadanMonth(ramYear, lat, lng, hMonth === 9 ? hDay : -1);
+            }).then(function() {
+                if (btn) btn.textContent = 'تحديث';
+            }).catch(function(e) {
+                if (container) container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text-muted)">تعذر تحميل التقويم. تأكد من الاتصال بالإنترنت.</div>';
+                if (btn) btn.textContent = 'إعادة المحاولة';
+            });
+    }
+
+    function fetchRamadanMonth(hijriYear, lat, lng, currentRamDay) {
+        var container = document.getElementById('ramadanCalContainer');
+        var infoEl = document.getElementById('ramadanCalInfo');
+        // Aladhan hijri calendar: /v1/hijriCalendar/{month}/{year}
+        return fetch('https://api.aladhan.com/v1/hijriCalendar/9/' + hijriYear + '?latitude=' + lat + '&longitude=' + lng + '&method=4')
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                if (d.code !== 200 || !d.data || !d.data.length) throw new Error('No data');
+                if (infoEl) infoEl.textContent = 'رمضان ' + hijriYear + ' هـ | الحسابات بناءً على موقعك';
+
+                var html = '<div class="ramadan-cal-scroll"><table class="ramadan-cal-table">';
+                html += '<thead><tr><th>اليوم</th><th>التاريخ</th><th>الإمساك</th><th>الفجر</th><th>الشروق</th><th>الظهر</th><th>العصر</th><th>المغرب</th><th>العشاء</th><th>مدة الصيام</th></tr></thead><tbody>';
+
+                var dayNames = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+                d.data.forEach(function(day) {
+                    var t = day.timings;
+                    var hd = day.date.hijri;
+                    var gd = day.date.gregorian;
+                    var dayNum = parseInt(hd.day);
+                    var gregDate = gd.day + '/' + gd.month.number;
+                    var jsDate = new Date(gd.year + '-' + gd.month.number.toString().padStart(2,'0') + '-' + gd.day.padStart(2,'0'));
+                    var dayName = dayNames[jsDate.getDay()] || '';
+
+                    // Clean time strings (remove timezone info like " (AST)")
+                    function cleanTime(s) { return s ? s.replace(/\s*\(.*\)/, '') : '--:--'; }
+
+                    var fajrT = cleanTime(t.Fajr);
+                    var maghribT = cleanTime(t.Maghrib);
+                    var imsak = cleanTime(t.Imsak);
+
+                    // Fasting duration
+                    var fMin = timeToMinutes(fajrT);
+                    var mMin = timeToMinutes(maghribT);
+                    var duration = (fMin >= 0 && mMin >= 0) ? formatHoursMin(mMin - fMin) : '--';
+
+                    var isToday = (dayNum === currentRamDay) ? ' class="today-row"' : '';
+
+                    html += '<tr' + isToday + '>'
+                        + '<td>' + toArabicNum(dayNum) + '</td>'
+                        + '<td>' + dayName + ' ' + gregDate + '</td>'
+                        + '<td>' + imsak + '</td>'
+                        + '<td>' + fajrT + '</td>'
+                        + '<td>' + cleanTime(t.Sunrise) + '</td>'
+                        + '<td>' + cleanTime(t.Dhuhr) + '</td>'
+                        + '<td>' + cleanTime(t.Asr) + '</td>'
+                        + '<td>' + maghribT + '</td>'
+                        + '<td>' + cleanTime(t.Isha) + '</td>'
+                        + '<td>' + duration + '</td>'
+                        + '</tr>';
+                });
+
+                html += '</tbody></table></div>';
+                if (container) container.innerHTML = html;
+
+                // Auto-scroll to today
+                setTimeout(function() {
+                    var todayRow = container.querySelector('.today-row');
+                    if (todayRow) todayRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+            });
     }
 
     // ═══════════════════════════════════════
