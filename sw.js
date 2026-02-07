@@ -1,4 +1,4 @@
-const CACHE_NAME = 'islamic-v1';
+const CACHE_NAME = 'islamic-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -30,8 +30,13 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(cached => {
       if (cached) return cached;
       return fetch(event.request).then(response => {
-        // Cache font files and the page for offline use
-        if (response.ok && (event.request.url.includes('fonts.g') || event.request.url.includes('index.html') || event.request.url.endsWith('/'))) {
+        // Cache fonts, page, and Quran API responses for offline use
+        if (response.ok && (
+          event.request.url.includes('fonts.g') ||
+          event.request.url.includes('index.html') ||
+          event.request.url.endsWith('/') ||
+          event.request.url.includes('api.alquran.cloud')
+        )) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
