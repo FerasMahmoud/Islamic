@@ -3063,8 +3063,7 @@
     function fetchRamadanMonth(hijriYear, lat, lng, currentRamDay) {
         var container = document.getElementById('ramadanCalContainer');
         var infoEl = document.getElementById('ramadanCalInfo');
-        // Aladhan hijri calendar: /v1/hijriCalendar/{month}/{year}
-        return fetch('https://api.aladhan.com/v1/hijriCalendar/9/' + hijriYear + '?latitude=' + lat + '&longitude=' + lng + '&method=4')
+        return fetch('https://api.aladhan.com/v1/hijriCalendar?month=9&year=' + hijriYear + '&latitude=' + lat + '&longitude=' + lng + '&method=4')
             .then(function(r) { return r.json(); })
             .then(function(d) {
                 if (d.code !== 200 || !d.data || !d.data.length) throw new Error('No data');
