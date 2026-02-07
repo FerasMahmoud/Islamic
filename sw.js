@@ -1,4 +1,4 @@
-const CACHE_NAME = 'islamic-v3';
+const CACHE_NAME = 'islamic-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -35,7 +35,8 @@ self.addEventListener('fetch', event => {
           event.request.url.includes('fonts.g') ||
           event.request.url.includes('index.html') ||
           event.request.url.endsWith('/') ||
-          event.request.url.includes('api.alquran.cloud')
+          event.request.url.includes('api.alquran.cloud') ||
+          event.request.url.includes('api.aladhan.com')
         )) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));

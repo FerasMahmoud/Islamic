@@ -275,6 +275,89 @@
             transform: translateY(-2px);
         }
 
+        /* Sub-navigation pills inside tabs */
+        .sub-nav {
+            display: flex; gap: 8px; margin-bottom: 22px; overflow-x: auto;
+            padding-bottom: 8px; flex-wrap: wrap;
+        }
+        .sub-nav-btn {
+            padding: 10px 20px; border-radius: 20px;
+            border: 1px solid rgba(46,204,113,0.25); background: rgba(255,255,255,0.04);
+            color: var(--text-muted); font-family: 'Amiri', serif; font-size: 1.15em;
+            cursor: pointer; transition: all 0.3s; white-space: nowrap;
+        }
+        .sub-nav-btn:hover { background: rgba(46,204,113,0.1); color: var(--gold-soft); }
+        .sub-nav-btn.active {
+            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
+            color: var(--night-deep); border-color: var(--gold-bright); font-weight: 600;
+        }
+        .sub-section { display: none; animation: fadeInUp 0.4s ease; }
+        .sub-section.active { display: block; }
+
+        /* Home dashboard cards */
+        .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .home-card {
+            background: linear-gradient(135deg, rgba(26,37,64,0.95), rgba(18,26,46,0.98));
+            border: 1px solid rgba(212,175,55,0.18); border-radius: 16px;
+            padding: 22px; transition: all 0.3s; cursor: pointer;
+        }
+        .home-card:hover { transform: translateY(-3px); border-color: rgba(46,204,113,0.4); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .home-card-icon { font-size: 2.2em; margin-bottom: 8px; }
+        .home-card-title { font-family: 'Scheherazade New', serif; font-size: 1.4em; color: var(--gold-soft); margin-bottom: 4px; }
+        .home-card-desc { font-size: 0.95em; color: var(--text-muted); }
+
+        /* Prayer times */
+        .prayer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 20px 0; }
+        .prayer-card {
+            text-align: center; padding: 18px 14px; border-radius: 14px;
+            background: linear-gradient(135deg, rgba(26,37,64,0.95), rgba(18,26,46,0.98));
+            border: 1px solid rgba(212,175,55,0.15); transition: all 0.3s;
+        }
+        .prayer-card.next { border-color: var(--gold-bright); box-shadow: var(--glow-gold); }
+        .prayer-card-name { font-family: 'Scheherazade New', serif; font-size: 1.3em; color: var(--gold-soft); margin-bottom: 6px; }
+        .prayer-card-time { font-size: 1.6em; color: var(--text-light); font-weight: 600; font-family: 'Amiri', serif; }
+
+        /* Tasbeeh counter */
+        .tasbeeh-container { text-align: center; padding: 30px 0; }
+        .tasbeeh-count {
+            font-size: 5em; font-weight: 700; color: var(--gold-bright);
+            font-family: 'Amiri', serif; margin: 20px 0; text-shadow: 0 0 20px rgba(46,204,113,0.3);
+        }
+        .tasbeeh-btn {
+            width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--gold-bright);
+            background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(46,204,113,0.05));
+            color: var(--gold-bright); font-size: 1.4em; font-family: 'Amiri', serif;
+            cursor: pointer; transition: all 0.15s; margin: 20px auto; display: flex;
+            align-items: center; justify-content: center;
+        }
+        .tasbeeh-btn:active { transform: scale(0.95); background: rgba(46,204,113,0.25); }
+        .tasbeeh-presets { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 18px 0; }
+        .tasbeeh-preset {
+            padding: 8px 16px; border-radius: 12px; border: 1px solid rgba(46,204,113,0.25);
+            background: rgba(255,255,255,0.04); color: var(--text-muted); cursor: pointer;
+            font-family: 'Amiri', serif; font-size: 1.05em; transition: all 0.3s;
+        }
+        .tasbeeh-preset:hover, .tasbeeh-preset.active { background: rgba(46,204,113,0.15); color: var(--gold-soft); border-color: var(--gold-bright); }
+        .tasbeeh-target { color: var(--text-muted); font-size: 1.1em; margin: 8px 0; }
+        .tasbeeh-controls { display: flex; gap: 10px; justify-content: center; margin-top: 15px; }
+        .tasbeeh-ctrl-btn {
+            padding: 8px 20px; border-radius: 10px; border: 1px solid rgba(46,204,113,0.25);
+            background: rgba(255,255,255,0.05); color: var(--gold-soft); cursor: pointer;
+            font-family: 'Amiri', serif; font-size: 1.05em; transition: all 0.3s;
+        }
+        .tasbeeh-ctrl-btn:hover { background: rgba(46,204,113,0.15); }
+
+        /* 99 Names grid */
+        .names-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .name-card {
+            text-align: center; padding: 18px; border-radius: 14px;
+            background: linear-gradient(135deg, rgba(26,37,64,0.95), rgba(18,26,46,0.98));
+            border: 1px solid rgba(212,175,55,0.12); transition: all 0.3s;
+        }
+        .name-card:hover { border-color: rgba(46,204,113,0.3); transform: translateY(-2px); }
+        .name-card-ar { font-family: 'Scheherazade New', serif; font-size: 1.8em; color: var(--gold-bright); margin-bottom: 4px; }
+        .name-card-meaning { font-size: 0.95em; color: var(--text-muted); }
+
         /* Content Wrapper */
         .content-wrapper {
             padding: 30px 40px;
@@ -427,7 +510,14 @@
         }
 
         .dua-source {
-            display: none;
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(46,204,113,0.1);
+        }
+        .dua-source strong {
+            color: var(--gold-warm);
         }
 
         .benefits {
@@ -1150,20 +1240,76 @@
             <span class="ornament-symbol">❋</span>
             <span class="ornament-line"></span>
         </div>
-        <p>Athkar, Duas & Surah Yasin - Complete Islamic Resources</p>
+        <p>رفيقك الإسلامي الشامل - Complete Muslim Companion</p>
     </div>
 
     <div class="tabs-nav">
-        <button class="tab-btn active" onclick="switchTab('tab1', this)">🌅 أذكار الاستيقاظ</button>
-        <button class="tab-btn" onclick="switchTab('tab2', this)">🌄 أذكار الصباح</button>
-        <button class="tab-btn" onclick="switchTab('tab4', this)">🤲 أدعية الرزق</button>
-
-        <button class="tab-btn" onclick="switchTab('tab7', this)">📖 القرآن الكريم</button>
+        <button class="tab-btn active" onclick="switchTab('tabHome', this)">🏠 الرئيسية</button>
+        <button class="tab-btn" onclick="switchTab('tabAthkar', this)">🤲 الأذكار</button>
+        <button class="tab-btn" onclick="switchTab('tabDuas', this)">📿 الأدعية</button>
+        <button class="tab-btn" onclick="switchTab('tab7', this)">📖 القرآن</button>
+        <button class="tab-btn" onclick="switchTab('tabTools', this)">🛠️ أدوات</button>
     </div>
 
     <div class="content-wrapper">
-        <!-- TAB 1: Athkar Al-Istiyaqaz -->
-        <div id="tab1" class="content-area active">
+        <!-- HOME TAB -->
+        <div id="tabHome" class="content-area active">
+            <h2 class="section-title">بسم الله الرحمن الرحيم</h2>
+            <div id="hijriDate" style="text-align:center;font-size:1.3em;color:var(--gold-soft);margin-bottom:20px;font-family:'Scheherazade New',serif"></div>
+
+            <div class="home-grid">
+                <div class="home-card" onclick="switchTab('tabAthkar',document.querySelectorAll('.tab-btn')[1])">
+                    <div class="home-card-icon">🤲</div>
+                    <div class="home-card-title">الأذكار</div>
+                    <div class="home-card-desc">أذكار الاستيقاظ والصباح والمساء والنوم وبعد الصلاة</div>
+                </div>
+                <div class="home-card" onclick="switchTab('tabDuas',document.querySelectorAll('.tab-btn')[2])">
+                    <div class="home-card-icon">📿</div>
+                    <div class="home-card-title">الأدعية</div>
+                    <div class="home-card-desc">أدعية الرزق والأدعية القرآنية والرقية الشرعية</div>
+                </div>
+                <div class="home-card" onclick="switchTab('tab7',document.querySelectorAll('.tab-btn')[3])">
+                    <div class="home-card-icon">📖</div>
+                    <div class="home-card-title">القرآن الكريم</div>
+                    <div class="home-card-desc">تصفح جميع السور مع حفظ موضع القراءة</div>
+                </div>
+                <div class="home-card" onclick="switchTab('tabTools',document.querySelectorAll('.tab-btn')[4])">
+                    <div class="home-card-icon">🛠️</div>
+                    <div class="home-card-title">أدوات</div>
+                    <div class="home-card-desc">مواقيت الصلاة وعداد التسبيح وأسماء الله الحسنى</div>
+                </div>
+            </div>
+
+            <div class="section-title" style="font-size:1.6em;margin-top:30px">آية اليوم</div>
+            <div class="dua-card" id="dailyAyah" style="text-align:center">
+                <div class="dua-text" id="dailyAyahText" style="font-size:1.5em;line-height:2.2">جاري التحميل...</div>
+                <div class="dua-source" id="dailyAyahRef"></div>
+            </div>
+
+            <div class="section-title" style="font-size:1.6em;margin-top:20px">مواقيت الصلاة</div>
+            <div class="prayer-grid" id="homePrayerGrid">
+                <div class="prayer-card"><div class="prayer-card-name">الفجر</div><div class="prayer-card-time" id="homeFajr">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">الشروق</div><div class="prayer-card-time" id="homeSunrise">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">الظهر</div><div class="prayer-card-time" id="homeDhuhr">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">العصر</div><div class="prayer-card-time" id="homeAsr">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">المغرب</div><div class="prayer-card-time" id="homeMaghrib">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">العشاء</div><div class="prayer-card-time" id="homeIsha">--:--</div></div>
+            </div>
+        </div>
+
+        <!-- ATHKAR TAB (all athkar consolidated) -->
+        <div id="tabAthkar" class="content-area">
+            <h2 class="section-title">الأذكار</h2>
+            <div class="sub-nav">
+                <button class="sub-nav-btn active" onclick="switchSub('tabAthkar','athkar-wake',this)">الاستيقاظ</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabAthkar','athkar-morning',this)">الصباح</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabAthkar','athkar-evening',this)">المساء</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabAthkar','athkar-sleep',this)">النوم</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabAthkar','athkar-prayer',this)">بعد الصلاة</button>
+            </div>
+
+            <!-- Sub: Wake up athkar (existing tab1 content) -->
+            <div id="athkar-wake" class="sub-section active">
             <h2 class="section-title">أذكار الاستيقاظ من النوم</h2>
 
             <div class="dua-card">
@@ -1192,10 +1338,10 @@
                 <div class="dua-text">﴿إن في خلق السموات والأرض واختلاف الليل والنهار لآيات لأولي الألباب * الذين يذكرون الله قياما وقعودا وعلى جنوبهم ويتفكرون في خلق السموات والأرض ربنا ما خلقت هذا باطلا سبحانك فقنا عذاب النار* ربنا إنك من تدخل النار فقد أخزيته وما للظالمين من أنصار* ربنا إننا سمعنا مناديا ينادي للإيمان أن آمنوا بربكم فآمنا ربنا فاغفر لنا ذنوبنا وكفر عنا سيئاتنا وتوفنا مع الأبرار* ربنا وآتنا ما وعدتنا على رسلك ولا تخزنا يوم القيامة إنك لا تخلف الميعاد* فاستجاب لهم ربهم أني لا أضيع عمل عامل منكم من ذكر أو أنثى بعضكم من بعض فالذين هاجروا وأخرجوا من ديارهم وأوذوا في سبيلي وقاتلوا وقتلوا لأكفرن عنهم سيئاتهم ولأدخلنهم جنات تجري من تحتها الأنهار ثوابا من عند الله والله عنده حسن الثواب * لا يغرنك تقلب الذين كفروا في البلاد * متاع قليل ثم مأواهم جهنم وبئس المهاد * لكن الذين اتقوا ربهم لهم جنات تجري من تحتها الأنهار خالدين فيها نزلا من عند الله وما عند الله خير للأبرار * وإن من أهل الكتاب لمن يؤمن بالله وما أنزل إليكم ومآ أنزل إليهم خاشعين لله لا يشترون بآيات الله ثمنا قليلا أولئك لهم أجرهم عند ربهم إن الله سريع الحساب*يا أيها الذين آمنوا اصبروا وصابروا ورابطوا واتقوا الله لعلكم تفلحون﴾</div>
                 <div class="dua-source"><strong>المصدر:</strong> آيات من سورة آل عمران (190-200)، البخاري ومسلم</div>
             </div>
-        </div>
+            </div><!-- end athkar-wake -->
 
-        <!-- TAB 2: Athkar Al-Sabah -->
-        <div id="tab2" class="content-area">
+            <!-- Sub: Morning athkar (existing tab2 content) -->
+            <div id="athkar-morning" class="sub-section">
             <h2 class="section-title">أذكار الصباح</h2>
 
             <div class="intro-box">
@@ -1391,10 +1537,66 @@
                 <div class="benefits"><strong>الفائدة:</strong> كانت له عدل عشر رقاب، وكتبت له مئة حسنة، ومحيت عنه مئة سيئة، وكانت له حرزا من الشيطان</div>
                 <div class="counter-display">👆 <span class="dua-counter">100</span></div>
             </div>
-        </div>
+            </div><!-- end athkar-morning -->
 
-        <!-- TAB 4: Duas for Provision -->
-        <div id="tab4" class="content-area">
+            <!-- Sub: Evening athkar -->
+            <div id="athkar-evening" class="sub-section">
+            <h2 class="section-title">أذكار المساء</h2>
+            <div class="intro-box">تُقرأ أذكار المساء من بعد صلاة العصر إلى غروب الشمس</div>
+            <div class="dua-card"><div class="dua-number">1</div><div class="dua-text">أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ</div><div class="dua-source"><strong>المصدر:</strong> صحيح مسلم</div></div>
+            <div class="dua-card"><div class="dua-number">2</div><div class="dua-text">اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ</div><div class="dua-source"><strong>المصدر:</strong> الترمذي</div></div>
+            <div class="dua-card"><div class="dua-number">3</div><div class="dua-text">اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ</div><div class="dua-source"><strong>المصدر:</strong> صحيح البخاري - سيد الاستغفار</div></div>
+            <div class="dua-card"><div class="dua-number">4</div><div class="dua-text">اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ</div><div class="dua-source"><strong>المصدر:</strong> أبو داود - أربع مرات</div></div>
+            <div class="dua-card"><div class="dua-number">5</div><div class="dua-text">اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ</div><div class="dua-source"><strong>المصدر:</strong> أبو داود</div></div>
+            <div class="dua-card"><div class="dua-number">6</div><div class="dua-text">اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ. اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ، وَالْفَقْرِ، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَا إِلَهَ إِلَّا أَنْتَ</div><div class="dua-source"><strong>المصدر:</strong> أبو داود - ثلاث مرات</div></div>
+            <div class="dua-card"><div class="dua-number">7</div><div class="dua-text">حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ</div><div class="dua-source"><strong>المصدر:</strong> أبو داود - سبع مرات</div></div>
+            <div class="dua-card"><div class="dua-number">8</div><div class="dua-text">بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ</div><div class="dua-source"><strong>المصدر:</strong> أبو داود والترمذي - ثلاث مرات</div></div>
+            <div class="dua-card"><div class="dua-number">9</div><div class="dua-text">رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا</div><div class="dua-source"><strong>المصدر:</strong> أحمد وأبو داود - ثلاث مرات</div></div>
+            <div class="dua-card"><div class="dua-number">10</div><div class="dua-text">يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ أَصْلِحْ لِي شَأْنِي كُلَّهُ وَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ</div><div class="dua-source"><strong>المصدر:</strong> الحاكم - ثلاث مرات</div></div>
+            <div class="dua-card"><div class="dua-number">11</div><div class="dua-text">أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ</div><div class="dua-source"><strong>المصدر:</strong> مسلم - ثلاث مرات مساءً</div></div>
+            <div class="dua-card"><div class="dua-number">12</div><div class="dua-text">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ</div><div class="dua-source"><strong>المصدر:</strong> الترمذي - عشر مرات</div></div>
+            <div class="dua-card"><div class="dua-number">13</div><div class="dua-text">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ</div><div class="dua-source"><strong>المصدر:</strong> مسلم - مئة مرة</div></div>
+            </div><!-- end athkar-evening -->
+
+            <!-- Sub: Sleep athkar -->
+            <div id="athkar-sleep" class="sub-section">
+            <h2 class="section-title">أذكار النوم</h2>
+            <div class="intro-box">تُقرأ عند النوم والاستعداد للنوم</div>
+            <div class="dua-card"><div class="dua-number">1</div><div class="dua-text">بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ</div><div class="dua-source"><strong>المصدر:</strong> البخاري ومسلم</div></div>
+            <div class="dua-card"><div class="dua-number">2</div><div class="dua-text">اللَّهُمَّ إِنَّكَ خَلَقْتَ نَفْسِي وَأَنْتَ تَوَفَّاهَا، لَكَ مَمَاتُهَا وَمَحْيَاهَا، إِنْ أَحْيَيْتَهَا فَاحْفَظْهَا، وَإِنْ أَمَتَّهَا فَاغْفِرْ لَهَا، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ</div><div class="dua-source"><strong>المصدر:</strong> صحيح مسلم</div></div>
+            <div class="dua-card"><div class="dua-number">3</div><div class="dua-text">اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ</div><div class="dua-source"><strong>المصدر:</strong> أبو داود والترمذي - ثلاث مرات</div></div>
+            <div class="dua-card"><div class="dua-number">4</div><div class="dua-text">بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا</div><div class="dua-source"><strong>المصدر:</strong> البخاري</div></div>
+            <div class="dua-card"><div class="dua-number">5</div><div class="dua-text">الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا، وَكَفَانَا، وَآوَانَا، فَكَمْ مِمَّنْ لَا كَافِيَ لَهُ وَلَا مُؤْوِيَ</div><div class="dua-source"><strong>المصدر:</strong> صحيح مسلم</div></div>
+            <div class="dua-card"><div class="dua-number">6</div><div class="dua-text">اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ</div><div class="dua-source"><strong>المصدر:</strong> أبو داود والترمذي</div></div>
+            <div class="dua-card"><div class="dua-number">7</div><div class="dua-text">اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَوَجَّهْتُ وَجْهِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَغْبَةً وَرَهْبَةً إِلَيْكَ، لَا مَلْجَأَ وَلَا مَنْجَا مِنْكَ إِلَّا إِلَيْكَ، آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ</div><div class="dua-source"><strong>المصدر:</strong> البخاري ومسلم</div></div>
+            <div class="dua-card"><div class="dua-number">8</div><div class="dua-text">سُبْحَانَ اللَّهِ (33) وَالْحَمْدُ لِلَّهِ (33) وَاللَّهُ أَكْبَرُ (34)</div><div class="dua-source"><strong>المصدر:</strong> البخاري ومسلم</div></div>
+            </div><!-- end athkar-sleep -->
+
+            <!-- Sub: Post-prayer athkar -->
+            <div id="athkar-prayer" class="sub-section">
+            <h2 class="section-title">أذكار بعد الصلاة</h2>
+            <div class="intro-box">تُقال بعد السلام من كل صلاة مفروضة</div>
+            <div class="dua-card"><div class="dua-number">1</div><div class="dua-text">أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ. اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ</div><div class="dua-source"><strong>المصدر:</strong> صحيح مسلم</div></div>
+            <div class="dua-card"><div class="dua-number">2</div><div class="dua-text">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ</div><div class="dua-source"><strong>المصدر:</strong> البخاري ومسلم</div></div>
+            <div class="dua-card"><div class="dua-number">3</div><div class="dua-text">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ، لَا إِلَهَ إِلَّا اللَّهُ، وَلَا نَعْبُدُ إِلَّا إِيَّاهُ، لَهُ النِّعْمَةُ وَلَهُ الْفَضْلُ، وَلَهُ الثَّنَاءُ الْحَسَنُ، لَا إِلَهَ إِلَّا اللَّهُ مُخْلِصِينَ لَهُ الدِّينَ وَلَوْ كَرِهَ الْكَافِرُونَ</div><div class="dua-source"><strong>المصدر:</strong> صحيح مسلم</div></div>
+            <div class="dua-card"><div class="dua-number">4</div><div class="dua-text">سُبْحَانَ اللَّهِ (33) وَالْحَمْدُ لِلَّهِ (33) وَاللَّهُ أَكْبَرُ (33) ثم لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ</div><div class="dua-source"><strong>المصدر:</strong> صحيح مسلم - تمام المئة</div></div>
+            <div class="dua-card"><div class="dua-number">5</div><div class="dua-text">قراءة آية الكرسي: ﴿اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ﴾</div><div class="dua-source"><strong>المصدر:</strong> النسائي - بعد كل صلاة</div></div>
+            <div class="dua-card"><div class="dua-number">6</div><div class="dua-text">قراءة ﴿قُلْ هُوَ اللَّهُ أَحَدٌ﴾ و ﴿قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ﴾ و ﴿قُلْ أَعُوذُ بِرَبِّ النَّاسِ﴾</div><div class="dua-source"><strong>المصدر:</strong> أبو داود - مرة بعد كل صلاة، وثلاثاً بعد الفجر والمغرب</div></div>
+            <div class="dua-card"><div class="dua-number">7</div><div class="dua-text">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا</div><div class="dua-source"><strong>المصدر:</strong> ابن ماجه - بعد صلاة الفجر</div></div>
+            </div><!-- end athkar-prayer -->
+        </div><!-- end tabAthkar -->
+
+        <!-- DUAS TAB -->
+        <div id="tabDuas" class="content-area">
+            <h2 class="section-title">الأدعية</h2>
+            <div class="sub-nav">
+                <button class="sub-nav-btn active" onclick="switchSub('tabDuas','duas-rizq',this)">أدعية الرزق</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabDuas','duas-quran',this)">أدعية قرآنية</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabDuas','duas-ruqyah',this)">الرقية الشرعية</button>
+            </div>
+
+            <!-- Sub: Rizq duas (existing tab4 content) -->
+            <div id="duas-rizq" class="sub-section active">
             <h2 class="section-title">أدعية مستجابة لجلب الرزق</h2>
 
             <div class="intro-box">
@@ -1481,7 +1683,105 @@
                     <li><strong>8. احسن الظن بالله:</strong> يقول الله: "أنا عند ظن عبدي بي"</li>
                 </ul>
             </div>
-        </div>
+            </div><!-- end duas-rizq -->
+
+            <!-- Sub: Quranic Duas -->
+            <div id="duas-quran" class="sub-section">
+            <h2 class="section-title">أدعية من القرآن الكريم</h2>
+            <div class="intro-box">أدعية وردت في القرآن الكريم على لسان الأنبياء والصالحين</div>
+            <div class="dua-card"><div class="dua-number">1</div><div class="dua-text">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div><div class="dua-source"><strong>المصدر:</strong> البقرة: 201</div></div>
+            <div class="dua-card"><div class="dua-number">2</div><div class="dua-text">رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ</div><div class="dua-source"><strong>المصدر:</strong> البقرة: 286</div></div>
+            <div class="dua-card"><div class="dua-number">3</div><div class="dua-text">رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ الْوَهَّابُ</div><div class="dua-source"><strong>المصدر:</strong> آل عمران: 8</div></div>
+            <div class="dua-card"><div class="dua-number">4</div><div class="dua-text">رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ</div><div class="dua-source"><strong>المصدر:</strong> آل عمران: 16</div></div>
+            <div class="dua-card"><div class="dua-number">5</div><div class="dua-text">رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً ۖ إِنَّكَ سَمِيعُ الدُّعَاءِ</div><div class="dua-source"><strong>المصدر:</strong> آل عمران: 38 - دعاء زكريا عليه السلام</div></div>
+            <div class="dua-card"><div class="dua-number">6</div><div class="dua-text">رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ</div><div class="dua-source"><strong>المصدر:</strong> آل عمران: 147</div></div>
+            <div class="dua-card"><div class="dua-number">7</div><div class="dua-text">رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ</div><div class="dua-source"><strong>المصدر:</strong> الأعراف: 23 - دعاء آدم وحواء</div></div>
+            <div class="dua-card"><div class="dua-number">8</div><div class="dua-text">رَبِّ اشْرَحْ لِي صَدْرِي ﴿٢٥﴾ وَيَسِّرْ لِي أَمْرِي ﴿٢٦﴾ وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي ﴿٢٧﴾ يَفْقَهُوا قَوْلِي</div><div class="dua-source"><strong>المصدر:</strong> طه: 25-28 - دعاء موسى عليه السلام</div></div>
+            <div class="dua-card"><div class="dua-number">9</div><div class="dua-text">رَبِّ زِدْنِي عِلْمًا</div><div class="dua-source"><strong>المصدر:</strong> طه: 114</div></div>
+            <div class="dua-card"><div class="dua-number">10</div><div class="dua-text">لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ</div><div class="dua-source"><strong>المصدر:</strong> الأنبياء: 87 - دعاء يونس عليه السلام</div></div>
+            <div class="dua-card"><div class="dua-number">11</div><div class="dua-text">رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ ﴿٩٧﴾ وَأَعُوذُ بِكَ رَبِّ أَن يَحْضُرُونِ</div><div class="dua-source"><strong>المصدر:</strong> المؤمنون: 97-98</div></div>
+            <div class="dua-card"><div class="dua-number">12</div><div class="dua-text">رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا</div><div class="dua-source"><strong>المصدر:</strong> الفرقان: 74</div></div>
+            <div class="dua-card"><div class="dua-number">13</div><div class="dua-text">رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَدْخِلْنِي بِرَحْمَتِكَ فِي عِبَادِكَ الصَّالِحِينَ</div><div class="dua-source"><strong>المصدر:</strong> النمل: 19 - دعاء سليمان عليه السلام</div></div>
+            <div class="dua-card"><div class="dua-number">14</div><div class="dua-text">رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِّلَّذِينَ آمَنُوا رَبَّنَا إِنَّكَ رَءُوفٌ رَّحِيمٌ</div><div class="dua-source"><strong>المصدر:</strong> الحشر: 10</div></div>
+            <div class="dua-card"><div class="dua-number">15</div><div class="dua-text">رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا ۖ إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ</div><div class="dua-source"><strong>المصدر:</strong> التحريم: 8</div></div>
+            </div><!-- end duas-quran -->
+
+            <!-- Sub: Ruqyah -->
+            <div id="duas-ruqyah" class="sub-section">
+            <h2 class="section-title">الرقية الشرعية</h2>
+            <div class="intro-box">آيات وأدعية الرقية الشرعية من القرآن والسنة للحفظ والشفاء بإذن الله</div>
+            <div class="dua-card"><div class="dua-number">1</div><div class="dua-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾</div><div class="dua-source"><strong>المصدر:</strong> سورة الفاتحة كاملة</div></div>
+            <div class="dua-card"><div class="dua-number">2</div><div class="dua-text">اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ</div><div class="dua-source"><strong>المصدر:</strong> آية الكرسي - البقرة: 255</div></div>
+            <div class="dua-card"><div class="dua-number">3</div><div class="dua-text">آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ</div><div class="dua-source"><strong>المصدر:</strong> البقرة: 285</div></div>
+            <div class="dua-card"><div class="dua-number">4</div><div class="dua-text">قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾</div><div class="dua-source"><strong>المصدر:</strong> سورة الإخلاص - ثلاث مرات</div></div>
+            <div class="dua-card"><div class="dua-number">5</div><div class="dua-text">قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾</div><div class="dua-source"><strong>المصدر:</strong> سورة الفلق - ثلاث مرات</div></div>
+            <div class="dua-card"><div class="dua-number">6</div><div class="dua-text">قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَهِ النَّاسِ ﴿٣﴾ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾</div><div class="dua-source"><strong>المصدر:</strong> سورة الناس - ثلاث مرات</div></div>
+            <div class="section-heading">أدعية الرقية من السنة</div>
+            <div class="dua-card"><div class="dua-number">7</div><div class="dua-text">بِسْمِ اللَّهِ أَرْقِيكَ، مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ، مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنِ حَاسِدٍ اللَّهُ يَشْفِيكَ، بِسْمِ اللَّهِ أَرْقِيكَ</div><div class="dua-source"><strong>المصدر:</strong> صحيح مسلم</div></div>
+            <div class="dua-card"><div class="dua-number">8</div><div class="dua-text">أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ، وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ</div><div class="dua-source"><strong>المصدر:</strong> صحيح البخاري</div></div>
+            <div class="dua-card"><div class="dua-number">9</div><div class="dua-text">أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ الَّتِي لَا يُجَاوِزُهُنَّ بَرٌّ وَلَا فَاجِرٌ، مِنْ شَرِّ مَا خَلَقَ وَذَرَأَ وَبَرَأَ، وَمِنْ شَرِّ مَا يَنْزِلُ مِنَ السَّمَاءِ، وَمِنْ شَرِّ مَا يَعْرُجُ فِيهَا، وَمِنْ شَرِّ مَا ذَرَأَ فِي الْأَرْضِ وَمِنْ شَرِّ مَا يَخْرُجُ مِنْهَا، وَمِنْ شَرِّ فِتَنِ اللَّيْلِ وَالنَّهَارِ، وَمِنْ شَرِّ كُلِّ طَارِقٍ إِلَّا طَارِقًا يَطْرُقُ بِخَيْرٍ يَا رَحْمَنُ</div><div class="dua-source"><strong>المصدر:</strong> أحمد</div></div>
+            <div class="dua-card"><div class="dua-number">10</div><div class="dua-text">اللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اشْفِهِ وَأَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا</div><div class="dua-source"><strong>المصدر:</strong> البخاري ومسلم</div></div>
+            </div><!-- end duas-ruqyah -->
+
+        </div><!-- end tabDuas -->
+
+        <!-- TOOLS TAB -->
+        <div id="tabTools" class="content-area">
+            <h2 class="section-title">أدوات المسلم</h2>
+            <div class="sub-nav">
+                <button class="sub-nav-btn active" onclick="switchSub('tabTools','tools-prayer',this)">مواقيت الصلاة</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabTools','tools-tasbeeh',this)">عداد التسبيح</button>
+                <button class="sub-nav-btn" onclick="switchSub('tabTools','tools-names',this)">أسماء الله الحسنى</button>
+            </div>
+
+            <!-- Sub: Prayer times -->
+            <div id="tools-prayer" class="sub-section active">
+            <h2 class="section-title">مواقيت الصلاة</h2>
+            <div id="prayerLocation" style="text-align:center;margin-bottom:15px;color:var(--text-muted);font-size:1.1em"></div>
+            <div class="prayer-grid" id="toolsPrayerGrid">
+                <div class="prayer-card"><div class="prayer-card-name">الفجر</div><div class="prayer-card-time" id="toolsFajr">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">الشروق</div><div class="prayer-card-time" id="toolsSunrise">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">الظهر</div><div class="prayer-card-time" id="toolsDhuhr">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">العصر</div><div class="prayer-card-time" id="toolsAsr">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">المغرب</div><div class="prayer-card-time" id="toolsMaghrib">--:--</div></div>
+                <div class="prayer-card"><div class="prayer-card-name">العشاء</div><div class="prayer-card-time" id="toolsIsha">--:--</div></div>
+            </div>
+            <div style="text-align:center;margin-top:15px">
+                <button class="tasbeeh-ctrl-btn" onclick="fetchPrayerTimes()" id="refreshPrayerBtn">تحديث المواقيت</button>
+            </div>
+            </div><!-- end tools-prayer -->
+
+            <!-- Sub: Tasbeeh counter -->
+            <div id="tools-tasbeeh" class="sub-section">
+            <h2 class="section-title">عداد التسبيح</h2>
+            <div class="tasbeeh-container">
+                <div class="tasbeeh-presets">
+                    <button class="tasbeeh-preset active" onclick="setTasbeehPreset('سبحان الله',33,this)">سبحان الله</button>
+                    <button class="tasbeeh-preset" onclick="setTasbeehPreset('الحمد لله',33,this)">الحمد لله</button>
+                    <button class="tasbeeh-preset" onclick="setTasbeehPreset('الله أكبر',34,this)">الله أكبر</button>
+                    <button class="tasbeeh-preset" onclick="setTasbeehPreset('لا إله إلا الله',100,this)">لا إله إلا الله</button>
+                    <button class="tasbeeh-preset" onclick="setTasbeehPreset('أستغفر الله',100,this)">أستغفر الله</button>
+                    <button class="tasbeeh-preset" onclick="setTasbeehPreset('لا حول ولا قوة إلا بالله',0,this)">لا حول ولا قوة إلا بالله</button>
+                </div>
+                <div class="tasbeeh-target" id="tasbeehTarget">الهدف: ٣٣</div>
+                <div class="tasbeeh-count" id="tasbeehCount">٠</div>
+                <div id="tasbeehLabel" style="font-size:1.4em;color:var(--gold-soft);margin-bottom:15px;font-family:'Scheherazade New',serif">سبحان الله</div>
+                <button class="tasbeeh-btn" onclick="incrementTasbeeh()" id="tasbeehBtn">اضغط</button>
+                <div class="tasbeeh-controls">
+                    <button class="tasbeeh-ctrl-btn" onclick="resetTasbeeh()">إعادة ٠</button>
+                    <button class="tasbeeh-ctrl-btn" id="tasbeehTotalBtn">المجموع: ٠</button>
+                </div>
+            </div>
+            </div><!-- end tools-tasbeeh -->
+
+            <!-- Sub: 99 Names -->
+            <div id="tools-names" class="sub-section">
+            <h2 class="section-title">أسماء الله الحسنى</h2>
+            <div class="intro-box">قال رسول الله ﷺ: «إنَّ لِلَّهِ تِسْعَةً وتِسْعِينَ اسْمًا، مِئَةً إلَّا واحِدًا، مَن أحْصاها دَخَلَ الجَنَّةَ» - متفق عليه</div>
+            <div class="names-grid" id="namesGrid"></div>
+            </div><!-- end tools-names -->
+
+        </div><!-- end tabTools -->
 
         <!-- TAB 7: Full Quran Browser (Enhanced) -->
         <div id="tab7" class="content-area">
@@ -1593,6 +1893,21 @@
 
         // Init Quran browser when tab7 is shown
         if (tabId === 'tab7') initQuran();
+        // Init tools when tools tab is shown
+        if (tabId === 'tabTools') initTools();
+        // Init home data
+        if (tabId === 'tabHome') initHome();
+    }
+
+    // Sub-navigation within tabs
+    function switchSub(tabId, subId, btn) {
+        var tab = document.getElementById(tabId);
+        if (!tab) return;
+        tab.querySelectorAll('.sub-section').forEach(function(s) { s.classList.remove('active'); });
+        tab.querySelectorAll('.sub-nav-btn').forEach(function(b) { b.classList.remove('active'); });
+        var sub = document.getElementById(subId);
+        if (sub) sub.classList.add('active');
+        if (btn) btn.classList.add('active');
     }
 
     // Keyboard navigation
@@ -2074,6 +2389,243 @@
 
     // Initialize surah grid
     renderSurahGrid2();
+</script>
+
+<script>
+    // ═══════════════════════════════════════
+    // Home Tab: Prayer Times, Daily Ayah, Hijri Date
+    // ═══════════════════════════════════════
+    var prayerTimesCache = null;
+
+    function initHome() {
+        loadHijriDate();
+        loadDailyAyah();
+        if (!prayerTimesCache) fetchPrayerTimes();
+    }
+
+    function loadHijriDate() {
+        var el = document.getElementById('hijriDate');
+        if (!el) return;
+        var today = new Date();
+        fetch('https://api.aladhan.com/v1/gpiDate/' + today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear())
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                if (d.code === 200 && d.data && d.data.hijri) {
+                    var h = d.data.hijri;
+                    el.textContent = h.day + ' ' + h.month.ar + ' ' + h.year + ' هـ';
+                }
+            }).catch(function() {
+                el.textContent = '';
+            });
+    }
+
+    function loadDailyAyah() {
+        var textEl = document.getElementById('dailyAyahText');
+        var refEl = document.getElementById('dailyAyahRef');
+        if (!textEl) return;
+        // Pick a random ayah from a curated set of beautiful verses
+        var dailyVerses = [
+            {s:2,a:286},{s:3,a:8},{s:2,a:201},{s:21,a:87},{s:40,a:60},
+            {s:65,a:3},{s:94,a:6},{s:2,a:152},{s:13,a:28},{s:3,a:139},
+            {s:39,a:53},{s:16,a:97},{s:29,a:69},{s:73,a:8},{s:6,a:162}
+        ];
+        var dayIdx = Math.floor(Date.now() / 86400000) % dailyVerses.length;
+        var pick = dailyVerses[dayIdx];
+        fetch('https://api.alquran.cloud/v1/ayah/' + pick.s + ':' + pick.a)
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                if (d.code === 200) {
+                    textEl.textContent = d.data.text;
+                    var surahName = SURAH_DATA.find(function(x) { return x.n === pick.s; });
+                    if (refEl) {
+                        refEl.style.display = 'block';
+                        refEl.textContent = 'سورة ' + (surahName ? surahName.name : pick.s) + ' - آية ' + pick.a;
+                    }
+                }
+            }).catch(function() {
+                textEl.textContent = 'وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ';
+                if (refEl) { refEl.style.display = 'block'; refEl.textContent = 'سورة البقرة - آية 186'; }
+            });
+    }
+
+    function fetchPrayerTimes() {
+        var btn = document.getElementById('refreshPrayerBtn');
+        if (btn) btn.textContent = 'جاري التحديث...';
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                fetchPrayerByCoords(pos.coords.latitude, pos.coords.longitude);
+            }, function() {
+                // Default to Mecca if location denied
+                fetchPrayerByCoords(21.4225, 39.8262);
+            });
+        } else {
+            fetchPrayerByCoords(21.4225, 39.8262);
+        }
+    }
+
+    function fetchPrayerByCoords(lat, lng) {
+        var today = new Date();
+        var url = 'https://api.aladhan.com/v1/timings/' + Math.floor(today.getTime()/1000)
+            + '?latitude=' + lat + '&longitude=' + lng + '&method=4';
+        fetch(url).then(function(r) { return r.json(); }).then(function(d) {
+            if (d.code === 200 && d.data && d.data.timings) {
+                prayerTimesCache = d.data.timings;
+                displayPrayerTimes(d.data.timings);
+                // Show location
+                var locEl = document.getElementById('prayerLocation');
+                if (locEl && d.data.meta && d.data.meta.timezone) {
+                    locEl.textContent = d.data.meta.timezone;
+                }
+                // Save for offline
+                try { localStorage.setItem('iq_prayer_times', JSON.stringify({t: Date.now(), data: d.data.timings})); } catch(e){}
+            }
+        }).catch(function() {
+            // Try offline cache
+            try {
+                var c = JSON.parse(localStorage.getItem('iq_prayer_times'));
+                if (c && c.data) displayPrayerTimes(c.data);
+            } catch(e){}
+        }).finally(function() {
+            var btn = document.getElementById('refreshPrayerBtn');
+            if (btn) btn.textContent = 'تحديث المواقيت';
+        });
+    }
+
+    function displayPrayerTimes(t) {
+        var map = {Fajr:'Fajr',Sunrise:'Sunrise',Dhuhr:'Dhuhr',Asr:'Asr',Maghrib:'Maghrib',Isha:'Isha'};
+        var names = {Fajr:'الفجر',Sunrise:'الشروق',Dhuhr:'الظهر',Asr:'العصر',Maghrib:'المغرب',Isha:'العشاء'};
+        var prefixes = ['home', 'tools'];
+        var now = new Date();
+        var nowMin = now.getHours() * 60 + now.getMinutes();
+        var nextPrayer = null;
+
+        Object.keys(map).forEach(function(key) {
+            var time = t[key];
+            prefixes.forEach(function(p) {
+                var el = document.getElementById(p + key);
+                if (el) el.textContent = time;
+            });
+            // Find next prayer
+            if (time && !nextPrayer) {
+                var parts = time.split(':');
+                var pMin = parseInt(parts[0]) * 60 + parseInt(parts[1]);
+                if (pMin > nowMin) nextPrayer = key;
+            }
+        });
+
+        // Highlight next prayer
+        if (nextPrayer) {
+            prefixes.forEach(function(p) {
+                var grid = document.getElementById(p + 'PrayerGrid');
+                if (grid) {
+                    grid.querySelectorAll('.prayer-card').forEach(function(c) { c.classList.remove('next'); });
+                    var el = document.getElementById(p + nextPrayer);
+                    if (el) el.closest('.prayer-card').classList.add('next');
+                }
+            });
+        }
+    }
+
+    // ═══════════════════════════════════════
+    // Tasbeeh Counter
+    // ═══════════════════════════════════════
+    var tasbeehCount = 0, tasbeehTarget = 33, tasbeehTotal = 0, tasbeehText = 'سبحان الله';
+
+    function initTasbeeh() {
+        try {
+            var saved = JSON.parse(localStorage.getItem('iq_tasbeeh'));
+            if (saved) { tasbeehTotal = saved.total || 0; }
+        } catch(e){}
+        updateTasbeehDisplay();
+    }
+
+    function setTasbeehPreset(text, target, btn) {
+        tasbeehText = text;
+        tasbeehTarget = target;
+        tasbeehCount = 0;
+        document.querySelectorAll('.tasbeeh-preset').forEach(function(b) { b.classList.remove('active'); });
+        if (btn) btn.classList.add('active');
+        updateTasbeehDisplay();
+    }
+
+    function incrementTasbeeh() {
+        tasbeehCount++;
+        tasbeehTotal++;
+        if (tasbeehTarget > 0 && tasbeehCount >= tasbeehTarget) {
+            // Completed - flash effect
+            var btn = document.getElementById('tasbeehBtn');
+            if (btn) { btn.style.borderColor = '#f1c40f'; setTimeout(function() { btn.style.borderColor = ''; }, 800); }
+        }
+        updateTasbeehDisplay();
+        try { localStorage.setItem('iq_tasbeeh', JSON.stringify({total: tasbeehTotal})); } catch(e){}
+    }
+
+    function resetTasbeeh() {
+        tasbeehCount = 0;
+        updateTasbeehDisplay();
+    }
+
+    function updateTasbeehDisplay() {
+        var countEl = document.getElementById('tasbeehCount');
+        var targetEl = document.getElementById('tasbeehTarget');
+        var labelEl = document.getElementById('tasbeehLabel');
+        var totalEl = document.getElementById('tasbeehTotalBtn');
+        if (countEl) countEl.textContent = toArabicNum(tasbeehCount);
+        if (targetEl) targetEl.textContent = tasbeehTarget > 0 ? 'الهدف: ' + toArabicNum(tasbeehTarget) : 'بدون حد';
+        if (labelEl) labelEl.textContent = tasbeehText;
+        if (totalEl) totalEl.textContent = 'المجموع: ' + toArabicNum(tasbeehTotal);
+    }
+
+    // ═══════════════════════════════════════
+    // 99 Names of Allah
+    // ═══════════════════════════════════════
+    var NAMES_99 = [
+        ['الله','Allah'],['الرَّحْمَنُ','الرحمن'],['الرَّحِيمُ','الرحيم'],['المَلِكُ','الملك'],['القُدُّوسُ','القدوس'],
+        ['السَّلَامُ','السلام'],['المُؤْمِنُ','المؤمن'],['المُهَيْمِنُ','المهيمن'],['العَزِيزُ','العزيز'],['الجَبَّارُ','الجبار'],
+        ['المُتَكَبِّرُ','المتكبر'],['الخَالِقُ','الخالق'],['البَارِئُ','البارئ'],['المُصَوِّرُ','المصور'],['الغَفَّارُ','الغفار'],
+        ['القَهَّارُ','القهار'],['الوَهَّابُ','الوهاب'],['الرَّزَّاقُ','الرزاق'],['الفَتَّاحُ','الفتاح'],['العَلِيمُ','العليم'],
+        ['القَابِضُ','القابض'],['البَاسِطُ','الباسط'],['الخَافِضُ','الخافض'],['الرَّافِعُ','الرافع'],['المُعِزُّ','المعز'],
+        ['المُذِلُّ','المذل'],['السَّمِيعُ','السميع'],['البَصِيرُ','البصير'],['الحَكَمُ','الحكم'],['العَدْلُ','العدل'],
+        ['اللَّطِيفُ','اللطيف'],['الخَبِيرُ','الخبير'],['الحَلِيمُ','الحليم'],['العَظِيمُ','العظيم'],['الغَفُورُ','الغفور'],
+        ['الشَّكُورُ','الشكور'],['العَلِيُّ','العلي'],['الكَبِيرُ','الكبير'],['الحَفِيظُ','الحفيظ'],['المُقِيتُ','المقيت'],
+        ['الحَسِيبُ','الحسيب'],['الجَلِيلُ','الجليل'],['الكَرِيمُ','الكريم'],['الرَّقِيبُ','الرقيب'],['المُجِيبُ','المجيب'],
+        ['الوَاسِعُ','الواسع'],['الحَكِيمُ','الحكيم'],['الوَدُودُ','الودود'],['المَجِيدُ','المجيد'],['البَاعِثُ','الباعث'],
+        ['الشَّهِيدُ','الشهيد'],['الحَقُّ','الحق'],['الوَكِيلُ','الوكيل'],['القَوِيُّ','القوي'],['المَتِينُ','المتين'],
+        ['الوَلِيُّ','الولي'],['الحَمِيدُ','الحميد'],['المُحْصِي','المحصي'],['المُبْدِئُ','المبدئ'],['المُعِيدُ','المعيد'],
+        ['المُحْيِي','المحيي'],['المُمِيتُ','المميت'],['الحَيُّ','الحي'],['القَيُّومُ','القيوم'],['الوَاجِدُ','الواجد'],
+        ['المَاجِدُ','الماجد'],['الوَاحِدُ','الواحد'],['الصَّمَدُ','الصمد'],['القَادِرُ','القادر'],['المُقْتَدِرُ','المقتدر'],
+        ['المُقَدِّمُ','المقدم'],['المُؤَخِّرُ','المؤخر'],['الأَوَّلُ','الأول'],['الآخِرُ','الآخر'],['الظَّاهِرُ','الظاهر'],
+        ['البَاطِنُ','الباطن'],['الوَالِي','الوالي'],['المُتَعَالِي','المتعالي'],['البَرُّ','البر'],['التَّوَّابُ','التواب'],
+        ['المُنْتَقِمُ','المنتقم'],['العَفُوُّ','العفو'],['الرَّؤُوفُ','الرؤوف'],['مَالِكُ المُلْكِ','مالك الملك'],
+        ['ذُو الجَلَالِ وَالإِكْرَامِ','ذو الجلال والإكرام'],['المُقْسِطُ','المقسط'],['الجَامِعُ','الجامع'],
+        ['الغَنِيُّ','الغني'],['المُغْنِي','المغني'],['المَانِعُ','المانع'],['الضَّارُّ','الضار'],['النَّافِعُ','النافع'],
+        ['النُّورُ','النور'],['الهَادِي','الهادي'],['البَدِيعُ','البديع'],['البَاقِي','الباقي'],['الوَارِثُ','الوارث'],
+        ['الرَّشِيدُ','الرشيد'],['الصَّبُورُ','الصبور']
+    ];
+
+    function renderNames() {
+        var grid = document.getElementById('namesGrid');
+        if (!grid) return;
+        grid.innerHTML = NAMES_99.map(function(n, i) {
+            return '<div class="name-card"><div class="name-card-ar">' + n[0] + '</div><div class="name-card-meaning">' + toArabicNum(i+1) + '</div></div>';
+        }).join('');
+    }
+
+    // ═══════════════════════════════════════
+    // Tools Tab Init
+    // ═══════════════════════════════════════
+    var toolsInited = false;
+    function initTools() {
+        if (toolsInited) return;
+        toolsInited = true;
+        initTasbeeh();
+        renderNames();
+        if (!prayerTimesCache) fetchPrayerTimes();
+    }
+
+    // Initialize home on load
+    initHome();
 </script>
 
 <script>
