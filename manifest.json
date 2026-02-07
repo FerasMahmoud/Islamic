@@ -14,5 +14,27 @@
       "sizes": "any",
       "type": "image/svg+xml"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "القرآن الكريم",
+      "url": "./index.html#quran",
+      "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='70' x='50' text-anchor='middle' font-size='60'>📖</text></svg>", "sizes": "any"}]
+    },
+    {
+      "name": "الأذكار",
+      "url": "./index.html#athkar",
+      "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='70' x='50' text-anchor='middle' font-size='60'>🤲</text></svg>", "sizes": "any"}]
+    },
+    {
+      "name": "مواقيت الصلاة",
+      "url": "./index.html#prayer",
+      "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='70' x='50' text-anchor='middle' font-size='60'>🕌</text></svg>", "sizes": "any"}]
+    },
+    {
+      "name": "عداد التسبيح",
+      "url": "./index.html#tasbeeh",
+      "icons": [{"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='70' x='50' text-anchor='middle' font-size='60'>📿</text></svg>", "sizes": "any"}]
+    }
   ]
 }
