@@ -1915,6 +1915,151 @@
             background: var(--night-deep);
         }
 
+        /* In-App Prayer Notification Banner */
+        .prayer-notif {
+            position: fixed;
+            top: -120px;
+            left: 12px;
+            right: 12px;
+            z-index: 10000;
+            background: linear-gradient(135deg, rgba(26,92,58,0.98), rgba(39,174,96,0.95));
+            border: 1px solid rgba(46,204,113,0.5);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 20px rgba(46,204,113,0.2);
+            transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .prayer-notif.show {
+            top: calc(12px + env(safe-area-inset-top, 0px));
+        }
+        .prayer-notif-icon {
+            font-size: 2.2em;
+            flex-shrink: 0;
+        }
+        .prayer-notif-body { flex: 1; }
+        .prayer-notif-title {
+            font-family: 'Scheherazade New', serif;
+            font-size: 1.3em;
+            color: #fff;
+            font-weight: 700;
+        }
+        .prayer-notif-text {
+            font-family: 'Amiri', serif;
+            font-size: 1em;
+            color: rgba(255,255,255,0.85);
+            margin-top: 2px;
+        }
+        .prayer-notif-close {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: none; background: rgba(255,255,255,0.15);
+            color: #fff; font-size: 1.1em; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .prayer-notif-close:hover { background: rgba(255,255,255,0.25); }
+
+        /* iOS Install Prompt */
+        .ios-install-prompt {
+            position: fixed;
+            bottom: -200px;
+            left: 12px;
+            right: 12px;
+            z-index: 10000;
+            background: linear-gradient(135deg, var(--night-soft), var(--night-mid));
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 16px;
+            padding: 18px 20px;
+            box-shadow: 0 -4px 25px rgba(0,0,0,0.5);
+            transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+        }
+        .ios-install-prompt.show { bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
+        .ios-install-title {
+            font-family: 'Scheherazade New', serif;
+            font-size: 1.3em; color: var(--gold-bright); margin-bottom: 8px;
+        }
+        .ios-install-text {
+            font-family: 'Amiri', serif;
+            font-size: 1em; color: var(--cream-soft); line-height: 1.6; margin-bottom: 12px;
+        }
+        .ios-install-steps {
+            font-size: 0.95em; color: var(--text-muted); line-height: 1.8;
+        }
+        .ios-install-dismiss {
+            margin-top: 12px; padding: 10px 24px; border-radius: 10px;
+            border: 1px solid rgba(212,175,55,0.3); background: transparent;
+            color: var(--gold-soft); font-family: 'Amiri', serif; font-size: 1em;
+            cursor: pointer;
+        }
+        .ios-install-dismiss:hover { background: rgba(212,175,55,0.1); }
+
+        /* Notification settings panel */
+        .notif-settings {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            z-index: 10001;
+            background: linear-gradient(135deg, var(--night-soft), var(--night-deep));
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 20px;
+            padding: 24px;
+            width: min(360px, 90vw);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+            opacity: 0; pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .notif-settings.show { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+        .notif-settings-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+            z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .notif-settings-overlay.show { opacity: 1; pointer-events: auto; }
+        .notif-settings h3 {
+            font-family: 'Scheherazade New', serif; font-size: 1.5em;
+            color: var(--gold-bright); text-align: center; margin-bottom: 16px;
+        }
+        .notif-option {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .notif-option:last-child { border-bottom: none; }
+        .notif-option-label {
+            font-family: 'Amiri', serif; font-size: 1.1em; color: var(--cream-soft);
+        }
+        .notif-toggle {
+            width: 48px; height: 28px; border-radius: 14px; border: none;
+            background: rgba(255,255,255,0.1); cursor: pointer; position: relative;
+            transition: background 0.3s;
+        }
+        .notif-toggle.on { background: var(--gold-warm); }
+        .notif-toggle::after {
+            content: ''; position: absolute; top: 3px; left: 3px;
+            width: 22px; height: 22px; border-radius: 50%; background: #fff;
+            transition: transform 0.3s;
+        }
+        .notif-toggle.on::after { transform: translateX(20px); }
+        .notif-volume {
+            display: flex; align-items: center; gap: 10px; margin-top: 14px;
+            padding: 12px 0;
+        }
+        .notif-volume-label { font-family: 'Amiri', serif; color: var(--cream-soft); font-size: 1em; flex-shrink: 0; }
+        .notif-volume input[type="range"] {
+            flex: 1; accent-color: var(--gold-warm);
+        }
+        .notif-test-btn {
+            width: 100%; margin-top: 16px; padding: 12px;
+            border-radius: 12px; border: none; cursor: pointer;
+            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
+            color: var(--night-deep); font-family: 'Amiri', serif;
+            font-size: 1.1em; font-weight: 600;
+        }
+        .notif-test-btn:hover { box-shadow: var(--glow-gold); }
+
     </style>
 </head>
 <body>
@@ -1930,9 +2075,62 @@
     <button class="rc-btn" onclick="toggleNightMode()" id="nightModeBtn" title="الوضع الليلي">🌙</button>
     <button class="rc-btn" onclick="changeFontSize(1)" title="تكبير الخط">A+</button>
     <button class="rc-btn" onclick="changeFontSize(-1)" title="تصغير الخط">A-</button>
-    <button class="rc-btn" onclick="toggleNotifications()" id="notifBtn" title="إشعارات الصلاة">🔔</button>
+    <button class="rc-btn" onclick="openNotifSettings()" id="notifBtn" title="إشعارات الصلاة">🔔</button>
 </div>
 <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="العودة للأعلى">↑</button>
+
+<!-- In-App Prayer Notification Banner (iOS compatible) -->
+<div class="prayer-notif" id="prayerNotif">
+    <div class="prayer-notif-icon">🕌</div>
+    <div class="prayer-notif-body">
+        <div class="prayer-notif-title" id="prayerNotifTitle">حان وقت الصلاة</div>
+        <div class="prayer-notif-text" id="prayerNotifText"></div>
+    </div>
+    <button class="prayer-notif-close" onclick="dismissPrayerNotif()">✕</button>
+</div>
+
+<!-- Notification Settings Panel -->
+<div class="notif-settings-overlay" id="notifOverlay" onclick="closeNotifSettings()"></div>
+<div class="notif-settings" id="notifSettings">
+    <h3>🔔 إعدادات الإشعارات</h3>
+    <div class="notif-option">
+        <span class="notif-option-label">صلاة الفجر</span>
+        <button class="notif-toggle" id="notifFajr" onclick="togglePrayerNotif('Fajr')"></button>
+    </div>
+    <div class="notif-option">
+        <span class="notif-option-label">صلاة الظهر</span>
+        <button class="notif-toggle" id="notifDhuhr" onclick="togglePrayerNotif('Dhuhr')"></button>
+    </div>
+    <div class="notif-option">
+        <span class="notif-option-label">صلاة العصر</span>
+        <button class="notif-toggle" id="notifAsr" onclick="togglePrayerNotif('Asr')"></button>
+    </div>
+    <div class="notif-option">
+        <span class="notif-option-label">صلاة المغرب</span>
+        <button class="notif-toggle" id="notifMaghrib" onclick="togglePrayerNotif('Maghrib')"></button>
+    </div>
+    <div class="notif-option">
+        <span class="notif-option-label">صلاة العشاء</span>
+        <button class="notif-toggle" id="notifIsha" onclick="togglePrayerNotif('Isha')"></button>
+    </div>
+    <div class="notif-volume">
+        <span class="notif-volume-label">🔊 الصوت</span>
+        <input type="range" id="notifVolume" min="0" max="100" value="70" oninput="setNotifVolume(this.value)">
+    </div>
+    <button class="notif-test-btn" onclick="testPrayerNotif()">🔔 تجربة الإشعار</button>
+</div>
+
+<!-- iOS Install Prompt -->
+<div class="ios-install-prompt" id="iosInstallPrompt">
+    <div class="ios-install-title">📱 أضف التطبيق للشاشة الرئيسية</div>
+    <div class="ios-install-text">للحصول على تجربة أفضل وإشعارات الصلاة</div>
+    <div class="ios-install-steps">
+        1. اضغط على <strong>مشاركة</strong> ⬆️ في أسفل المتصفح<br>
+        2. اختر <strong>"إضافة إلى الشاشة الرئيسية"</strong><br>
+        3. اضغط <strong>"إضافة"</strong>
+    </div>
+    <button class="ios-install-dismiss" onclick="dismissIosPrompt()">فهمت ✓</button>
+</div>
 
 <!-- Ayah Action Popup -->
 <div class="ayah-popup" id="ayahPopup">
@@ -3502,7 +3700,7 @@
                 displayPrayerTimes(d.data.timings);
                 updateLiveCountdown();
                 updateFastingInfo();
-                schedulePrayerNotifs();
+                if (notifEnabled) startPrayerChecker();
                 // Extract Hijri date from timings response
                 if (d.data.date && d.data.date.hijri) {
                     var h = d.data.date.hijri;
@@ -3991,53 +4189,222 @@
     }
 
     // ═══════════════════════════════════════
-    // Prayer Notifications
+    // Prayer Notifications (iOS-compatible)
     // ═══════════════════════════════════════
+    var PRAYER_KEYS = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+    var PRAYER_NAMES_AR = {Fajr:'الفجر',Dhuhr:'الظهر',Asr:'العصر',Maghrib:'المغرب',Isha:'العشاء'};
+
+    // Load per-prayer toggle states (default all on if notif enabled)
+    function getNotifPrefs() {
+        try { return JSON.parse(localStorage.getItem('iq_notif_prefs')) || {}; } catch(e) { return {}; }
+    }
+    function saveNotifPrefs(p) { localStorage.setItem('iq_notif_prefs', JSON.stringify(p)); }
+
     var notifEnabled = localStorage.getItem('iq_notif') === '1';
+    var notifVolume = parseInt(localStorage.getItem('iq_notif_vol') || '70') / 100;
+    var notifPrefs = getNotifPrefs();
+    var notifShownToday = {}; // track which prayers already notified today
+    var prayerCheckInterval = null;
+    var athanAudioCtx = null;
+
     if (notifEnabled) { var nb = document.getElementById('notifBtn'); if (nb) nb.classList.add('on'); }
 
-    function toggleNotifications() {
-        if (!notifEnabled) {
-            if (!('Notification' in window)) { alert('المتصفح لا يدعم الإشعارات'); return; }
-            Notification.requestPermission().then(function(p) {
-                if (p === 'granted') {
-                    notifEnabled = true;
-                    localStorage.setItem('iq_notif', '1');
-                    var nb = document.getElementById('notifBtn'); if (nb) nb.classList.add('on');
-                    schedulePrayerNotifs();
-                }
-            });
-        } else {
-            notifEnabled = false;
-            localStorage.setItem('iq_notif', '0');
-            var nb = document.getElementById('notifBtn'); if (nb) nb.classList.remove('on');
-            clearPrayerNotifs();
-        }
+    // Initialize Web Audio on first user interaction (iOS requirement)
+    function initAudioContext() {
+        if (athanAudioCtx) return;
+        try {
+            athanAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            // iOS requires resume after creation in user gesture
+            if (athanAudioCtx.state === 'suspended') athanAudioCtx.resume();
+        } catch(e) { /* no audio support */ }
     }
-    var prayerNotifTimers = [];
-    function clearPrayerNotifs() { prayerNotifTimers.forEach(clearTimeout); prayerNotifTimers = []; }
-    function schedulePrayerNotifs() {
-        clearPrayerNotifs();
+    document.addEventListener('touchstart', initAudioContext, { once: true });
+    document.addEventListener('click', initAudioContext, { once: true });
+
+    // Play athan-like tone sequence
+    function playAthanTone() {
+        if (!athanAudioCtx || notifVolume === 0) return;
+        try {
+            if (athanAudioCtx.state === 'suspended') athanAudioCtx.resume();
+            var now = athanAudioCtx.currentTime;
+            var vol = notifVolume * 0.4;
+            // Melodic athan-inspired notes (D4, F4, G4, A4, Bb4 - Hijaz-like scale)
+            var notes = [293.66, 349.23, 392.00, 440.00, 466.16, 440.00, 392.00, 349.23];
+            var durations = [0.5, 0.4, 0.5, 0.6, 0.5, 0.4, 0.5, 0.8];
+            var t = now + 0.05;
+            notes.forEach(function(freq, i) {
+                var osc = athanAudioCtx.createOscillator();
+                var gain = athanAudioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(vol, t + 0.06);
+                gain.gain.setValueAtTime(vol, t + durations[i] - 0.1);
+                gain.gain.linearRampToValueAtTime(0, t + durations[i]);
+                osc.connect(gain);
+                gain.connect(athanAudioCtx.destination);
+                osc.start(t);
+                osc.stop(t + durations[i]);
+                t += durations[i] + 0.05;
+            });
+        } catch(e) { /* audio error, silently ignore */ }
+    }
+
+    // Show in-app notification banner
+    function showPrayerNotifBanner(prayerKey) {
+        var el = document.getElementById('prayerNotif');
+        var titleEl = document.getElementById('prayerNotifTitle');
+        var textEl = document.getElementById('prayerNotifText');
+        if (!el) return;
+        titleEl.textContent = '🕌 حان وقت صلاة ' + PRAYER_NAMES_AR[prayerKey];
+        textEl.textContent = 'الوقت: ' + (prayerTimesCache ? prayerTimesCache[prayerKey] : '');
+        el.classList.add('show');
+        playAthanTone();
+        // Also try native notification if permission granted (for background on Android/desktop)
+        if ('Notification' in window && Notification.permission === 'granted') {
+            try {
+                new Notification('حان وقت صلاة ' + PRAYER_NAMES_AR[prayerKey], {
+                    body: 'الوقت: ' + (prayerTimesCache ? prayerTimesCache[prayerKey] : ''),
+                    icon: '🕌', tag: 'prayer-' + prayerKey
+                });
+            } catch(e) {}
+        }
+        // Auto-dismiss after 15 seconds
+        setTimeout(function() { dismissPrayerNotif(); }, 15000);
+    }
+
+    function dismissPrayerNotif() {
+        var el = document.getElementById('prayerNotif');
+        if (el) el.classList.remove('show');
+    }
+
+    // Periodic prayer time checker (runs every 30 seconds)
+    function checkPrayerTimes() {
         if (!prayerTimesCache || !notifEnabled) return;
         var now = new Date();
+        var todayKey = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
+        // Reset shown tracker on new day
+        if (notifShownToday._day !== todayKey) {
+            notifShownToday = { _day: todayKey };
+        }
         var todayBase = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-        var names = {Fajr:'الفجر',Dhuhr:'الظهر',Asr:'العصر',Maghrib:'المغرب',Isha:'العشاء'};
-        ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(function(key) {
+        var prefs = getNotifPrefs();
+        PRAYER_KEYS.forEach(function(key) {
+            // Skip if this prayer is toggled off
+            if (prefs[key] === false) return;
+            // Skip if already shown today
+            if (notifShownToday[key]) return;
             var tStr = prayerTimesCache[key];
             if (!tStr) return;
             var pMs = todayBase + timeToMinutes(tStr) * 60000;
-            var diff = pMs - now.getTime();
-            if (diff > 0) {
-                prayerNotifTimers.push(setTimeout(function() {
-                    new Notification('حان وقت صلاة ' + names[key], {
-                        body: 'الوقت: ' + tStr,
-                        icon: '📖',
-                        tag: 'prayer-' + key
-                    });
-                }, diff));
+            var diff = now.getTime() - pMs;
+            // Trigger if we're within 0-90 seconds after prayer time
+            if (diff >= 0 && diff < 90000) {
+                notifShownToday[key] = true;
+                showPrayerNotifBanner(key);
             }
         });
     }
+
+    function startPrayerChecker() {
+        if (prayerCheckInterval) clearInterval(prayerCheckInterval);
+        prayerCheckInterval = setInterval(checkPrayerTimes, 30000);
+        checkPrayerTimes(); // check immediately
+    }
+
+    function stopPrayerChecker() {
+        if (prayerCheckInterval) { clearInterval(prayerCheckInterval); prayerCheckInterval = null; }
+    }
+
+    // Settings panel
+    function openNotifSettings() {
+        initAudioContext();
+        var overlay = document.getElementById('notifOverlay');
+        var panel = document.getElementById('notifSettings');
+        if (overlay) overlay.classList.add('show');
+        if (panel) panel.classList.add('show');
+        // Sync toggles with saved prefs
+        var prefs = getNotifPrefs();
+        PRAYER_KEYS.forEach(function(key) {
+            var btn = document.getElementById('notif' + key);
+            if (!btn) return;
+            var isOn = notifEnabled && prefs[key] !== false;
+            btn.classList.toggle('on', isOn);
+        });
+        var volSlider = document.getElementById('notifVolume');
+        if (volSlider) volSlider.value = Math.round(notifVolume * 100);
+    }
+
+    function closeNotifSettings() {
+        var overlay = document.getElementById('notifOverlay');
+        var panel = document.getElementById('notifSettings');
+        if (overlay) overlay.classList.remove('show');
+        if (panel) panel.classList.remove('show');
+    }
+
+    function togglePrayerNotif(key) {
+        initAudioContext();
+        var prefs = getNotifPrefs();
+        var btn = document.getElementById('notif' + key);
+        var wasOn = prefs[key] !== false;
+        prefs[key] = !wasOn;
+        if (btn) btn.classList.toggle('on', !wasOn);
+        saveNotifPrefs(prefs);
+        // Enable master notification if any prayer is toggled on
+        var anyOn = PRAYER_KEYS.some(function(k) { return prefs[k] !== false; });
+        if (anyOn && !notifEnabled) {
+            notifEnabled = true;
+            localStorage.setItem('iq_notif', '1');
+            var nb = document.getElementById('notifBtn'); if (nb) nb.classList.add('on');
+            startPrayerChecker();
+            // Try requesting native notification permission (for Android/desktop)
+            if ('Notification' in window && Notification.permission === 'default') {
+                try { Notification.requestPermission(); } catch(e) {}
+            }
+        }
+        if (!anyOn) {
+            notifEnabled = false;
+            localStorage.setItem('iq_notif', '0');
+            var nb2 = document.getElementById('notifBtn'); if (nb2) nb2.classList.remove('on');
+            stopPrayerChecker();
+        }
+    }
+
+    function setNotifVolume(val) {
+        notifVolume = parseInt(val) / 100;
+        localStorage.setItem('iq_notif_vol', val);
+    }
+
+    function testPrayerNotif() {
+        initAudioContext();
+        showPrayerNotifBanner('Fajr');
+    }
+
+    // iOS detection & install prompt
+    function checkIosInstallPrompt() {
+        var isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+        var dismissed = localStorage.getItem('iq_ios_prompt_dismissed');
+        if (isIos && !isStandalone && !dismissed) {
+            setTimeout(function() {
+                var prompt = document.getElementById('iosInstallPrompt');
+                if (prompt) prompt.classList.add('show');
+            }, 3000);
+        }
+    }
+
+    function dismissIosPrompt() {
+        var prompt = document.getElementById('iosInstallPrompt');
+        if (prompt) prompt.classList.remove('show');
+        localStorage.setItem('iq_ios_prompt_dismissed', '1');
+    }
+
+    // Legacy compatibility - keep old function name working
+    function toggleNotifications() { openNotifSettings(); }
+
+    // Start checker if notifications were previously enabled
+    if (notifEnabled) startPrayerChecker();
+    checkIosInstallPrompt();
 
     // ═══════════════════════════════════════
     // Qibla Compass
