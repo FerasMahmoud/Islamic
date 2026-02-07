@@ -1093,6 +1093,21 @@
         }
         .ayah-num-inline:hover { color: var(--gold-bright); }
         .ayah-num-inline.on { color: var(--gold-bright); text-shadow: 0 0 8px rgba(46,204,113,0.5); }
+        .offline-progress {
+            margin-bottom: 18px; padding: 14px 18px;
+            background: rgba(18,26,46,0.8); border-radius: 12px;
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+        .offline-bar {
+            width: 100%; height: 10px; background: rgba(255,255,255,0.08);
+            border-radius: 6px; overflow: hidden; margin-bottom: 8px;
+        }
+        .offline-fill {
+            height: 100%; width: 0%; border-radius: 6px;
+            background: linear-gradient(90deg, var(--gold-warm), var(--gold-bright));
+            transition: width 0.3s;
+        }
+        .offline-label { color: var(--text-muted); font-size: 1em; text-align: center; font-family: 'Amiri', serif; }
         .q-loading2 { text-align: center; padding: 50px; color: var(--gold-soft); font-size: 1.4em; }
         .q-spinner2 { display: block; width: 36px; height: 36px; margin: 18px auto;
             border: 3px solid rgba(212,175,55,0.18); border-top-color: var(--gold-bright);
@@ -1487,6 +1502,11 @@
                         <button class="q-filter2 on" onclick="setQFilter('all',this)">الكل (114)</button>
                         <button class="q-filter2" onclick="setQFilter('mec',this)">مكية (86)</button>
                         <button class="q-filter2" onclick="setQFilter('med',this)">مدنية (28)</button>
+                        <button class="q-filter2" id="offlineBtn" onclick="downloadAllSurahs()">تحميل للقراءة بدون إنترنت</button>
+                    </div>
+                    <div class="offline-progress" id="offlineProgress" style="display:none">
+                        <div class="offline-bar"><div class="offline-fill" id="offlineFill"></div></div>
+                        <div class="offline-label" id="offlineLabel"></div>
                     </div>
                     <div class="surah-grid" id="surahGrid"></div>
                 </div>
@@ -1730,7 +1750,7 @@
     function getLR() { try { return JSON.parse(localStorage.getItem(LR_KEY)); } catch(e) { return null; } }
     function saveLR(d) { localStorage.setItem(LR_KEY, JSON.stringify(d)); }
 
-    function initQuran() { renderSurahGrid2(); renderBM(); renderLR(); }
+    function initQuran() { renderSurahGrid2(); renderBM(); renderLR(); checkOfflineStatus(); }
 
     function renderSurahGrid2() {
         const grid = document.getElementById('surahGrid');
@@ -1877,11 +1897,76 @@
         const data = await resp.json();
         const ayahs = data.data.ayahs.map(function(a) { return { text: a.text, numberInSurah: a.numberInSurah }; });
 
-        try { localStorage.setItem(cacheKey, JSON.stringify(ayahs)); } catch (e) {
-            for (var i = 1; i <= 114; i++) { if (i !== num) localStorage.removeItem('quran-surah-' + i); }
-            try { localStorage.setItem(cacheKey, JSON.stringify(ayahs)); } catch(e2) {}
-        }
+        try { localStorage.setItem(cacheKey, JSON.stringify(ayahs)); } catch (e) {}
         return ayahs;
+    }
+
+    async function downloadAllSurahs() {
+        var btn = document.getElementById('offlineBtn');
+        var prog = document.getElementById('offlineProgress');
+        var fill = document.getElementById('offlineFill');
+        var label = document.getElementById('offlineLabel');
+
+        // Count already cached
+        var cached = 0;
+        for (var i = 1; i <= 114; i++) {
+            if (localStorage.getItem('quran-surah-' + i)) cached++;
+        }
+        if (cached === 114) {
+            btn.textContent = 'تم التحميل بالكامل ✓';
+            btn.classList.add('on');
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'جاري التحميل...';
+        prog.style.display = 'block';
+        var done = 0, failed = 0;
+
+        for (var i = 1; i <= 114; i++) {
+            if (localStorage.getItem('quran-surah-' + i)) {
+                done++;
+                fill.style.width = Math.round((done / 114) * 100) + '%';
+                label.textContent = done + ' / 114';
+                continue;
+            }
+            try {
+                await fetchSurah(i);
+                done++;
+            } catch (e) {
+                done++;
+                failed++;
+            }
+            fill.style.width = Math.round((done / 114) * 100) + '%';
+            label.textContent = done + ' / 114' + (failed ? ' (' + failed + ' فشل)' : '');
+            // Small delay to avoid hammering the API
+            await new Promise(function(r) { setTimeout(r, 80); });
+        }
+
+        btn.disabled = false;
+        if (failed === 0) {
+            btn.textContent = 'تم التحميل بالكامل ✓';
+            btn.classList.add('on');
+            label.textContent = 'جميع السور متاحة بدون إنترنت';
+        } else {
+            btn.textContent = 'إعادة المحاولة (' + failed + ' متبقية)';
+            label.textContent = 'بعض السور لم تُحمّل - حاول مرة أخرى';
+        }
+    }
+
+    function checkOfflineStatus() {
+        var cached = 0;
+        for (var i = 1; i <= 114; i++) {
+            if (localStorage.getItem('quran-surah-' + i)) cached++;
+        }
+        var btn = document.getElementById('offlineBtn');
+        if (!btn) return;
+        if (cached === 114) {
+            btn.textContent = 'متاح بدون إنترنت ✓';
+            btn.classList.add('on');
+        } else if (cached > 0) {
+            btn.textContent = 'تحميل للقراءة بدون إنترنت (' + cached + '/114)';
+        }
     }
 
     function backToSurahList() {
