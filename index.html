@@ -692,6 +692,55 @@
             color: var(--night-deep);
         }
 
+        /* Scroll to Top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold-warm) 0%, var(--gold-bright) 100%);
+            color: var(--night-deep);
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(46, 204, 113, 0.6);
+        }
+
+        .scroll-top-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .scroll-top-btn {
+                bottom: 20px;
+                left: 20px;
+                width: 44px;
+                height: 44px;
+                font-size: 1.3em;
+            }
+        }
+
         /* ═══════════════════════════════════════ */
         /* Habits Tracker Styles */
         /* ═══════════════════════════════════════ */
@@ -944,6 +993,9 @@
 
 <!-- Islamic Pattern Overlay -->
 <div class="pattern-overlay"></div>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="العودة للأعلى">↑</button>
 
 <div class="container">
     <div class="header">
@@ -1621,6 +1673,16 @@
 
     // Initialize stars
     createStars();
+
+    // Scroll to top button visibility
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
 
     function switchTab(tabId, button) {
         // Hide all content areas
