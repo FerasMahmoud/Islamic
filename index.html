@@ -1233,6 +1233,72 @@
         }
         .ayah-num-inline:hover { color: var(--gold-bright); }
         .ayah-num-inline.on { color: var(--gold-bright); text-shadow: 0 0 8px rgba(46,204,113,0.5); }
+
+        /* Tafseer Panel */
+        .tafseer-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .tafseer-overlay.show { opacity: 1; pointer-events: auto; }
+        .tafseer-panel {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 1001;
+            max-height: 75vh; background: linear-gradient(180deg, var(--night-soft), var(--night-deep));
+            border-top: 2px solid rgba(212,175,55,0.4);
+            border-radius: 24px 24px 0 0; padding: 0;
+            transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+            display: flex; flex-direction: column;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+        }
+        .tafseer-panel.show { transform: translateY(0); }
+        .tafseer-header {
+            padding: 16px 20px 12px; display: flex; align-items: center; gap: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0;
+        }
+        .tafseer-title {
+            flex: 1; font-family: 'Amiri', serif; font-size: 1.2em;
+            color: var(--gold-soft); font-weight: 600;
+        }
+        .tafseer-close {
+            background: rgba(255,255,255,0.08); border: none; color: var(--text-muted);
+            width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+            font-size: 1.2em; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .tafseer-close:hover { background: rgba(255,255,255,0.15); }
+        .tafseer-tabs {
+            display: flex; gap: 6px; padding: 10px 20px;
+            overflow-x: auto; flex-shrink: 0; scrollbar-width: none;
+        }
+        .tafseer-tabs::-webkit-scrollbar { display: none; }
+        .tafseer-tab {
+            padding: 7px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.12);
+            background: transparent; color: var(--text-muted); cursor: pointer;
+            font-family: 'Amiri', serif; font-size: 0.95em; white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .tafseer-tab.active {
+            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
+            color: var(--night-deep); border-color: transparent; font-weight: 600;
+        }
+        .tafseer-tab:hover:not(.active) { border-color: rgba(212,175,55,0.3); color: var(--gold-soft); }
+        .tafseer-body {
+            padding: 20px; overflow-y: auto; flex: 1;
+            font-family: 'Amiri', serif; font-size: 1.25em; line-height: 2.2;
+            color: var(--cream-soft); direction: rtl;
+        }
+        .tafseer-body .tafseer-loading {
+            text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.9em;
+        }
+        .tafseer-ayah-text {
+            background: rgba(212,175,55,0.08); border-right: 3px solid var(--gold-warm);
+            padding: 12px 16px; margin-bottom: 16px; border-radius: 0 8px 8px 0;
+            font-size: 1.05em; color: var(--gold-soft);
+        }
+        .ayah-popup-btn.tafseer {
+            background: rgba(52,152,219,0.15); color: #85c1e9;
+            border: 1px solid rgba(52,152,219,0.3);
+        }
+        .ayah-popup-btn.tafseer:hover { background: rgba(52,152,219,0.25); }
         .offline-progress {
             margin-bottom: 18px; padding: 14px 18px;
             background: rgba(18,26,46,0.8); border-radius: 12px;
@@ -1277,9 +1343,30 @@
 <!-- Ayah Action Popup -->
 <div class="ayah-popup" id="ayahPopup">
     <span class="ayah-popup-text" id="ayahPopupLabel"></span>
+    <button class="ayah-popup-btn tafseer" onclick="openTafseer()">تفسير</button>
     <button class="ayah-popup-btn save" id="ayahPopupSave" onclick="saveSelectedAyah()">حفظ 🔖</button>
     <button class="ayah-popup-btn resume" id="ayahPopupResume" onclick="resumeFromSelected()">متابعة من هنا</button>
     <button class="ayah-popup-btn close" onclick="hideAyahPopup()">✕</button>
+</div>
+
+<!-- Tafseer Panel -->
+<div class="tafseer-overlay" id="tafseerOverlay" onclick="closeTafseer()"></div>
+<div class="tafseer-panel" id="tafseerPanel">
+    <div class="tafseer-header">
+        <div class="tafseer-title" id="tafseerTitle">تفسير</div>
+        <button class="tafseer-close" onclick="closeTafseer()">✕</button>
+    </div>
+    <div class="tafseer-tabs" id="tafseerTabs">
+        <button class="tafseer-tab active" onclick="switchTafseer('ar-tafseer-al-saddi',this)">السعدي</button>
+        <button class="tafseer-tab" onclick="switchTafseer('ar-tafsir-ibn-kathir',this)">ابن كثير</button>
+        <button class="tafseer-tab" onclick="switchTafseer('ar-tafsir-muyassar',this)">الميسر</button>
+        <button class="tafseer-tab" onclick="switchTafseer('ar-tafseer-al-qurtubi',this)">القرطبي</button>
+        <button class="tafseer-tab" onclick="switchTafseer('ar-tafsir-al-baghawi',this)">البغوي</button>
+        <button class="tafseer-tab" onclick="switchTafseer('ar-tafsir-al-tabari',this)">الطبري</button>
+    </div>
+    <div class="tafseer-body" id="tafseerBody">
+        <div class="tafseer-loading">اختر آية لعرض التفسير</div>
+    </div>
 </div>
 
 <div class="container">
@@ -2468,6 +2555,74 @@
         if (e.target.closest('.ayah-popup') || e.target.closest('.ayah-span') || e.target.closest('.ayah-num-inline')) return;
         hideAyahPopup();
     });
+
+    // ═══════════════════════════════════════
+    // Tafseer Feature
+    // ═══════════════════════════════════════
+    var currentTafseerSlug = 'ar-tafseer-al-saddi';
+    var tafseerCache = {};
+
+    function openTafseer() {
+        if (!selectedAyahNum || !currentSurahNum) return;
+        var surah = SURAH_DATA.find(function(s) { return s.n === currentSurahNum; });
+        document.getElementById('tafseerTitle').textContent = 'تفسير آية ' + selectedAyahNum + ' - سورة ' + surah.name;
+        document.getElementById('tafseerOverlay').classList.add('show');
+        document.getElementById('tafseerPanel').classList.add('show');
+        fetchTafseer(currentTafseerSlug, currentSurahNum, selectedAyahNum);
+    }
+
+    function closeTafseer() {
+        document.getElementById('tafseerOverlay').classList.remove('show');
+        document.getElementById('tafseerPanel').classList.remove('show');
+    }
+
+    function switchTafseer(slug, btn) {
+        currentTafseerSlug = slug;
+        document.querySelectorAll('.tafseer-tab').forEach(function(t) { t.classList.remove('active'); });
+        if (btn) btn.classList.add('active');
+        if (selectedAyahNum && currentSurahNum) {
+            fetchTafseer(slug, currentSurahNum, selectedAyahNum);
+        }
+    }
+
+    function fetchTafseer(slug, surah, ayah) {
+        var body = document.getElementById('tafseerBody');
+        var cacheKey = slug + '-' + surah + '-' + ayah;
+
+        if (tafseerCache[cacheKey]) {
+            renderTafseer(tafseerCache[cacheKey], surah, ayah);
+            return;
+        }
+
+        body.innerHTML = '<div class="tafseer-loading">جاري تحميل التفسير...</div>';
+
+        var url = 'https://cdn.jsdelivr.net/gh/spa5k/tafsir_api@main/tafsir/' + slug + '/' + surah + '/' + ayah + '.json';
+        fetch(url)
+            .then(function(r) {
+                if (!r.ok) throw new Error('Not found');
+                return r.json();
+            })
+            .then(function(d) {
+                tafseerCache[cacheKey] = d.text || '';
+                renderTafseer(d.text || '', surah, ayah);
+            })
+            .catch(function() {
+                body.innerHTML = '<div class="tafseer-loading">لم يتوفر تفسير لهذه الآية. جرب تفسيراً آخر.</div>';
+            });
+    }
+
+    function renderTafseer(text, surah, ayah) {
+        var body = document.getElementById('tafseerBody');
+        var ayahSpan = document.getElementById('ayah-' + ayah);
+        var ayahText = ayahSpan ? ayahSpan.textContent.trim() : '';
+        var html = '';
+        if (ayahText) {
+            html += '<div class="tafseer-ayah-text">﴿ ' + ayahText + ' ﴾</div>';
+        }
+        html += '<div>' + text.replace(/\n/g, '<br>') + '</div>';
+        body.innerHTML = html;
+        body.scrollTop = 0;
+    }
 
     var autoSaveTimer = null;
     function setupAutoSave() {

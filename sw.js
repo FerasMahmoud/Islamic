@@ -1,4 +1,4 @@
-const CACHE_NAME = 'islamic-v7';
+const CACHE_NAME = 'islamic-v8';
 const ASSETS = [
   './',
   './index.html',
@@ -36,7 +36,8 @@ self.addEventListener('fetch', event => {
           event.request.url.includes('index.html') ||
           event.request.url.endsWith('/') ||
           event.request.url.includes('api.alquran.cloud') ||
-          event.request.url.includes('api.aladhan.com')
+          event.request.url.includes('api.aladhan.com') ||
+          event.request.url.includes('cdn.jsdelivr.net/gh/spa5k/tafsir_api')
         )) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
