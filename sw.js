@@ -1,8 +1,11 @@
-const CACHE_NAME = 'islamic-v16';
+const CACHE_NAME = 'islamic-v17';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './icons/icon-192x192.png',
+  './icons/icon-512x512.png',
+  './icons/icon-180x180.png',
   'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Scheherazade+New:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap'
 ];
 
@@ -30,11 +33,12 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(cached => {
       if (cached) return cached;
       return fetch(event.request).then(response => {
-        // Cache fonts, page, and Quran API responses for offline use
+        // Cache fonts, page, icons, and API responses for offline use
         if (response.ok && (
           event.request.url.includes('fonts.g') ||
           event.request.url.includes('index.html') ||
           event.request.url.endsWith('/') ||
+          event.request.url.includes('/icons/') ||
           event.request.url.includes('api.alquran.cloud') ||
           event.request.url.includes('api.aladhan.com') ||
           event.request.url.includes('cdn.jsdelivr.net/gh/spa5k/tafsir_api')
@@ -49,4 +53,12 @@ self.addEventListener('fetch', event => {
       return caches.match('./index.html');
     })
   );
+});
+
+// Keep-alive message handler (prevents iOS from killing the SW)
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'KEEP_ALIVE') {
+    // Just acknowledge - this keeps the SW alive
+    event.source.postMessage({ type: 'ALIVE' });
+  }
 });

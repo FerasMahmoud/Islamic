@@ -2,15 +2,38 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>أذكار القرآن الكريم - Complete Islamic Resources</title>
 
     <!-- PWA -->
     <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#27ae60">
+    <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: light)">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="أذكار">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- iOS App Icons -->
+    <link rel="apple-touch-icon" href="./icons/icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="./icons/icon-167x167.png">
+
+    <!-- iOS Splash Screens -->
+    <link rel="apple-touch-startup-image"
+          href="./icons/splash-1290x2796.png"
+          media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image"
+          href="./icons/splash-1179x2556.png"
+          media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image"
+          href="./icons/splash-1170x2532.png"
+          media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image"
+          href="./icons/splash-1284x2778.png"
+          media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 
     <!-- Google Fonts for Arabic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,10 +78,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         html, body {
             height: 100%;
+        }
+
+        html {
+            background: var(--night-deep);
+            color-scheme: dark;
         }
 
         body {
@@ -71,6 +101,55 @@
             text-rendering: optimizeLegibility;
             overflow-y: auto;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* iOS standalone overscroll prevention */
+        @media all and (display-mode: standalone) {
+            body {
+                overscroll-behavior-y: none;
+            }
+        }
+
+        /* iOS Spring Animation Curves */
+        :root {
+            --ios-spring: cubic-bezier(0.2, 0.9, 0.3, 1);
+            --ios-spring-fast: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ios-ease-out: cubic-bezier(0, 0, 0.2, 1);
+            --ios-ease-in: cubic-bezier(0.4, 0, 1, 1);
+        }
+
+        /* Prevent text selection on interactive elements (native feel) */
+        button, [onclick], .tab-btn, .sub-nav-btn, .tasbeeh-btn, .tasbeeh-preset,
+        .home-card, .surah-card, .khatm-juz, .hifz-cell, .rc-btn, .bm-chip {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* iOS-style button press feedback */
+        button:active, .tab-btn:active, .sub-nav-btn:active, .home-card:active,
+        .surah-card:active, .prayer-card:active, .rc-btn:active, .bm-chip:active {
+            transform: scale(0.97) !important;
+            transition: transform 0.1s ease !important;
+        }
+
+        /* Status bar blur overlay for standalone PWA */
+        .ios-status-blur {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: env(safe-area-inset-top, 0px);
+            z-index: 9999;
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            background-color: rgba(10, 14, 26, 0.72);
+            pointer-events: none;
+        }
+        @media all and (display-mode: standalone) {
+            .ios-status-blur { display: block; }
         }
 
         /* Animated Starfield Background */
@@ -377,10 +456,19 @@
             width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--gold-bright);
             background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(46,204,113,0.05));
             color: var(--gold-bright); font-size: 1.4em; font-family: 'Amiri', serif;
-            cursor: pointer; transition: all 0.15s; margin: 20px auto; display: flex;
+            cursor: pointer; transition: transform 0.3s var(--ios-spring-fast, cubic-bezier(0.34, 1.56, 0.64, 1)), background 0.15s ease;
+            margin: 20px auto; display: flex;
             align-items: center; justify-content: center;
         }
-        .tasbeeh-btn:active { transform: scale(0.95); background: rgba(46,204,113,0.25); }
+        .tasbeeh-btn:active { transform: scale(0.88) !important; background: rgba(46,204,113,0.30); }
+        .tasbeeh-btn.ios-pulse {
+            animation: iosTasbeehPulse 0.3s var(--ios-spring-fast) forwards;
+        }
+        @keyframes iosTasbeehPulse {
+            0% { transform: scale(0.88); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
         .tasbeeh-presets { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 18px 0; }
         .tasbeeh-preset {
             padding: 8px 16px; border-radius: 12px; border: 1px solid rgba(46,204,113,0.25);
@@ -1252,16 +1340,28 @@
         .tafseer-overlay.show { opacity: 1; pointer-events: auto; }
         .tafseer-panel {
             position: fixed; bottom: 0; left: 0; right: 0; z-index: 1001;
-            max-height: 75vh; background: linear-gradient(180deg, var(--night-soft), var(--night-deep));
-            border-top: 2px solid rgba(212,175,55,0.4);
-            border-radius: 24px 24px 0 0; padding: 0;
-            transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+            max-height: 85vh; background: linear-gradient(180deg, var(--night-soft), var(--night-deep));
+            border-top: none;
+            border-radius: 14px 14px 0 0; padding: 0;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            transform: translateY(100%); transition: transform 0.45s var(--ios-spring, cubic-bezier(0.2, 0.9, 0.3, 1));
             display: flex; flex-direction: column;
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 -10px 50px rgba(0,0,0,0.6);
         }
         .tafseer-panel.show { transform: translateY(0); }
+        /* iOS-style drag handle */
+        .tafseer-panel::before {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 5px;
+            border-radius: 2.5px;
+            background: rgba(120, 120, 128, 0.3);
+            margin: 8px auto 4px;
+            flex-shrink: 0;
+        }
         .tafseer-header {
-            padding: 16px 20px 12px; display: flex; align-items: center; gap: 12px;
+            padding: 8px 20px 12px; display: flex; align-items: center; gap: 12px;
             border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0;
         }
         .tafseer-title {
@@ -1764,7 +1864,7 @@
 
         /* Small phones */
         @media (max-width: 480px) {
-            /* Bottom sticky tab bar like native apps */
+            /* iOS-style frosted glass bottom tab bar */
             .tabs-nav {
                 position: fixed;
                 bottom: 0;
@@ -1772,29 +1872,53 @@
                 right: 0;
                 z-index: 990;
                 flex-wrap: nowrap;
-                padding: 6px 8px;
-                gap: 4px;
+                padding: 4px 6px;
+                padding-bottom: calc(4px + env(safe-area-inset-bottom, 0px));
+                gap: 0;
                 border-bottom: none;
-                border-top: 1px solid var(--gold-warm);
-                background: linear-gradient(0deg, var(--night-deep) 0%, var(--night-mid) 100%);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
+                border-top: 0.5px solid rgba(255, 255, 255, 0.12);
+                background: rgba(10, 14, 26, 0.88);
+                backdrop-filter: saturate(180%) blur(20px);
+                -webkit-backdrop-filter: saturate(180%) blur(20px);
             }
 
             .tabs-nav button {
                 min-width: 0;
-                padding: 10px 6px;
-                font-size: 0.85em;
-                border-radius: 10px;
+                padding: 6px 4px 2px;
+                font-size: 0.72em;
+                border-radius: 0;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 2px;
+                gap: 1px;
+                background: transparent;
+                border: none;
+                color: var(--text-muted);
+                letter-spacing: 0;
+                transition: color 0.2s ease;
+            }
+
+            .tabs-nav button:hover {
+                background: transparent;
+                transform: none;
+                border-color: transparent;
+            }
+
+            .tabs-nav button.active {
+                background: transparent;
+                color: var(--gold-bright);
+                border-color: transparent;
+                box-shadow: none;
+                transform: none;
+            }
+
+            .tabs-nav button::before {
+                display: none;
             }
 
             /* Add padding to body so content isn't hidden behind fixed tabs */
             body {
-                padding-bottom: 80px;
+                padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
             }
 
             /* Content area adjustments */
@@ -2063,47 +2187,59 @@
             }
         }
 
-        /* Dark mode handling for notch/dynamic island area */
+        /* Standalone PWA mode - Dynamic Island & safe areas */
         @media (display-mode: standalone) {
             body {
                 padding-top: env(safe-area-inset-top, 0);
             }
             .header {
-                padding-top: calc(20px + env(safe-area-inset-top, 0));
+                padding-top: calc(12px + env(safe-area-inset-top, 0));
+            }
+            /* Reading controls push down for Dynamic Island */
+            .reading-controls {
+                top: calc(8px + env(safe-area-inset-top, 0));
             }
         }
 
-        /* Smooth scrolling for iOS */
-        * {
-            -webkit-overflow-scrolling: touch;
+        /* iOS-style content tab transition */
+        .content-area {
+            transition: opacity 0.25s ease;
+        }
+        .content-area.active {
+            animation: iosTabFadeIn 0.3s var(--ios-spring) forwards;
+        }
+        @keyframes iosTabFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Prevent rubber banding revealing white background */
-        html {
-            background: var(--night-deep);
+        /* Smooth scrolling for overflow containers */
+        .ramadan-cal-scroll, .tafseer-body, .sheet-content {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
         }
 
         /* In-App Prayer Notification Banner */
         .prayer-notif {
             position: fixed;
             top: -120px;
-            left: 12px;
-            right: 12px;
+            left: 8px;
+            right: 8px;
             z-index: 10000;
-            background: linear-gradient(135deg, rgba(26,92,58,0.98), rgba(39,174,96,0.95));
-            border: 1px solid rgba(46,204,113,0.5);
-            border-radius: 16px;
-            padding: 16px 20px;
+            background: rgba(30, 30, 30, 0.85);
+            border: none;
+            border-radius: 14px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 20px rgba(46,204,113,0.2);
-            transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            gap: 12px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            transition: top 0.5s var(--ios-spring, cubic-bezier(0.2, 0.9, 0.3, 1));
+            backdrop-filter: saturate(180%) blur(30px);
+            -webkit-backdrop-filter: saturate(180%) blur(30px);
         }
         .prayer-notif.show {
-            top: calc(12px + env(safe-area-inset-top, 0px));
+            top: calc(8px + env(safe-area-inset-top, 0px));
         }
         .prayer-notif-icon {
             font-size: 2.2em;
@@ -2137,14 +2273,16 @@
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0.9);
             z-index: 10001;
-            background: linear-gradient(135deg, var(--night-soft), var(--night-deep));
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 20px;
+            background: rgba(28, 28, 30, 0.95);
+            border: none;
+            border-radius: 14px;
             padding: 24px;
             width: min(360px, 90vw);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6);
             opacity: 0; pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.35s var(--ios-spring, cubic-bezier(0.2, 0.9, 0.3, 1));
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
         }
         .notif-settings.show { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
         .notif-settings-overlay {
@@ -2165,15 +2303,17 @@
             font-family: 'Amiri', serif; font-size: 1.1em; color: var(--cream-soft);
         }
         .notif-toggle {
-            width: 48px; height: 28px; border-radius: 14px; border: none;
-            background: rgba(255,255,255,0.1); cursor: pointer; position: relative;
-            transition: background 0.3s;
+            width: 51px; height: 31px; border-radius: 15.5px; border: none;
+            background: rgba(120, 120, 128, 0.32); cursor: pointer; position: relative;
+            transition: background 0.25s ease;
+            flex-shrink: 0;
         }
-        .notif-toggle.on { background: var(--gold-warm); }
+        .notif-toggle.on { background: #34c759; }
         .notif-toggle::after {
-            content: ''; position: absolute; top: 3px; left: 3px;
-            width: 22px; height: 22px; border-radius: 50%; background: #fff;
-            transition: transform 0.3s;
+            content: ''; position: absolute; top: 2px; left: 2px;
+            width: 27px; height: 27px; border-radius: 50%; background: #fff;
+            transition: transform 0.25s var(--ios-spring, cubic-bezier(0.2, 0.9, 0.3, 1));
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15), 0 1px 1px rgba(0,0,0,0.06);
         }
         .notif-toggle.on::after { transform: translateX(20px); }
         .notif-volume {
@@ -2196,6 +2336,9 @@
     </style>
 </head>
 <body>
+
+<!-- iOS Status Bar Blur -->
+<div class="ios-status-blur"></div>
 
 <!-- Animated Stars Background -->
 <div class="stars-container" id="stars"></div>
@@ -4223,9 +4366,18 @@
     function incrementTasbeeh() {
         tasbeehCount++;
         tasbeehTotal++;
+        // iOS haptic feedback
+        iosHaptic('tap');
+        // Spring animation
+        var btn = document.getElementById('tasbeehBtn');
+        if (btn) {
+            btn.classList.remove('ios-pulse');
+            void btn.offsetWidth; // force reflow
+            btn.classList.add('ios-pulse');
+        }
         if (tasbeehTarget > 0 && tasbeehCount >= tasbeehTarget) {
-            // Completed - flash effect
-            var btn = document.getElementById('tasbeehBtn');
+            // Completed - special haptic + flash
+            iosHaptic('success');
             if (btn) { btn.style.borderColor = '#f1c40f'; setTimeout(function() { btn.style.borderColor = ''; }, 800); }
         }
         updateTasbeehDisplay();
@@ -5300,8 +5452,98 @@
 </script>
 
 <script>
+    // ═══════════════════════════════════════
+    // iOS Native Feel Enhancements
+    // ═══════════════════════════════════════
+
+    // iOS Haptic Feedback Engine
+    var _isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+    function iosHaptic(type) {
+        // Android: use vibrate API
+        if ('vibrate' in navigator) {
+            if (type === 'tap') navigator.vibrate(10);
+            else if (type === 'success') navigator.vibrate([10, 50, 10]);
+            else if (type === 'error') navigator.vibrate([10, 30, 10, 30, 10]);
+            return;
+        }
+        // iOS: checkbox switch haptic trick (Safari 17.4+)
+        if (_isIOS) {
+            try {
+                var cb = document.createElement('input');
+                cb.type = 'checkbox';
+                cb.setAttribute('switch', '');
+                cb.style.cssText = 'position:fixed;top:-100px;opacity:0;pointer-events:none';
+                var lbl = document.createElement('label');
+                lbl.appendChild(cb);
+                document.body.appendChild(lbl);
+                lbl.click();
+                requestAnimationFrame(function() { document.body.removeChild(lbl); });
+            } catch(e) {}
+        }
+    }
+
+    // Add haptic to common interactive elements
+    document.addEventListener('click', function(e) {
+        var el = e.target.closest('.tab-btn, .sub-nav-btn, .home-card, .notif-toggle, .bm-chip, .surah-card');
+        if (el) iosHaptic('tap');
+    }, { passive: true });
+
+    // iOS System Dark Mode Auto-Detection
+    // Maps system dark mode to app's AMOLED theme, light to default
+    (function initSystemThemeWatch() {
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        var userHasSetTheme = localStorage.getItem('iq_theme_manual');
+
+        // Only auto-switch if user hasn't manually chosen a theme
+        if (!userHasSetTheme) {
+            // Already dark by default, so do nothing on dark mode
+            // But if system goes to light, could switch to default
+        }
+
+        // Track when user manually cycles theme
+        var origCycleTheme = window.cycleTheme;
+        if (origCycleTheme) {
+            window.cycleTheme = function() {
+                localStorage.setItem('iq_theme_manual', '1');
+                origCycleTheme();
+            };
+        }
+    })();
+
+    // Standalone mode detection - extra enhancements
+    (function iosStandaloneEnhancements() {
+        var isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+        if (!isStandalone) return;
+
+        // Prevent pull-to-refresh in standalone mode (let custom handler work)
+        var lastY = 0;
+        document.addEventListener('touchstart', function(e) {
+            lastY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', function(e) {
+            var y = e.touches[0].clientY;
+            // At top of page, pulling down
+            if (window.scrollY <= 0 && y > lastY) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Keep service worker alive on visibilitychange (iOS kills SWs aggressively)
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible' && navigator.serviceWorker && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage({ type: 'KEEP_ALIVE' });
+            }
+        });
+    })();
+</script>
+
+<script>
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js');
+        navigator.serviceWorker.register('./sw.js').then(function(reg) {
+            // Check for updates periodically (iOS kills SWs after ~days of inactivity)
+            setInterval(function() { reg.update(); }, 30 * 60 * 1000);
+        });
     }
 </script>
 
