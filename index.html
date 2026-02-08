@@ -2333,6 +2333,86 @@
         }
         .notif-test-btn:hover { box-shadow: var(--glow-gold); }
 
+        /* Sync status indicator */
+        .sync-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            position: absolute; top: 6px; right: 6px;
+            background: #636366; transition: background 0.3s;
+        }
+        .sync-dot.synced { background: #34c759; }
+        .sync-dot.syncing { background: #ff9f0a; animation: syncPulse 1s infinite; }
+        .sync-dot.offline { background: #ff453a; }
+        .sync-dot.disabled { background: #636366; }
+        @keyframes syncPulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+
+        /* Sync settings panel (reuses notif-settings pattern) */
+        .sync-settings {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            z-index: 10001;
+            background: rgba(28, 28, 30, 0.95);
+            border: none;
+            border-radius: 14px;
+            padding: 24px;
+            width: min(380px, 92vw);
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+            opacity: 0; pointer-events: none;
+            transition: all 0.35s var(--ios-spring, cubic-bezier(0.2, 0.9, 0.3, 1));
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+        }
+        .sync-settings.show { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+        .sync-settings-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+            z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .sync-settings-overlay.show { opacity: 1; pointer-events: auto; }
+        .sync-settings h3 {
+            font-family: 'Scheherazade New', serif; font-size: 1.5em;
+            color: var(--gold-bright); text-align: center; margin-bottom: 16px;
+        }
+        .sync-field { margin-bottom: 14px; }
+        .sync-field label {
+            display: block; font-family: 'Amiri', serif; font-size: 1em;
+            color: var(--cream-soft); margin-bottom: 6px;
+        }
+        .sync-field input[type="text"], .sync-field input[type="password"] {
+            width: 100%; padding: 10px 12px; border-radius: 10px; border: none;
+            background: rgba(255,255,255,0.08); color: var(--cream);
+            font-family: monospace; font-size: 0.9em; direction: ltr; text-align: left;
+        }
+        .sync-field input::placeholder { color: rgba(255,255,255,0.25); }
+        .sync-option {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .sync-option-label {
+            font-family: 'Amiri', serif; font-size: 1.1em; color: var(--cream-soft);
+        }
+        .sync-status-row {
+            text-align: center; padding: 10px 0; margin-top: 4px;
+            font-family: 'Amiri', serif; font-size: 0.95em; color: var(--text-muted);
+        }
+        .sync-btn {
+            width: 100%; margin-top: 12px; padding: 12px;
+            border-radius: 12px; border: none; cursor: pointer;
+            background: linear-gradient(135deg, var(--gold-warm), var(--gold-bright));
+            color: var(--night-deep); font-family: 'Amiri', serif;
+            font-size: 1.1em; font-weight: 600;
+        }
+        .sync-btn:hover { box-shadow: var(--glow-gold); }
+        .sync-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .sync-btn-secondary {
+            width: 100%; margin-top: 8px; padding: 10px;
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer;
+            background: transparent; color: var(--cream-soft);
+            font-family: 'Amiri', serif; font-size: 1em;
+        }
+        .sync-btn-secondary:hover { background: rgba(255,255,255,0.05); }
+
     </style>
 </head>
 <body>
@@ -2352,6 +2432,7 @@
     <button class="rc-btn" onclick="changeFontSize(1)" title="تكبير الخط">A+</button>
     <button class="rc-btn" onclick="changeFontSize(-1)" title="تصغير الخط">A-</button>
     <button class="rc-btn" onclick="openNotifSettings()" id="notifBtn" title="إشعارات الصلاة">🔔</button>
+    <button class="rc-btn" onclick="openSyncSettings()" id="syncBtn" title="مزامنة البيانات" style="position:relative">🔄<span class="sync-dot disabled" id="syncDot"></span></button>
 </div>
 <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="العودة للأعلى">↑</button>
 
@@ -2394,6 +2475,27 @@
         <input type="range" id="notifVolume" min="0" max="100" value="70" oninput="setNotifVolume(this.value)">
     </div>
     <button class="notif-test-btn" onclick="testPrayerNotif()">🔔 تجربة الإشعار</button>
+</div>
+
+<!-- Sync Settings Panel -->
+<div class="sync-settings-overlay" id="syncOverlay" onclick="closeSyncSettings()"></div>
+<div class="sync-settings" id="syncSettingsPanel">
+    <h3>🔄 مزامنة البيانات</h3>
+    <div class="sync-option">
+        <span class="sync-option-label">تفعيل المزامنة</span>
+        <button class="notif-toggle" id="syncEnabledToggle" onclick="toggleSyncEnabled()"></button>
+    </div>
+    <div class="sync-field">
+        <label>عنوان الخادم (Server URL)</label>
+        <input type="text" id="syncServerUrl" placeholder="http://100.74.117.61:8420" dir="ltr" oninput="saveSyncConfig()">
+    </div>
+    <div class="sync-field">
+        <label>رمز المصادقة (Auth Token)</label>
+        <input type="password" id="syncAuthToken" placeholder="Bearer token" dir="ltr" oninput="saveSyncConfig()">
+    </div>
+    <div class="sync-status-row" id="syncStatusText">غير متصل</div>
+    <button class="sync-btn" id="syncNowBtn" onclick="manualSync()">مزامنة الآن</button>
+    <button class="sync-btn-secondary" onclick="testSyncConnection()">اختبار الاتصال</button>
 </div>
 
 <!-- Ayah Action Popup -->
@@ -5536,6 +5638,283 @@
             }
         });
     })();
+</script>
+
+<script>
+/* ============================================
+   Cross-Device Sync Engine
+   ============================================ */
+(function() {
+    'use strict';
+
+    var SYNC_CONFIG_KEY = '_sync_config';
+    var SYNC_QUEUE_KEY = '_sync_queue';
+    var SYNC_TIMESTAMPS_KEY = '_sync_timestamps';
+    var EXCLUDED_PREFIXES = ['_sync_', 'quran-surah-'];
+
+    // --- Config ---
+    function getSyncConfig() {
+        try { return JSON.parse(localStorage.getItem(SYNC_CONFIG_KEY)) || {}; } catch(e) { return {}; }
+    }
+    function saveSyncConfigToStorage(cfg) {
+        localStorage.setItem(SYNC_CONFIG_KEY, JSON.stringify(cfg));
+    }
+    function getTimestamps() {
+        try { return JSON.parse(localStorage.getItem(SYNC_TIMESTAMPS_KEY)) || {}; } catch(e) { return {}; }
+    }
+    function saveTimestamps(ts) {
+        localStorage.setItem(SYNC_TIMESTAMPS_KEY, JSON.stringify(ts));
+    }
+
+    // --- Sync status UI ---
+    function setSyncStatus(state, text) {
+        var dot = document.getElementById('syncDot');
+        var statusEl = document.getElementById('syncStatusText');
+        if (dot) {
+            dot.className = 'sync-dot ' + state;
+        }
+        if (statusEl && text) {
+            statusEl.textContent = text;
+        }
+    }
+
+    function isExcluded(key) {
+        for (var i = 0; i < EXCLUDED_PREFIXES.length; i++) {
+            if (key.indexOf(EXCLUDED_PREFIXES[i]) === 0) return true;
+        }
+        return false;
+    }
+
+    // --- Queue management ---
+    var syncTimer = null;
+    function queueKeyForSync(key) {
+        if (isExcluded(key)) return;
+        var cfg = getSyncConfig();
+        if (!cfg.enabled || !cfg.url || !cfg.token) return;
+
+        // Update timestamp for this key
+        var ts = getTimestamps();
+        ts[key] = Date.now() / 1000;
+        saveTimestamps(ts);
+
+        // Add to queue
+        var queue;
+        try { queue = JSON.parse(localStorage.getItem(SYNC_QUEUE_KEY)) || []; } catch(e) { queue = []; }
+        if (queue.indexOf(key) === -1) queue.push(key);
+        localStorage.setItem(SYNC_QUEUE_KEY, JSON.stringify(queue));
+
+        // Debounced push
+        if (syncTimer) clearTimeout(syncTimer);
+        syncTimer = setTimeout(pushToServer, 2000);
+    }
+
+    // --- localStorage interception ---
+    var originalSetItem = localStorage.setItem.bind(localStorage);
+    var originalRemoveItem = localStorage.removeItem.bind(localStorage);
+
+    localStorage.setItem = function(key, value) {
+        originalSetItem(key, value);
+        queueKeyForSync(key);
+    };
+    localStorage.removeItem = function(key) {
+        originalRemoveItem(key);
+        // Sync deletions as empty value
+        if (!isExcluded(key)) {
+            var ts = getTimestamps();
+            ts[key] = Date.now() / 1000;
+            saveTimestamps(ts);
+        }
+    };
+
+    // --- Server communication ---
+    function makeHeaders(token) {
+        return {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        };
+    }
+
+    function pushToServer() {
+        var cfg = getSyncConfig();
+        if (!cfg.enabled || !cfg.url || !cfg.token) return;
+
+        var queue;
+        try { queue = JSON.parse(localStorage.getItem(SYNC_QUEUE_KEY)) || []; } catch(e) { queue = []; }
+        if (queue.length === 0) return;
+
+        setSyncStatus('syncing', 'جاري المزامنة...');
+
+        var ts = getTimestamps();
+        var items = [];
+        for (var i = 0; i < queue.length; i++) {
+            var k = queue[i];
+            var val = localStorage.getItem(k);
+            if (val === null) val = '';
+            items.push({
+                key: k,
+                value: val,
+                updated_at: ts[k] || (Date.now() / 1000)
+            });
+        }
+
+        fetch(cfg.url.replace(/\/+$/, '') + '/api/sync', {
+            method: 'PUT',
+            headers: makeHeaders(cfg.token),
+            body: JSON.stringify({ items: items })
+        }).then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        }).then(function() {
+            // Clear queue
+            originalSetItem(SYNC_QUEUE_KEY, '[]');
+            var now = new Date();
+            var timeStr = now.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+            setSyncStatus('synced', 'آخر مزامنة: ' + timeStr);
+            cfg.lastSync = Date.now();
+            saveSyncConfigToStorage(cfg);
+        }).catch(function(err) {
+            console.warn('[Sync] Push failed:', err.message);
+            setSyncStatus('offline', 'فشل الاتصال');
+        });
+    }
+
+    function pullFromServer() {
+        var cfg = getSyncConfig();
+        if (!cfg.enabled || !cfg.url || !cfg.token) return Promise.resolve();
+
+        setSyncStatus('syncing', 'جاري المزامنة...');
+
+        return fetch(cfg.url.replace(/\/+$/, '') + '/api/sync', {
+            method: 'GET',
+            headers: makeHeaders(cfg.token)
+        }).then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        }).then(function(serverItems) {
+            var ts = getTimestamps();
+            var merged = 0;
+            for (var i = 0; i < serverItems.length; i++) {
+                var item = serverItems[i];
+                if (isExcluded(item.key)) continue;
+                var localTs = ts[item.key] || 0;
+                // Server wins if newer
+                if (item.updated_at > localTs) {
+                    originalSetItem(item.key, item.value);
+                    ts[item.key] = item.updated_at;
+                    merged++;
+                }
+            }
+            saveTimestamps(ts);
+            var now = new Date();
+            var timeStr = now.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+            setSyncStatus('synced', 'آخر مزامنة: ' + timeStr + ' (' + merged + ' محدّث)');
+            cfg.lastSync = Date.now();
+            saveSyncConfigToStorage(cfg);
+        }).catch(function(err) {
+            console.warn('[Sync] Pull failed:', err.message);
+            setSyncStatus('offline', 'فشل الاتصال');
+        });
+    }
+
+    // Full sync: pull then push
+    window.fullSync = function() {
+        return pullFromServer().then(function() {
+            pushToServer();
+        });
+    };
+
+    // --- Settings UI ---
+    window.openSyncSettings = function() {
+        var cfg = getSyncConfig();
+        document.getElementById('syncServerUrl').value = cfg.url || '';
+        document.getElementById('syncAuthToken').value = cfg.token || '';
+        var toggle = document.getElementById('syncEnabledToggle');
+        if (cfg.enabled) toggle.classList.add('on');
+        else toggle.classList.remove('on');
+        document.getElementById('syncOverlay').classList.add('show');
+        document.getElementById('syncSettingsPanel').classList.add('show');
+    };
+
+    window.closeSyncSettings = function() {
+        document.getElementById('syncOverlay').classList.remove('show');
+        document.getElementById('syncSettingsPanel').classList.remove('show');
+    };
+
+    window.toggleSyncEnabled = function() {
+        var toggle = document.getElementById('syncEnabledToggle');
+        toggle.classList.toggle('on');
+        var cfg = getSyncConfig();
+        cfg.enabled = toggle.classList.contains('on');
+        saveSyncConfigToStorage(cfg);
+        if (cfg.enabled && cfg.url && cfg.token) {
+            window.fullSync();
+        } else if (!cfg.enabled) {
+            setSyncStatus('disabled', 'المزامنة معطلة');
+        }
+    };
+
+    window.saveSyncConfig = function() {
+        var cfg = getSyncConfig();
+        cfg.url = document.getElementById('syncServerUrl').value.trim();
+        cfg.token = document.getElementById('syncAuthToken').value.trim();
+        saveSyncConfigToStorage(cfg);
+    };
+
+    window.manualSync = function() {
+        var btn = document.getElementById('syncNowBtn');
+        btn.disabled = true;
+        btn.textContent = 'جاري المزامنة...';
+        window.fullSync().then(function() {
+            btn.disabled = false;
+            btn.textContent = 'مزامنة الآن';
+        }).catch(function() {
+            btn.disabled = false;
+            btn.textContent = 'مزامنة الآن';
+        });
+    };
+
+    window.testSyncConnection = function() {
+        var cfg = getSyncConfig();
+        if (!cfg.url) {
+            setSyncStatus('offline', 'أدخل عنوان الخادم');
+            return;
+        }
+        setSyncStatus('syncing', 'جاري الاختبار...');
+        fetch(cfg.url.replace(/\/+$/, '') + '/api/health')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.status === 'ok') {
+                    setSyncStatus('synced', 'الخادم متصل ✓');
+                } else {
+                    setSyncStatus('offline', 'استجابة غير متوقعة');
+                }
+            })
+            .catch(function() {
+                setSyncStatus('offline', 'لا يمكن الوصول للخادم');
+            });
+    };
+
+    // --- Auto-sync on load ---
+    var cfg = getSyncConfig();
+    if (cfg.enabled && cfg.url && cfg.token) {
+        setSyncStatus('syncing', 'جاري المزامنة...');
+        setTimeout(function() { window.fullSync(); }, 1500);
+        // Periodic sync every 5 minutes
+        setInterval(function() { window.fullSync(); }, 5 * 60 * 1000);
+    } else {
+        setSyncStatus('disabled', 'المزامنة معطلة');
+    }
+
+    // Sync on visibility change (user returns to app)
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+            var c = getSyncConfig();
+            if (c.enabled && c.url && c.token) {
+                window.fullSync();
+            }
+        }
+    });
+})();
 </script>
 
 <script>
